@@ -67,6 +67,70 @@ const differentiators = [
   },
 ];
 
+const differentiatorIcons = [
+  (color: string) => (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+      <path
+        d="M12 15a3 3 0 100-6 3 3 0 000 6z"
+        stroke={color}
+        strokeWidth="1.5"
+      />
+      <path
+        d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"
+        stroke={color}
+        strokeWidth="1.5"
+      />
+    </svg>
+  ),
+  (color: string) => (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+      <path
+        d="M12 2L2 7l10 5 10-5-10-5z"
+        stroke={color}
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M2 17l10 5 10-5"
+        stroke={color}
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M2 12l10 5 10-5"
+        stroke={color}
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+    </svg>
+  ),
+  (color: string) => (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+      <path
+        d="M23 4v6h-6"
+        stroke={color}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M1 20v-6h6"
+        stroke={color}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"
+        stroke={color}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  ),
+];
+
 export default function ProcesoPage() {
   return (
     <>
@@ -119,12 +183,10 @@ export default function ProcesoPage() {
       {/* Timeline alternado */}
       <section className="pb-32">
         <div className="max-w-5xl mx-auto px-6 relative">
-          {/* Línea central */}
           <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-[#FF6B35]/50 via-[#8B5CFF]/40 to-transparent" />
 
           {steps.map((step, index) => {
             const isLeft = index % 2 === 0;
-
             return (
               <motion.div
                 key={step.number}
@@ -134,7 +196,6 @@ export default function ProcesoPage() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="relative mb-12 md:mb-16"
               >
-                {/* Dot */}
                 <div
                   className="hidden md:block absolute left-1/2 -translate-x-1/2 top-8 z-10 w-[14px] h-[14px] rounded-full"
                   style={{
@@ -142,8 +203,6 @@ export default function ProcesoPage() {
                     boxShadow: `0 0 10px ${step.color}80, 0 0 25px ${step.color}40`,
                   }}
                 />
-
-                {/* Línea horizontal del dot a la card */}
                 <div
                   className={`hidden md:block absolute top-[21px] w-[30px] h-[1px] ${
                     isLeft ? "right-1/2 mr-[7px]" : "left-1/2 ml-[7px]"
@@ -151,27 +210,35 @@ export default function ProcesoPage() {
                   style={{ background: `${step.color}40` }}
                 />
 
-                {/* Card posicionada */}
                 <div
-                  className={`md:w-[calc(50%-50px)] ${
-                    isLeft ? "md:mr-auto" : "md:ml-auto"
-                  }`}
+                  className={`md:w-[calc(50%-50px)] ${isLeft ? "md:mr-auto" : "md:ml-auto"}`}
                 >
                   <div
-                    className="rounded-2xl p-7 relative overflow-hidden transition-all duration-300 hover:-translate-y-1"
+                    className="rounded-2xl p-7 relative overflow-hidden cursor-default"
                     style={{
                       background: "rgba(23,28,49,0.7)",
                       border: `1px solid ${step.color}20`,
+                      transition: "all 0.35s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      const el = e.currentTarget as HTMLElement;
+                      el.style.transform = "translateY(-6px)";
+                      el.style.boxShadow = `0 8px 40px ${step.color}30, 0 0 0 1px ${step.color}40`;
+                      el.style.border = `1px solid ${step.color}50`;
+                    }}
+                    onMouseLeave={(e) => {
+                      const el = e.currentTarget as HTMLElement;
+                      el.style.transform = "translateY(0)";
+                      el.style.boxShadow = "none";
+                      el.style.border = `1px solid ${step.color}20`;
                     }}
                   >
-                    {/* Línea de acento arriba */}
                     <div
                       className="absolute top-0 left-0 right-0 h-[2px]"
                       style={{
                         background: `linear-gradient(90deg, transparent, ${step.color}60, transparent)`,
                       }}
                     />
-
                     <div className="flex items-center gap-4 mb-4">
                       <span
                         className="text-3xl font-bold"
@@ -184,11 +251,9 @@ export default function ProcesoPage() {
                       </span>
                       <h3 className="text-xl font-semibold">{step.title}</h3>
                     </div>
-
                     <p className="text-[#8E95A9] text-sm leading-relaxed mb-4">
                       {step.description}
                     </p>
-
                     <div className="flex items-center gap-2">
                       <div
                         className="w-1.5 h-1.5 rounded-full"
@@ -242,10 +307,23 @@ export default function ProcesoPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.12 }}
-                className="rounded-2xl p-8 relative overflow-hidden text-center transition-all duration-300 hover:-translate-y-1"
+                className="rounded-2xl p-8 relative overflow-hidden text-center cursor-default"
                 style={{
                   background: "rgba(23,28,49,0.7)",
                   border: `1px solid ${diff.color}20`,
+                  transition: "all 0.35s ease",
+                }}
+                onMouseEnter={(e) => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.transform = "translateY(-6px)";
+                  el.style.boxShadow = `0 8px 40px ${diff.color}30, 0 0 0 1px ${diff.color}40`;
+                  el.style.border = `1px solid ${diff.color}50`;
+                }}
+                onMouseLeave={(e) => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.transform = "translateY(0)";
+                  el.style.boxShadow = "none";
+                  el.style.border = `1px solid ${diff.color}20`;
                 }}
               >
                 <div
@@ -254,24 +332,16 @@ export default function ProcesoPage() {
                     background: `linear-gradient(90deg, transparent, ${diff.color}60, transparent)`,
                   }}
                 />
-
                 <div
                   className="w-12 h-12 rounded-2xl mx-auto mb-6 flex items-center justify-center"
                   style={{
                     background: `${diff.color}12`,
-                    border: `1px solid ${diff.color}25`,
+                    border: `1px solid ${diff.color}30`,
+                    filter: `drop-shadow(0 0 8px ${diff.color}30)`,
                   }}
                 >
-                  <div
-                    className="w-3 h-3 rounded-full"
-                    style={{
-                      background: diff.color,
-                      boxShadow: `0 0 10px ${diff.color}80, 0 0 25px ${diff.color}40`,
-                      animation: "glow-pulse 3s ease-in-out infinite",
-                    }}
-                  />
+                  {differentiatorIcons[index](diff.color)}
                 </div>
-
                 <h3 className="text-xl font-semibold mb-3">{diff.title}</h3>
                 <p className="text-[#8E95A9] text-sm leading-relaxed">
                   {diff.description}
@@ -286,14 +356,16 @@ export default function ProcesoPage() {
       <section className="pb-32">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 40, scale: 0.97 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="relative overflow-hidden rounded-[32px] p-16 text-center"
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            whileHover={{ y: -6, scale: 1.01, transition: { duration: 0.3 } }}
+            className="relative overflow-hidden rounded-[32px] p-16 text-center cursor-default"
             style={{
               background: "rgba(23,28,49,0.7)",
               border: "1px solid rgba(255,255,255,0.1)",
+              boxShadow: "0 0 60px rgba(139,92,255,0.08)",
             }}
           >
             <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_top_left,rgba(139,92,255,0.4),transparent_40%)]" />

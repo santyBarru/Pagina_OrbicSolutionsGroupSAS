@@ -108,7 +108,7 @@ body::after {
   height: 500px;
   background: radial-gradient(
     circle,
-    rgba(139, 92, 255, 0.25),
+    rgba(139, 92, 255, 0.08),
     transparent 70%
   );
   filter: blur(80px);
@@ -156,19 +156,19 @@ body::after {
 
 .text-glow-orange {
   text-shadow:
-    0 0 20px rgba(255, 107, 53, 0.5),
-    0 0 60px rgba(255, 107, 53, 0.2);
+    0 0 20px rgba(255, 107, 53, 0.15),
+    0 0 40px rgba(255, 107, 53, 0.05);
 }
 .text-glow-violet {
   text-shadow:
-    0 0 20px rgba(139, 92, 255, 0.4),
-    0 0 60px rgba(139, 92, 255, 0.15);
+    0 0 20px rgba(139, 92, 255, 0.12),
+    0 0 40px rgba(139, 92, 255, 0.04);
 }
 
 .stat-glow {
   text-shadow:
-    0 0 30px rgba(255, 107, 53, 0.6),
-    0 0 80px rgba(255, 107, 53, 0.25);
+    0 0 20px rgba(255, 107, 53, 0.2),
+    0 0 40px rgba(255, 107, 53, 0.08);
 }
 
 @keyframes twinkle-1 {
@@ -262,32 +262,32 @@ body::after {
   pointer-events: none;
   background: transparent;
   box-shadow:
-    24px 56px 0 0.5px rgba(255, 255, 255, 0.15),
-    130px 200px 0 0.5px rgba(139, 92, 255, 0.25),
-    290px 80px 0 0.5px rgba(255, 255, 255, 0.1),
-    450px 300px 0 0.5px rgba(255, 107, 53, 0.2),
-    600px 120px 0 0.5px rgba(255, 255, 255, 0.15),
-    780px 400px 0 0.5px rgba(139, 92, 255, 0.2),
-    900px 60px 0 0.5px rgba(255, 255, 255, 0.12),
-    1050px 280px 0 0.5px rgba(255, 255, 255, 0.1),
-    1200px 150px 0 0.5px rgba(139, 92, 255, 0.25),
-    1350px 380px 0 0.5px rgba(255, 255, 255, 0.15),
-    80px 500px 0 0.5px rgba(255, 255, 255, 0.12),
-    220px 620px 0 0.5px rgba(255, 107, 53, 0.2),
-    400px 550px 0 0.5px rgba(255, 255, 255, 0.1),
-    560px 680px 0 0.5px rgba(255, 255, 255, 0.15),
-    720px 580px 0 0.5px rgba(139, 92, 255, 0.2),
-    880px 650px 0 0.5px rgba(255, 255, 255, 0.12),
-    1040px 520px 0 0.5px rgba(255, 255, 255, 0.1),
-    1180px 700px 0 0.5px rgba(255, 107, 53, 0.25),
-    1320px 600px 0 0.5px rgba(255, 255, 255, 0.15),
-    150px 800px 0 0.5px rgba(255, 255, 255, 0.12),
-    350px 900px 0 0.5px rgba(139, 92, 255, 0.2),
-    550px 850px 0 0.5px rgba(255, 255, 255, 0.1),
-    750px 950px 0 0.5px rgba(255, 255, 255, 0.15),
-    950px 820px 0 0.5px rgba(255, 255, 255, 0.12),
-    1100px 900px 0 0.5px rgba(139, 92, 255, 0.25),
-    1280px 850px 0 0.5px rgba(255, 255, 255, 0.1);
+    24px 56px 0 0.5px rgba(255, 255, 255, 0.07),
+    130px 200px 0 0.5px rgba(139, 92, 255, 0.08),
+    290px 80px 0 0.5px rgba(255, 255, 255, 0.05),
+    450px 300px 0 0.5px rgba(255, 107, 53, 0.06),
+    600px 120px 0 0.5px rgba(255, 255, 255, 0.07),
+    780px 400px 0 0.5px rgba(139, 92, 255, 0.06),
+    900px 60px 0 0.5px rgba(255, 255, 255, 0.06),
+    1050px 280px 0 0.5px rgba(255, 255, 255, 0.05),
+    1200px 150px 0 0.5px rgba(139, 92, 255, 0.08),
+    1350px 380px 0 0.5px rgba(255, 255, 255, 0.07),
+    80px 500px 0 0.5px rgba(255, 255, 255, 0.06),
+    220px 620px 0 0.5px rgba(255, 107, 53, 0.06),
+    400px 550px 0 0.5px rgba(255, 255, 255, 0.05),
+    560px 680px 0 0.5px rgba(255, 255, 255, 0.07),
+    720px 580px 0 0.5px rgba(139, 92, 255, 0.06),
+    880px 650px 0 0.5px rgba(255, 255, 255, 0.06),
+    1040px 520px 0 0.5px rgba(255, 255, 255, 0.05),
+    1180px 700px 0 0.5px rgba(255, 107, 53, 0.08),
+    1320px 600px 0 0.5px rgba(255, 255, 255, 0.07),
+    150px 800px 0 0.5px rgba(255, 255, 255, 0.06),
+    350px 900px 0 0.5px rgba(139, 92, 255, 0.06),
+    550px 850px 0 0.5px rgba(255, 255, 255, 0.05),
+    750px 950px 0 0.5px rgba(255, 255, 255, 0.07),
+    950px 820px 0 0.5px rgba(255, 255, 255, 0.06),
+    1100px 900px 0 0.5px rgba(139, 92, 255, 0.08),
+    1280px 850px 0 0.5px rgba(255, 255, 255, 0.05);
   animation: twinkle-1 8s ease-in-out infinite alternate;
 }
 
@@ -302,27 +302,27 @@ body::after {
   pointer-events: none;
   background: transparent;
   box-shadow:
-    80px 120px 2px 1px rgba(139, 92, 255, 0.5),
-    320px 50px 2px 1px rgba(255, 255, 255, 0.3),
-    500px 220px 2px 1px rgba(255, 107, 53, 0.45),
-    700px 180px 2px 1px rgba(139, 92, 255, 0.5),
-    920px 300px 2px 1px rgba(255, 255, 255, 0.25),
-    1100px 100px 2px 1px rgba(179, 136, 255, 0.45),
-    200px 420px 2px 1px rgba(255, 107, 53, 0.4),
-    440px 380px 2px 1px rgba(139, 92, 255, 0.5),
-    660px 500px 2px 1px rgba(255, 255, 255, 0.25),
-    860px 450px 2px 1px rgba(179, 136, 255, 0.45),
-    1060px 550px 2px 1px rgba(255, 255, 255, 0.3),
-    100px 700px 2px 1px rgba(255, 255, 255, 0.25),
-    340px 750px 2px 1px rgba(255, 107, 53, 0.45),
-    580px 680px 2px 1px rgba(139, 92, 255, 0.5),
-    800px 780px 2px 1px rgba(255, 255, 255, 0.3),
-    1000px 720px 2px 1px rgba(179, 136, 255, 0.45),
-    60px 950px 2px 1px rgba(139, 92, 255, 0.5),
-    280px 1000px 2px 1px rgba(255, 107, 53, 0.4),
-    520px 920px 2px 1px rgba(255, 255, 255, 0.3),
-    740px 1050px 2px 1px rgba(139, 92, 255, 0.5),
-    960px 980px 2px 1px rgba(255, 255, 255, 0.25),
-    1160px 1050px 2px 1px rgba(179, 136, 255, 0.45);
+    80px 120px 2px 1px rgba(139, 92, 255, 0.15),
+    320px 50px 2px 1px rgba(255, 255, 255, 0.1),
+    500px 220px 2px 1px rgba(255, 107, 53, 0.12),
+    700px 180px 2px 1px rgba(139, 92, 255, 0.15),
+    920px 300px 2px 1px rgba(255, 255, 255, 0.08),
+    1100px 100px 2px 1px rgba(179, 136, 255, 0.12),
+    200px 420px 2px 1px rgba(255, 107, 53, 0.1),
+    440px 380px 2px 1px rgba(139, 92, 255, 0.15),
+    660px 500px 2px 1px rgba(255, 255, 255, 0.08),
+    860px 450px 2px 1px rgba(179, 136, 255, 0.12),
+    1060px 550px 2px 1px rgba(255, 255, 255, 0.1),
+    100px 700px 2px 1px rgba(255, 255, 255, 0.08),
+    340px 750px 2px 1px rgba(255, 107, 53, 0.12),
+    580px 680px 2px 1px rgba(139, 92, 255, 0.15),
+    800px 780px 2px 1px rgba(255, 255, 255, 0.1),
+    1000px 720px 2px 1px rgba(179, 136, 255, 0.12),
+    60px 950px 2px 1px rgba(139, 92, 255, 0.15),
+    280px 1000px 2px 1px rgba(255, 107, 53, 0.1),
+    520px 920px 2px 1px rgba(255, 255, 255, 0.1),
+    740px 1050px 2px 1px rgba(139, 92, 255, 0.15),
+    960px 980px 2px 1px rgba(255, 255, 255, 0.08),
+    1160px 1050px 2px 1px rgba(179, 136, 255, 0.12);
   animation: twinkle-2 12s ease-in-out infinite alternate;
 }

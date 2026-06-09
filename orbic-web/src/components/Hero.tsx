@@ -86,7 +86,7 @@ export default function Hero() {
               alt="Orbic Operations"
               width={500}
               height={500}
-              className="relative z-10 drop-shadow-[0_0_80px_rgba(139,92,255,0.35)]"
+              className="relative z-10 drop-shadow-[0_0_30px_rgba(139,92,255,0.20)]"
               priority
             />
           </motion.div>

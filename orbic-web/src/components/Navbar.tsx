@@ -20,6 +20,7 @@ export default function Navbar() {
   const navLinks = [
     { label: "Inicio", href: "/" },
     { label: "Servicios", href: "/servicios" },
+    { label: "Planes", href: "/planes" },
     { label: "Proceso", href: "/proceso" },
     { label: "Nosotros", href: "/nosotros" },
     { label: "Contacto", href: "/contacto" },
@@ -57,12 +58,22 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <Link
-          href="/contacto"
-          className="hidden md:inline-flex px-5 py-3 rounded-xl border border-[rgba(255,107,53,0.5)] text-sm hover:bg-[rgba(255,107,53,0.08)] transition-all duration-300"
-        >
-          Solicitar diagnóstico →
-        </Link>
+        <div className="hidden md:flex items-center gap-3">
+          <a
+            href="https://demo.orbicopsgroup.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-5 py-3 rounded-xl border border-[rgba(139,92,255,0.5)] text-sm text-[#B388FF] hover:bg-[rgba(139,92,255,0.08)] transition-all duration-300"
+          >
+            Probar Demo ✦
+          </a>
+          <Link
+            href="/contacto"
+            className="px-5 py-3 rounded-xl border border-[rgba(255,107,53,0.5)] text-sm hover:bg-[rgba(255,107,53,0.08)] transition-all duration-300"
+          >
+            Solicitar diagnóstico →
+          </Link>
+        </div>
 
         {/* Mobile menu */}
         <button
@@ -92,6 +103,15 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
+            <a
+              href="https://demo.orbicopsgroup.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
+              className="inline-flex items-center justify-center px-5 py-2.5 rounded-full text-sm font-semibold text-[#B388FF] border border-[rgba(139,92,255,0.4)] mt-2"
+            >
+              Probar Demo ✦
+            </a>
             <Link
               href="/contacto"
               onClick={() => setOpen(false)}
