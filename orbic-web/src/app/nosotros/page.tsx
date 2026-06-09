@@ -100,7 +100,7 @@ const team = [
     description:
       "Lidera la operación y el crecimiento estratégico de Orbic, impulsando la expansión y el desarrollo de la empresa.",
     color: "#22C55E",
-    emoji: "🟢",
+    image: "/assets/juan camilo.jpg",
   },
   {
     name: "Juan Pablo Luna",
@@ -312,9 +312,7 @@ export default function NosotrosPage() {
                     <div
                       className="w-full h-full flex items-center justify-center text-3xl"
                       style={{ background: `${member.color}15` }}
-                    >
-                      {member.emoji}
-                    </div>
+                    ></div>
                   )}
                 </div>
                 <h3 className="text-xl font-semibold mb-1">{member.name}</h3>
