@@ -367,14 +367,13 @@ export default function ServiciosPage() {
                 Siguiente paso
               </p>
               <h2 className="text-4xl lg:text-5xl font-semibold tracking-tight mb-6">
-                ¿Cuál necesita tu empresa{" "}
-                <span className="text-[#8B5CFF] text-glow-violet">
-                  primero?
-                </span>
+                ¿Si te queda alguna{" "}
+                <span className="text-[#8B5CFF] text-glow-violet">Duda</span>
               </h2>
               <p className="text-[#8E95A9] text-lg mb-10 max-w-xl mx-auto">
-                En el diagnóstico gratuito identificamos cuál es el punto de
-                mayor impacto para tu operación.
+                Puedes revisar tu mismo una DEMO de nuestro CRM en vivo, o si es
+                mas profundo puedes contactarte con nosotros para resolver
+                cualquier duda que tengas.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a
