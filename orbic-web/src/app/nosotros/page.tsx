@@ -108,15 +108,15 @@ const team = [
     },
   },
   {
-    name: "Juan Pablo Luna",
-    role: "CTO, Co-founder & Infrastructure Lead",
+    name: "Juan Camilo Hernández Díaz",
+    role: "Co-Funder & Investor",
     description:
-      "Infraestructura, automatizaciones y arquitectura técnica. Construye todo lo que hace funcionar a Orbic.",
-    color: "#F97316",
-    image: "/assets/juan pablo.jpg",
+      "Lidera la operación y el crecimiento estratégico de Orbic, impulsando la expansión y el desarrollo de la empresa.",
+    color: "#22C55E",
+    image: "/assets/juan camilo.jpg",
     imageStyle: {
       objectPosition: "50% 50%",
-      transform: "scale(1.18) translateY(%)",
+      transform: "scale(1.18) translateY(0%)",
       transformOrigin: "center center",
     },
   },
