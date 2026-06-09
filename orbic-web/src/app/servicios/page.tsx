@@ -367,13 +367,13 @@ export default function ServiciosPage() {
                 Siguiente paso
               </p>
               <h2 className="text-4xl lg:text-5xl font-semibold tracking-tight mb-6">
-                ¿Si te queda alguna{" "}
-                <span className="text-[#8B5CFF] text-glow-violet">Duda</span>
+                ¿Tienes alguna{" "}
+                <span className="text-[#8B5CFF] text-glow-violet">Duda?</span>
               </h2>
               <p className="text-[#8E95A9] text-lg mb-10 max-w-xl mx-auto">
-                Puedes revisar tu mismo una DEMO de nuestro CRM en vivo, o si es
-                mas profundo puedes contactarte con nosotros para resolver
-                cualquier duda que tengas.
+                Si aún tienes preguntas sobre nuestro servicio, te invitamos a
+                explorar una demostración en vivo de nuestro CRM y conocer de
+                primera mano todas sus funcionalidades y beneficios.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a
