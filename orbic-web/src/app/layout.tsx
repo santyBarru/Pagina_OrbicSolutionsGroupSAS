@@ -10,9 +10,6 @@ export const metadata: Metadata = {
   title: "Orbic Operations | Automatización inteligente para empresas",
   description:
     "Impulsamos el crecimiento de empresas ambiciosas. Automatización, CRM, software e IA aplicada.",
-  icons: {
-    icon: "/favicon.png",
-  },
 };
 
 export default function RootLayout({
@@ -22,13 +19,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+      </head>
       <body className={inter.className}>
-        {/* Background layers - fixed, behind everything */}
         <div className="stars-1" />
         <div className="stars-2" />
         <div className="grid-overlay" />
-
-        {/* Content */}
         <Navbar />
         <main className="relative z-[2]">{children}</main>
         <Footer />
