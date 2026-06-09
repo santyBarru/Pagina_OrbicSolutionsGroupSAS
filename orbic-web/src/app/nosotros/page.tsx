@@ -101,6 +101,11 @@ const team = [
       "Lidera la operación y el crecimiento estratégico de Orbic, impulsando la expansión y el desarrollo de la empresa.",
     color: "#22C55E",
     image: "/assets/juan camilo.jpg",
+    imageStyle: {
+      objectPosition: "50% 50%",
+      transform: "scale(1.18) translateY(-5%)",
+      transformOrigin: "center center",
+    },
   },
   {
     name: "Juan Pablo Luna",
