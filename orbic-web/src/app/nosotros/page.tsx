@@ -111,7 +111,7 @@ const team = [
     image: "/assets/juan pablo.jpg",
     imageStyle: {
       objectPosition: "50% 50%",
-      transform: "scale(1.18) translateY(3%)",
+      transform: "scale(1.18) translateY(%)",
       transformOrigin: "center center",
     },
   },
@@ -265,10 +265,23 @@ export default function NosotrosPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.15 }}
-                className="rounded-2xl p-8 relative overflow-hidden text-center transition-all duration-300 hover:-translate-y-1"
+                className="rounded-2xl p-8 relative overflow-hidden text-center cursor-default"
                 style={{
                   background: "rgba(23,28,49,0.3)",
                   border: `1px solid ${member.color}25`,
+                  transition: "all 0.35s ease",
+                }}
+                onMouseEnter={(e) => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.transform = "translateY(-6px)";
+                  el.style.boxShadow = `0 8px 40px ${member.color}30, 0 0 0 1px ${member.color}40`;
+                  el.style.border = `1px solid ${member.color}50`;
+                }}
+                onMouseLeave={(e) => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.transform = "translateY(0)";
+                  el.style.boxShadow = "none";
+                  el.style.border = `1px solid ${member.color}25`;
                 }}
               >
                 <div
