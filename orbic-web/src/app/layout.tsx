@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   title: "Orbic Operations | Automatización inteligente para empresas",
   description:
     "Impulsamos el crecimiento de empresas ambiciosas. Automatización, CRM, software e IA aplicada.",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
