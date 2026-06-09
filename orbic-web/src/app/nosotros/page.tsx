@@ -103,7 +103,7 @@ const team = [
     image: "/assets/juan camilo.jpg",
     imageStyle: {
       objectPosition: "50% 50%",
-      transform: "scale(1.18) translateY(0%)",
+      transform: "scale(1.05) translateY(0%)",
       transformOrigin: "center center",
     },
   },
