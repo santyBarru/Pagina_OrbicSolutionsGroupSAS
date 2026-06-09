@@ -20,24 +20,42 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-gray text-sm leading-relaxed max-w-[280px]">
-              Web, CRM, automatización, software e IA aplicada para empresas
-              que necesitan orden, velocidad y control.
+              Web, CRM, automatización, software e IA aplicada para empresas que
+              necesitan orden, velocidad y control.
             </p>
           </div>
 
           {/* Links */}
           <nav className="flex flex-col gap-3">
             <p className="text-white font-semibold text-sm mb-1">Navegación</p>
-            <Link href="/servicios" className="text-gray text-sm hover:text-white transition-colors">
+            <Link
+              href="/servicios"
+              className="text-gray text-sm hover:text-white transition-colors"
+            >
               Servicios
             </Link>
-            <Link href="/proceso" className="text-gray text-sm hover:text-white transition-colors">
+            <Link
+              href="/planes"
+              className="text-gray text-sm hover:text-white transition-colors"
+            >
+              Planes
+            </Link>
+            <Link
+              href="/proceso"
+              className="text-gray text-sm hover:text-white transition-colors"
+            >
               Proceso
             </Link>
-            <Link href="/nosotros" className="text-gray text-sm hover:text-white transition-colors">
+            <Link
+              href="/nosotros"
+              className="text-gray text-sm hover:text-white transition-colors"
+            >
               Nosotros
             </Link>
-            <Link href="/contacto" className="text-gray text-sm hover:text-white transition-colors">
+            <Link
+              href="/contacto"
+              className="text-gray text-sm hover:text-white transition-colors"
+            >
               Contacto
             </Link>
           </nav>
@@ -52,7 +70,7 @@ export default function Footer() {
               orbicoperationgroupsas@gmail.com
             </a>
             <a
-              href="https://wa.me/"
+              href="https://wa.me/57XXXXXXXXXX"
               target="_blank"
               rel="noreferrer"
               className="text-gray text-sm hover:text-white transition-colors"
@@ -60,7 +78,7 @@ export default function Footer() {
               WhatsApp
             </a>
             <a
-              href="https://linkedin.com/"
+              href="https://www.linkedin.com/company/orbic-operations-group/"
               target="_blank"
               rel="noreferrer"
               className="text-gray text-sm hover:text-white transition-colors"
