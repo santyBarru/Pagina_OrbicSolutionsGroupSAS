@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/orbic-logo.png" type="image/png" />
       </head>
       <body className={inter.className}>
         <div className="stars-1" />
