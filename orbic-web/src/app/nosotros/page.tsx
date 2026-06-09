@@ -102,8 +102,8 @@ const team = [
     color: "#22C55E",
     image: "/assets/juan camilo.jpg",
     imageStyle: {
-      objectPosition: "50% 50%",
-      transform: "scale(0.95) translateY(8%)",
+      objectPosition: "50% 20%",
+      transform: "scale(1.1)",
       transformOrigin: "center center",
     },
   },
