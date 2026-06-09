@@ -54,14 +54,14 @@ export default function Hero() {
             className="flex items-center gap-5"
           >
             <Link
-              href="#contacto"
+              href="/servicios"
               className="px-7 py-4 rounded-2xl bg-[#FF6B35] text-black font-medium hover:scale-105 transition-all duration-300 shadow-[0_0_40px_rgba(255,107,53,0.4)] hover:shadow-[0_0_60px_rgba(255,107,53,0.6)]"
             >
               Explorar plataforma →
             </Link>
 
             <Link
-              href="#proceso"
+              href="/proceso"
               className="text-[#8E95A9] hover:text-white transition-all duration-300"
             >
               Cómo funciona
@@ -86,7 +86,7 @@ export default function Hero() {
               alt="Orbic Operations"
               width={500}
               height={500}
-              className="relative z-10 drop-shadow-[0_0_30px_rgba(139,92,255,0.20)]"
+              className="relative z-10 drop-shadow-[0_0_80px_rgba(139,92,255,0.35)]"
               priority
             />
           </motion.div>

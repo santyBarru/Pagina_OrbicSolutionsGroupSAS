@@ -376,12 +376,26 @@ export default function ServiciosPage() {
                 En el diagnóstico gratuito identificamos cuál es el punto de
                 mayor impacto para tu operación.
               </p>
-              <Link
-                href="/contacto"
-                className="inline-flex items-center gap-2 px-8 py-5 rounded-2xl bg-[#FF6B35] text-black font-semibold hover:scale-105 transition-all duration-300 shadow-[0_0_50px_rgba(255,107,53,0.5)] hover:shadow-[0_0_80px_rgba(255,107,53,0.7)]"
-              >
-                Solicitar diagnóstico gratis →
-              </Link>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a
+                  href="https://demo.orbicopsgroup.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 px-8 py-5 rounded-2xl bg-[#FF6B35] text-black font-semibold hover:scale-105 transition-all duration-300 shadow-[0_0_50px_rgba(255,107,53,0.5)] hover:shadow-[0_0_80px_rgba(255,107,53,0.7)]"
+                >
+                  Prueba el CRM en vivo →
+                </a>
+                <Link
+                  href="/contacto"
+                  className="inline-flex items-center gap-2 px-8 py-5 rounded-2xl font-semibold transition-all duration-300 hover:scale-105"
+                  style={{
+                    border: "1px solid rgba(139,92,255,0.4)",
+                    color: "#B388FF",
+                  }}
+                >
+                  ¿Tienes alguna duda? →
+                </Link>
+              </div>
             </div>
           </motion.div>
         </div>
