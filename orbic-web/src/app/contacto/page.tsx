@@ -1,16 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
-
-const EMAIL = "orbicoperationgroupsas@gmail.com";
 
 const contactMethods = [
   {
     title: "WhatsApp",
-    description: "Escríbenos directo. Atención 24/7",
+    description: "Escríbenos directo. Respondemos en menos de 24 horas.",
     action: "Abrir WhatsApp →",
-    href: "https://wa.me/57XXXXXXXXXX?text=Hola%20equipo%20Orbic%2C%20vi%20su%20p%C3%A1gina%20web%20y%20me%20interesa%20un%20diagn%C3%B3stico%20gratuito%20para%20mi%20empresa.",
+    href: "https://wa.me/573053308423?text=Hola%20equipo%20Orbic%2C%20vi%20su%20p%C3%A1gina%20web%20y%20me%20interesa%20un%20diagn%C3%B3stico%20gratuito%20para%20mi%20empresa.",
     color: "#22C55E",
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -21,8 +18,8 @@ const contactMethods = [
   {
     title: "Email",
     description: "Para propuestas formales o documentación.",
-    action: "Copiar correo →",
-    href: "",
+    action: "Enviar correo →",
+    href: "mailto:orbicoperationgroupsas@gmail.com",
     color: "#8B5CFF",
     icon: (
       <svg
@@ -44,7 +41,7 @@ const contactMethods = [
     title: "LinkedIn",
     description: "Síguenos para actualizaciones y contenido.",
     action: "Ver perfil →",
-    href: "https://www.linkedin.com/company/orbic-operations-group/",
+    href: "https://linkedin.com/",
     color: "#3B82F6",
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -55,14 +52,6 @@ const contactMethods = [
 ];
 
 export default function ContactoPage() {
-  const [copied, setCopied] = useState(false);
-
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText(EMAIL);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
-  };
-
   return (
     <>
       {/* Hero */}
@@ -94,99 +83,51 @@ export default function ContactoPage() {
       <section className="pb-16">
         <div className="max-w-4xl mx-auto px-6">
           <div className="grid md:grid-cols-3 gap-6">
-            {contactMethods.map((method, index) => {
-              const isEmail = method.title === "Email";
+            {contactMethods.map((method, index) => (
+              <motion.a
+                key={index}
+                href={method.href}
+                target="_blank"
+                rel="noreferrer"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.12 }}
+                className="rounded-2xl p-7 relative overflow-hidden transition-all duration-300 hover:-translate-y-1 block"
+                style={{
+                  background: "rgba(23,28,49,0.3)",
+                  border: `1px solid ${method.color}20`,
+                }}
+              >
+                <div
+                  className="absolute top-0 left-0 right-0 h-[2px]"
+                  style={{
+                    background: `linear-gradient(90deg, transparent, ${method.color}60, transparent)`,
+                  }}
+                />
 
-              const cardStyle = {
-                background: "rgba(23,28,49,0.3)",
-                border: `1px solid ${method.color}20`,
-                transition: "all 0.35s ease",
-              };
-
-              const handleEnter = (e: React.MouseEvent<HTMLElement>) => {
-                const el = e.currentTarget;
-                el.style.transform = "translateY(-6px)";
-                el.style.boxShadow = `0 8px 40px ${method.color}30, 0 0 0 1px ${method.color}40`;
-                el.style.border = `1px solid ${method.color}50`;
-              };
-
-              const handleLeave = (e: React.MouseEvent<HTMLElement>) => {
-                const el = e.currentTarget;
-                el.style.transform = "translateY(0)";
-                el.style.boxShadow = "none";
-                el.style.border = `1px solid ${method.color}20`;
-              };
-
-              const inner = (
-                <>
-                  <div
-                    className="absolute top-0 left-0 right-0 h-[2px]"
-                    style={{
-                      background: `linear-gradient(90deg, transparent, ${method.color}60, transparent)`,
-                    }}
-                  />
-                  <div
-                    className="w-12 h-12 rounded-xl mb-5 flex items-center justify-center"
-                    style={{
-                      background: `${method.color}12`,
-                      border: `1px solid ${method.color}25`,
-                      color: method.color,
-                    }}
-                  >
-                    {method.icon}
-                  </div>
-                  <h3 className="text-lg font-semibold mb-2">{method.title}</h3>
-                  <p className="text-[#8E95A9] text-sm leading-relaxed mb-4">
-                    {method.description}
-                  </p>
-                  <p
-                    className="text-sm font-medium transition-colors duration-300"
-                    style={{
-                      color: isEmail && copied ? "#22C55E" : method.color,
-                    }}
-                  >
-                    {isEmail
-                      ? copied
-                        ? "¡Copiado al portapapeles ✓"
-                        : "Copiar correo →"
-                      : method.action}
-                  </p>
-                </>
-              );
-
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.12 }}
+                <div
+                  className="w-12 h-12 rounded-xl mb-5 flex items-center justify-center"
+                  style={{
+                    background: `${method.color}12`,
+                    border: `1px solid ${method.color}25`,
+                    color: method.color,
+                  }}
                 >
-                  {isEmail ? (
-                    <button
-                      onClick={handleCopyEmail}
-                      className="rounded-2xl p-7 relative overflow-hidden w-full text-left cursor-pointer"
-                      style={cardStyle}
-                      onMouseEnter={handleEnter}
-                      onMouseLeave={handleLeave}
-                    >
-                      {inner}
-                    </button>
-                  ) : (
-                    <a
-                      href={method.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="rounded-2xl p-7 relative overflow-hidden block cursor-pointer"
-                      style={cardStyle}
-                      onMouseEnter={handleEnter}
-                      onMouseLeave={handleLeave}
-                    >
-                      {inner}
-                    </a>
-                  )}
-                </motion.div>
-              );
-            })}
+                  {method.icon}
+                </div>
+
+                <h3 className="text-lg font-semibold mb-2">{method.title}</h3>
+                <p className="text-[#8E95A9] text-sm leading-relaxed mb-4">
+                  {method.description}
+                </p>
+                <p
+                  className="text-sm font-medium"
+                  style={{ color: method.color }}
+                >
+                  {method.action}
+                </p>
+              </motion.a>
+            ))}
           </div>
         </div>
       </section>
@@ -195,20 +136,19 @@ export default function ContactoPage() {
       <section className="pb-16">
         <div className="max-w-2xl mx-auto px-6">
           <motion.div
-            initial={{ opacity: 0, y: 40, scale: 0.97 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            whileHover={{ y: -6, scale: 1.01, transition: { duration: 0.3 } }}
-            className="rounded-2xl p-10 relative overflow-hidden text-center cursor-default"
+            transition={{ duration: 0.7 }}
+            className="rounded-2xl p-10 relative overflow-hidden text-center"
             style={{
               background: "rgba(23,28,49,0.3)",
               border: "1px solid rgba(255,107,53,0.15)",
-              boxShadow: "0 0 60px rgba(255,107,53,0.06)",
             }}
           >
             <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_top_left,rgba(139,92,255,0.3),transparent_40%)]" />
             <div className="absolute inset-0 opacity-15 bg-[radial-gradient(circle_at_bottom_right,rgba(255,107,53,0.3),transparent_40%)]" />
+
             <div
               className="absolute top-0 left-0 right-0 h-[2px]"
               style={{
@@ -216,6 +156,7 @@ export default function ContactoPage() {
                   "linear-gradient(90deg, transparent, rgba(255,107,53,0.5), transparent)",
               }}
             />
+
             <div className="relative z-10">
               <p className="text-4xl font-semibold mb-4">
                 ¿Listo para{" "}
@@ -226,7 +167,7 @@ export default function ContactoPage() {
                 Escríbenos por WhatsApp y agenda tu diagnóstico gratuito hoy.
               </p>
               <a
-                href="https://wa.me/57XXXXXXXXXX?text=Hola%20equipo%20Orbic%2C%20vi%20su%20p%C3%A1gina%20web%20y%20me%20interesa%20un%20diagn%C3%B3stico%20gratuito%20para%20mi%20empresa."
+                href="https://wa.me/573053308423?text=Hola%20equipo%20Orbic%2C%20vi%20su%20p%C3%A1gina%20web%20y%20me%20interesa%20un%20diagn%C3%B3stico%20gratuito%20para%20mi%20empresa."
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 px-8 py-5 rounded-2xl bg-[#FF6B35] text-black font-semibold hover:scale-105 transition-all duration-300 shadow-[0_0_50px_rgba(255,107,53,0.5)] hover:shadow-[0_0_80px_rgba(255,107,53,0.7)]"
@@ -252,7 +193,7 @@ export default function ContactoPage() {
               <p className="text-[#8E95A9] text-xs uppercase tracking-wider mb-1">
                 Email
               </p>
-              <p className="text-sm">{EMAIL}</p>
+              <p className="text-sm">orbicoperationgroupsas@gmail.com</p>
             </div>
             <div className="hidden md:block w-[1px] h-8 bg-[rgba(255,255,255,0.08)]" />
             <div>
