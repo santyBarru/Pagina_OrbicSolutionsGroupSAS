@@ -35,6 +35,12 @@ export default function Footer() {
               Servicios
             </Link>
             <Link
+              href="/planes"
+              className="text-gray text-sm hover:text-white transition-colors"
+            >
+              Planes
+            </Link>
+            <Link
               href="/proceso"
               className="text-gray text-sm hover:text-white transition-colors"
             >
@@ -72,7 +78,7 @@ export default function Footer() {
               WhatsApp
             </a>
             <a
-              href="https://linkedin.com/"
+              href="https://www.linkedin.com/company/orbic-operations-group/"
               target="_blank"
               rel="noreferrer"
               className="text-gray text-sm hover:text-white transition-colors"
