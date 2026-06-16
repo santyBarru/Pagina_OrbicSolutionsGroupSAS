@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -20,7 +21,19 @@ export default function RootLayout({
   return (
     <html lang="es">
       <head>
-        <link rel="icon" href="/orbic-logo.png" type="image/png" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-HSCET96BZM"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-HSCET96BZM');
+          `}
+        </Script>
       </head>
       <body className={inter.className}>
         <div className="stars-1" />
