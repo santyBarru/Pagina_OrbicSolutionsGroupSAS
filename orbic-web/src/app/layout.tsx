@@ -22,8 +22,10 @@ export default function RootLayout({
     <html lang="es">
       <head>
         <link rel="icon" href="/orbic-logo.png" type="image/png" />
+      </head>
+      <body className={inter.className}>
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-HSCET96BZM"
+          src="https://www.googletagmanager.com/gtag/js?id=G-T4XYCTK1R8"
           strategy="afterInteractive"
         />
         <Script id="google-analytics" strategy="afterInteractive">
@@ -31,11 +33,9 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-HSCET96BZM');
+            gtag('config', 'G-T4XYCTK1R8');
           `}
         </Script>
-      </head>
-      <body className={inter.className}>
         <div className="stars-1" />
         <div className="stars-2" />
         <div className="grid-overlay" />
