@@ -83,11 +83,18 @@ export default function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="pt-6 border-t border-white/[0.04] text-center">
+        <div className="pt-6 border-t border-white/[0.04] flex flex-col md:flex-row items-center justify-center gap-4 text-center">
           <p className="text-gray/50 text-xs">
             © {new Date().getFullYear()} Orbic Operations Group SAS. Todos los
             derechos reservados.
           </p>
+          <span className="hidden md:block text-gray/20 text-xs">·</span>
+          <Link
+            href="/privacidad"
+            className="text-gray/50 text-xs hover:text-white transition-colors"
+          >
+            Política de tratamiento de datos
+          </Link>
         </div>
       </div>
     </footer>
