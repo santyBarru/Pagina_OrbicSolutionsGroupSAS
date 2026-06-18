@@ -109,7 +109,7 @@ const team = [
   },
   {
     name: "Juan Pablo Luna",
-    role: "CTO, Co-founder & Infrastructure Lead",
+    role: "CTO & Infrastructure Lead",
     description:
       "Infraestructura, automatizaciones y arquitectura técnica. Construye todo lo que hace funcionar a Orbic.",
     color: "#F97316",
