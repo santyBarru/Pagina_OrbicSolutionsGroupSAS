@@ -49,7 +49,9 @@ export default function RootLayout({
   return (
     <html lang="es">
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/orbic-logo.png" type="image/png" />
+      </head>
+      <body className={inter.className}>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-T4XYCTK1R8"
           strategy="afterInteractive"
@@ -62,8 +64,6 @@ export default function RootLayout({
             gtag('config', 'G-T4XYCTK1R8');
           `}
         </Script>
-      </head>
-      <body className={inter.className}>
         <div className="stars-1" />
         <div className="stars-2" />
         <div className="grid-overlay" />
