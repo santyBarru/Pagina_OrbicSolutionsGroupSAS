@@ -207,7 +207,7 @@ export default function ContactoPage() {
               <p className="text-[#8E95A9] text-xs uppercase tracking-wider mb-1">
                 Horario
               </p>
-              <p className="text-sm">Lun - Vie, 8AM - 6PM</p>
+              <p className="text-sm">24/7</p>
             </div>
           </motion.div>
         </div>
