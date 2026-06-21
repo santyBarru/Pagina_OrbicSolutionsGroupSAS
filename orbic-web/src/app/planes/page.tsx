@@ -244,6 +244,42 @@ export default function PlanesPage() {
         </div>
       </section>
 
+      {/* Guiño a casos de uso — ayuda a quien no sabe qué plan necesita */}
+      <section className="pb-24">
+        <div className="max-w-5xl mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="flex flex-col items-center justify-between gap-5 rounded-2xl px-8 py-7 text-center md:flex-row md:text-left"
+            style={{
+              background: "rgba(23,28,49,0.5)",
+              border: "1px solid rgba(139,92,255,0.18)",
+            }}
+          >
+            <div>
+              <p className="text-lg font-semibold">
+                ¿No sabes cuál plan necesitas?
+              </p>
+              <p className="mt-1 text-sm text-[#8E95A9]">
+                Mira casos de uso reales y descubre cuál se parece a tu empresa.
+              </p>
+            </div>
+            <Link
+              href="/servicios#casos"
+              className="inline-flex flex-shrink-0 items-center gap-2 rounded-2xl px-6 py-3.5 text-sm font-semibold transition-all duration-300 hover:scale-[1.03]"
+              style={{
+                border: "1px solid rgba(139,92,255,0.4)",
+                color: "#B388FF",
+              }}
+            >
+              Ver casos de uso →
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Tabla comparativa */}
       <section className="pb-24">
         <div className="max-w-5xl mx-auto px-6">
