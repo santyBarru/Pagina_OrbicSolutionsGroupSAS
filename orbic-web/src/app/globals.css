@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  --color-void: #07090f;
-  --color-midnight: #0b1020;
-  --color-navy: #111628;
-  --color-card: #171c31;
-  --color-hover: #202744;
+  --color-void: #050608;
+  --color-midnight: #080a10;
+  --color-navy: #0c0f18;
+  --color-card: #0e1119;
+  --color-hover: #161922;
   --color-gray: #8e95a9;
   --color-coral: #ff6b35;
   --color-coral-glow: #ff8f5f;
@@ -27,47 +27,46 @@ html {
 }
 
 body {
-  background: #050710;
+  background: #070809;
   color: #f5f7fa;
   position: relative;
 }
 
+/* Resplandores ambientales: estáticos y sutiles (sin animación) */
 body::before {
   content: "";
   position: fixed;
-  top: -15%;
-  left: -5%;
-  width: 700px;
-  height: 700px;
+  top: -20%;
+  left: -10%;
+  width: 620px;
+  height: 620px;
   border-radius: 50%;
   pointer-events: none;
   z-index: 0;
   background: radial-gradient(
     circle,
-    rgba(139, 92, 255, 0.12),
+    rgba(139, 92, 255, 0.07),
     transparent 65%
   );
-  filter: blur(60px);
-  animation: glow-drift-1 20s ease-in-out infinite alternate;
+  filter: blur(70px);
 }
 
 body::after {
   content: "";
   position: fixed;
-  bottom: -10%;
-  right: -5%;
-  width: 500px;
-  height: 500px;
+  bottom: -15%;
+  right: -10%;
+  width: 520px;
+  height: 520px;
   border-radius: 50%;
   pointer-events: none;
   z-index: 0;
   background: radial-gradient(
     circle,
-    rgba(255, 107, 53, 0.07),
+    rgba(255, 107, 53, 0.045),
     transparent 65%
   );
-  filter: blur(60px);
-  animation: glow-drift-2 25s ease-in-out infinite alternate;
+  filter: blur(70px);
 }
 
 ::selection {
@@ -83,6 +82,7 @@ body::after {
   overflow: hidden;
 }
 
+/* Rejilla apenas perceptible, estática */
 .grid-overlay {
   position: fixed;
   inset: 0;
@@ -90,48 +90,51 @@ body::after {
   pointer-events: none;
   overflow: hidden;
   background-image:
-    linear-gradient(rgba(139, 92, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(139, 92, 255, 0.025) 1px, transparent 1px);
-  background-size: 80px 80px;
-  mask-image: radial-gradient(ellipse at 50% 30%, black 20%, transparent 70%);
+    linear-gradient(rgba(139, 92, 255, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 92, 255, 0.018) 1px, transparent 1px);
+  background-size: 90px 90px;
+  mask-image: radial-gradient(ellipse at 50% 25%, black 15%, transparent 70%);
 }
 
 .glass {
-  background: "rgba(23,28,49,0.3)";
+  background: rgba(14, 17, 25, 0.55);
   backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Campo de estrellas desactivado para un look más limpio y corporativo */
+.stars-1,
+.stars-2 {
+  display: none;
 }
 
 .hero-glow {
   position: absolute;
-  width: 500px;
-  height: 500px;
+  width: 460px;
+  height: 460px;
   background: radial-gradient(
     circle,
-    rgba(139, 92, 255, 0.08),
+    rgba(139, 92, 255, 0.06),
     transparent 70%
   );
   filter: blur(80px);
   z-index: 0;
-  animation: hero-pulse 8s ease-in-out infinite;
 }
 
+/* Tarjetas: hover limpio, sin inclinación 3D */
 .card-3d {
-  transform-style: preserve-3d;
-  perspective: 800px;
   transition:
-    transform 0.4s ease,
-    box-shadow 0.4s ease,
-    border-color 0.4s ease;
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
 }
 
 .card-3d:hover {
-  transform: translateY(-8px) rotateX(3deg) rotateY(-2deg);
+  transform: translateY(-4px);
   box-shadow:
-    0 25px 60px rgba(0, 0, 0, 0.5),
-    0 0 40px rgba(139, 92, 255, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06);
-  border-color: rgba(139, 92, 255, 0.2) !important;
+    0 18px 40px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  border-color: rgba(139, 92, 255, 0.18) !important;
 }
 
 .card-3d::before {
@@ -141,12 +144,11 @@ body::after {
   border-radius: inherit;
   background: linear-gradient(
     135deg,
-    rgba(139, 92, 255, 0.1),
-    transparent 40%,
-    rgba(255, 107, 53, 0.06)
+    rgba(139, 92, 255, 0.06),
+    transparent 45%
   );
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.3s ease;
   pointer-events: none;
 }
 
@@ -154,175 +156,23 @@ body::after {
   opacity: 1;
 }
 
-.text-glow-orange {
-  text-shadow:
-    0 0 20px rgba(255, 107, 53, 0.15),
-    0 0 40px rgba(255, 107, 53, 0.05);
-}
-.text-glow-violet {
-  text-shadow:
-    0 0 20px rgba(139, 92, 255, 0.12),
-    0 0 40px rgba(139, 92, 255, 0.04);
-}
-
+/* Sin glow en textos: lectura más limpia y seria */
+.text-glow-orange,
+.text-glow-violet,
 .stat-glow {
-  text-shadow:
-    0 0 20px rgba(255, 107, 53, 0.2),
-    0 0 40px rgba(255, 107, 53, 0.08);
-}
-
-@keyframes twinkle-1 {
-  0% {
-    opacity: 0.4;
-  }
-  50% {
-    opacity: 0.8;
-  }
-  100% {
-    opacity: 0.5;
-  }
-}
-
-@keyframes twinkle-2 {
-  0% {
-    opacity: 0.3;
-  }
-  50% {
-    opacity: 0.7;
-  }
-  100% {
-    opacity: 0.4;
-  }
-}
-
-@keyframes glow-drift-1 {
-  0% {
-    transform: translate(0, 0) scale(1);
-    opacity: 0.8;
-  }
-  50% {
-    transform: translate(40px, 30px) scale(1.1);
-    opacity: 1;
-  }
-  100% {
-    transform: translate(-20px, 50px) scale(0.95);
-    opacity: 0.7;
-  }
-}
-
-@keyframes glow-drift-2 {
-  0% {
-    transform: translate(0, 0) scale(1);
-    opacity: 0.6;
-  }
-  50% {
-    transform: translate(-30px, -40px) scale(1.15);
-    opacity: 0.9;
-  }
-  100% {
-    transform: translate(20px, -20px) scale(0.9);
-    opacity: 0.5;
-  }
-}
-
-@keyframes hero-pulse {
-  0%,
-  100% {
-    opacity: 0.6;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.05);
-  }
+  text-shadow: none;
 }
 
 @keyframes glow-pulse {
   0%,
   100% {
     box-shadow:
-      0 0 8px rgba(139, 92, 255, 0.4),
-      0 0 20px rgba(139, 92, 255, 0.2);
+      0 0 8px rgba(139, 92, 255, 0.35),
+      0 0 18px rgba(139, 92, 255, 0.15);
   }
   50% {
     box-shadow:
-      0 0 16px rgba(139, 92, 255, 0.6),
-      0 0 40px rgba(139, 92, 255, 0.3);
+      0 0 14px rgba(139, 92, 255, 0.5),
+      0 0 30px rgba(139, 92, 255, 0.22);
   }
-}
-
-/* Stars layer 1 */
-.stars-1 {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  pointer-events: none;
-  background: transparent;
-  box-shadow:
-    24px 56px 0 0.5px rgba(255, 255, 255, 0.07),
-    130px 200px 0 0.5px rgba(139, 92, 255, 0.08),
-    290px 80px 0 0.5px rgba(255, 255, 255, 0.05),
-    450px 300px 0 0.5px rgba(255, 107, 53, 0.06),
-    600px 120px 0 0.5px rgba(255, 255, 255, 0.07),
-    780px 400px 0 0.5px rgba(139, 92, 255, 0.06),
-    900px 60px 0 0.5px rgba(255, 255, 255, 0.06),
-    1050px 280px 0 0.5px rgba(255, 255, 255, 0.05),
-    1200px 150px 0 0.5px rgba(139, 92, 255, 0.08),
-    1350px 380px 0 0.5px rgba(255, 255, 255, 0.07),
-    80px 500px 0 0.5px rgba(255, 255, 255, 0.06),
-    220px 620px 0 0.5px rgba(255, 107, 53, 0.06),
-    400px 550px 0 0.5px rgba(255, 255, 255, 0.05),
-    560px 680px 0 0.5px rgba(255, 255, 255, 0.07),
-    720px 580px 0 0.5px rgba(139, 92, 255, 0.06),
-    880px 650px 0 0.5px rgba(255, 255, 255, 0.06),
-    1040px 520px 0 0.5px rgba(255, 255, 255, 0.05),
-    1180px 700px 0 0.5px rgba(255, 107, 53, 0.08),
-    1320px 600px 0 0.5px rgba(255, 255, 255, 0.07),
-    150px 800px 0 0.5px rgba(255, 255, 255, 0.06),
-    350px 900px 0 0.5px rgba(139, 92, 255, 0.06),
-    550px 850px 0 0.5px rgba(255, 255, 255, 0.05),
-    750px 950px 0 0.5px rgba(255, 255, 255, 0.07),
-    950px 820px 0 0.5px rgba(255, 255, 255, 0.06),
-    1100px 900px 0 0.5px rgba(139, 92, 255, 0.08),
-    1280px 850px 0 0.5px rgba(255, 255, 255, 0.05);
-  animation: twinkle-1 8s ease-in-out infinite alternate;
-}
-
-/* Stars layer 2 - bigger, more glow */
-.stars-2 {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  pointer-events: none;
-  background: transparent;
-  box-shadow:
-    80px 120px 2px 1px rgba(139, 92, 255, 0.15),
-    320px 50px 2px 1px rgba(255, 255, 255, 0.1),
-    500px 220px 2px 1px rgba(255, 107, 53, 0.12),
-    700px 180px 2px 1px rgba(139, 92, 255, 0.15),
-    920px 300px 2px 1px rgba(255, 255, 255, 0.08),
-    1100px 100px 2px 1px rgba(179, 136, 255, 0.12),
-    200px 420px 2px 1px rgba(255, 107, 53, 0.1),
-    440px 380px 2px 1px rgba(139, 92, 255, 0.15),
-    660px 500px 2px 1px rgba(255, 255, 255, 0.08),
-    860px 450px 2px 1px rgba(179, 136, 255, 0.12),
-    1060px 550px 2px 1px rgba(255, 255, 255, 0.1),
-    100px 700px 2px 1px rgba(255, 255, 255, 0.08),
-    340px 750px 2px 1px rgba(255, 107, 53, 0.12),
-    580px 680px 2px 1px rgba(139, 92, 255, 0.15),
-    800px 780px 2px 1px rgba(255, 255, 255, 0.1),
-    1000px 720px 2px 1px rgba(179, 136, 255, 0.12),
-    60px 950px 2px 1px rgba(139, 92, 255, 0.15),
-    280px 1000px 2px 1px rgba(255, 107, 53, 0.1),
-    520px 920px 2px 1px rgba(255, 255, 255, 0.1),
-    740px 1050px 2px 1px rgba(139, 92, 255, 0.15),
-    960px 980px 2px 1px rgba(255, 255, 255, 0.08),
-    1160px 1050px 2px 1px rgba(179, 136, 255, 0.12);
-  animation: twinkle-2 12s ease-in-out infinite alternate;
 }

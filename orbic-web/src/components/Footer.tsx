@@ -23,6 +23,9 @@ export default function Footer() {
               Web, CRM, automatización, software e IA aplicada para empresas que
               necesitan orden, velocidad y control.
             </p>
+            <p className="text-gray/60 text-xs mt-4 tracking-wide">
+              Construido sobre OpenAI · Anthropic · n8n
+            </p>
           </div>
 
           {/* Links */}
@@ -64,11 +67,12 @@ export default function Footer() {
           <div className="flex flex-col gap-3">
             <p className="text-white font-semibold text-sm mb-1">Contacto</p>
             <a
-              href="mailto:orbicoperationgroupsas@gmail.com"
+              href="mailto:orbic@orbicopsgroup.com"
               className="text-gray text-sm hover:text-white transition-colors"
             >
-              orbicoperationgroupsas@gmail.com
+              orbic@orbicopsgroup.com
             </a>
+
             <a
               href="https://wa.me/573053308423"
               target="_blank"
@@ -77,6 +81,7 @@ export default function Footer() {
             >
               WhatsApp
             </a>
+
             <a
               href="https://www.linkedin.com/company/orbic-operations-group/"
               target="_blank"
@@ -89,11 +94,13 @@ export default function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="pt-6 border-t border-white/[0.04] flex flex-col md:flex-row items-center justify-center gap-4 text-center">
+        <div className="pt-6 border-t border-white/[0.04] flex flex-col md:flex-row items-center justify-center gap-3 text-center">
           <p className="text-gray/50 text-xs">
             © {new Date().getFullYear()} Orbic Operations Group SAS. Todos los
             derechos reservados.
           </p>
+          <span className="hidden md:block text-gray/20 text-xs">·</span>
+          <p className="text-gray/50 text-xs">NIT 902.076.559-3</p>
           <span className="hidden md:block text-gray/20 text-xs">·</span>
           <Link
             href="/privacidad"
