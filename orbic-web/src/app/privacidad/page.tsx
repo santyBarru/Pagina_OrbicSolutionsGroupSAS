@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 const sections = [
   {
     title: "Responsable del tratamiento",
-    content: `Orbic Operations Group S.A.S.\nCorreo: orbicoperationgroupsas@gmail.com\nDomicilio: Bogotá D.C., Colombia`,
+    content: `Orbic Operations Group S.A.S.\nCorreo: orbic@orbicopsgroup.com\nDomicilio: Bogotá D.C., Colombia`,
   },
   {
     title: "1. Datos que recopilamos",
@@ -25,7 +25,7 @@ const sections = [
   },
   {
     title: "5. Derechos del titular",
-    content: `Como titular de sus datos, usted tiene derecho a:\n\n• Conocer, actualizar y rectificar sus datos personales.\n• Solicitar prueba de la autorización otorgada.\n• Ser informado sobre el uso que se da a sus datos.\n• Revocar la autorización y/o solicitar la supresión de sus datos cuando proceda.\n• Presentar quejas ante la Superintendencia de Industria y Comercio (SIC).\n\nPara ejercer estos derechos, escríbanos a orbicoperationgroupsas@gmail.com. Atenderemos su solicitud en los plazos establecidos por la ley.`,
+    content: `Como titular de sus datos, usted tiene derecho a:\n\n• Conocer, actualizar y rectificar sus datos personales.\n• Solicitar prueba de la autorización otorgada.\n• Ser informado sobre el uso que se da a sus datos.\n• Revocar la autorización y/o solicitar la supresión de sus datos cuando proceda.\n• Presentar quejas ante la Superintendencia de Industria y Comercio (SIC).\n\nPara ejercer estos derechos, escríbanos a orbic@orbicopsgroup.com. Atenderemos su solicitud en los plazos establecidos por la ley.`,
   },
   {
     title: "6. Conservación de los datos",
@@ -45,7 +45,7 @@ const sections = [
   },
   {
     title: "10. Contacto",
-    content: `Para cualquier consulta sobre esta política o sobre el tratamiento de sus datos, contáctenos en orbicoperationgroupsas@gmail.com.`,
+    content: `Para cualquier consulta sobre esta política o sobre el tratamiento de sus datos, contáctenos en orbic@orbicopsgroup.com.`,
   },
 ];
 
@@ -94,10 +94,10 @@ export default function PrivacidadPage() {
             }}
           >
             <p className="text-[#8E95A9] text-sm leading-relaxed">
-              Orbic Operations Group S.A.S. (&quot;Orbic&quot;, &quot;nosotros&quot;) es responsable
-              del tratamiento de los datos personales que usted nos proporciona.
-              Esta política describe cómo recopilamos, usamos, almacenamos y
-              protegemos su información.
+              Orbic Operations Group S.A.S. (&quot;Orbic&quot;,
+              &quot;nosotros&quot;) es responsable del tratamiento de los datos
+              personales que usted nos proporciona. Esta política describe cómo
+              recopilamos, usamos, almacenamos y protegemos su información.
             </p>
           </motion.div>
 

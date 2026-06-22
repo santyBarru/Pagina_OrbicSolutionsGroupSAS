@@ -100,7 +100,7 @@ const team = [
     description:
       "Lidera la operación y el crecimiento estratégico de Orbic, impulsando la expansión y el desarrollo de la empresa.",
     color: "#22C55E",
-    image: "/assets/juan camilo.jpg",
+    image: "/assets/juan%20camilo.jpg",
     imageStyle: {
       objectPosition: "50% 20%",
       transform: "scale(0.99)",
@@ -113,7 +113,7 @@ const team = [
     description:
       "Infraestructura, automatizaciones y arquitectura técnica. Construye todo lo que hace funcionar a Orbic.",
     color: "#F97316",
-    image: "/assets/juan pablo.jpg",
+    image: "/assets/juan%20pablo.jpg",
     imageStyle: {
       objectPosition: "50% 50%",
       transform: "scale(1.18) translateY(%)",

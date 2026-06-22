@@ -7,7 +7,7 @@ const planes = [
   {
     nombre: "Esencial",
     para: "Presencia digital seria + captación",
-    precio: "desde $2.000.000 COP",
+    precio: "desde $2.000.000 COP aprox.",
     soporte: "Soporte Básico $800.000/mes (opcional)",
     color: "#FF6B35",
     destacado: false,
@@ -22,7 +22,7 @@ const planes = [
   {
     nombre: "Crecimiento",
     para: "Ordenar y escalar la operación",
-    precio: "desde $8.000.000 COP",
+    precio: "desde $8.000.000 COP aprox.",
     soporte: "Soporte Empresarial $1.500.000/mes",
     color: "#8B5CFF",
     destacado: true,
@@ -38,7 +38,7 @@ const planes = [
   {
     nombre: "Corporativo",
     para: "Operaciones complejas / alto volumen",
-    precio: "desde $12.000.000 COP",
+    precio: "desde $12.000.000 COP aprox.",
     soporte: "Soporte Corporativo desde $3.000.000/mes",
     color: "#B388FF",
     destacado: false,
@@ -129,8 +129,8 @@ export default function PlanesPage() {
               </span>
             </h1>
             <p className="text-[#8E95A9] text-lg max-w-2xl mx-auto leading-relaxed">
-              Elige el plan según la etapa de tu empresa. El alcance exacto se
-              define tras el diagnóstico gratuito.
+              Elige el plan según la etapa de tu empresa. Los valores son
+              aproximados y el precio final se define en la cotización.
             </p>
           </motion.div>
         </div>
