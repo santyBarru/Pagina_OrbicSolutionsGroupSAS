@@ -61,8 +61,6 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-3">
           <a
             href="https://demo.orbicopsgroup.com"
-            target="_blank"
-            rel="noopener noreferrer"
             className="px-5 py-3 rounded-xl border border-[rgba(139,92,255,0.5)] text-sm text-[#B388FF] hover:bg-[rgba(139,92,255,0.08)] transition-all duration-300"
           >
             Probar Demo ✦
@@ -71,11 +69,10 @@ export default function Navbar() {
             href="/contacto"
             className="px-5 py-3 rounded-xl border border-[rgba(255,107,53,0.5)] text-sm hover:bg-[rgba(255,107,53,0.08)] transition-all duration-300"
           >
-            Solicitar diagnóstico →
+            Solicitar propuesta →
           </Link>
         </div>
 
-        {/* Mobile menu */}
         <button
           onClick={() => setOpen(!open)}
           className="md:hidden flex flex-col gap-1.5 p-2"
@@ -91,7 +88,7 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <div className="md:hidden px-6 pb-5 pt-2 bg-[#07090F]/95 backdrop-blur-xl">
+        <div className="md:hidden px-6 pb-5 pt-2 bg-black/95 backdrop-blur-xl">
           <nav className="flex flex-col gap-4">
             {navLinks.map((link) => (
               <Link
@@ -105,8 +102,6 @@ export default function Navbar() {
             ))}
             <a
               href="https://demo.orbicopsgroup.com"
-              target="_blank"
-              rel="noopener noreferrer"
               onClick={() => setOpen(false)}
               className="inline-flex items-center justify-center px-5 py-2.5 rounded-full text-sm font-semibold text-[#B388FF] border border-[rgba(139,92,255,0.4)] mt-2"
             >
@@ -117,7 +112,7 @@ export default function Navbar() {
               onClick={() => setOpen(false)}
               className="inline-flex items-center justify-center px-5 py-2.5 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-[#FF6B35] to-[#8B5CFF] mt-2"
             >
-              Solicitar diagnóstico →
+              Solicitar propuesta →
             </Link>
           </nav>
         </div>
