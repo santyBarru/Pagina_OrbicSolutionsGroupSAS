@@ -6,7 +6,12 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CookieBanner from "@/components/CookieBanner";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Orbic Operations | Automatización inteligente para empresas",
@@ -48,11 +53,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es">
+    <html lang="es" className={inter.variable}>
       <head>
         <link rel="icon" href="/orbic-logo.png" type="image/png" />
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.className} antialiased`}>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-T4XYCTK1R8"
           strategy="afterInteractive"
@@ -65,8 +70,6 @@ export default function RootLayout({
             gtag('config', 'G-T4XYCTK1R8');
           `}
         </Script>
-        <div className="stars-1" />
-        <div className="stars-2" />
         <div className="grid-overlay" />
         <Navbar />
         <main className="relative z-[2]">{children}</main>

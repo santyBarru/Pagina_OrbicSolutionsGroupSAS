@@ -2,21 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import {
-  Globe,
-  BarChart3,
-  Workflow,
-  Code,
-  Brain,
-  Link2,
-  ArrowRight,
-} from "lucide-react";
-
-/* ------------------------------------------------------------------ */
-/* SERVICIOS — las 6 capas del sistema Orbic.                          */
-/* Sin precios aquí: los precios viven SOLO en /planes para no         */
-/* contradecir el mensaje "no vendemos piezas sueltas".                */
-/* ------------------------------------------------------------------ */
+import { Globe, BarChart3, Workflow, Code, Brain, Link2 } from "lucide-react";
 
 const servicios = [
   {
@@ -111,16 +97,21 @@ const servicios = [
   },
 ];
 
-/* Cómo se conectan las capas — el argumento "no son piezas sueltas". */
 const flujo = [
-  { label: "Web", desc: "Captas al cliente" },
-  { label: "CRM", desc: "Lo organizas y le haces seguimiento" },
-  { label: "Automatización", desc: "El sistema responde y avanza solo" },
-  { label: "IA", desc: "Aprende y mejora la operación" },
+  { label: "Web", desc: "Captas al cliente", color: "#8B5CFF" },
+  {
+    label: "CRM",
+    desc: "Lo organizas y le haces seguimiento",
+    color: "#B388FF",
+  },
+  {
+    label: "Automatización",
+    desc: "El sistema responde y avanza solo",
+    color: "#FF6B35",
+  },
+  { label: "IA", desc: "Aprende y mejora la operación", color: "#FF8F5F" },
 ];
 
-/* Casos de uso — EJEMPLOS EDITABLES. Cambia los nombres/sectores por
-   casos reales de Orbic cuando los tengan. */
 const casos = [
   {
     sector: "Inmobiliaria / agencia",
@@ -132,7 +123,7 @@ const casos = [
     color: "#8B5CFF",
   },
   {
-    sector: "Empresa con cumplimiento (SARLAFT / KYC)",
+    sector: "Empresa con cumplimiento",
     problema:
       "Validar cada cliente nuevo toma horas y depende de una sola persona.",
     solucion:
@@ -141,7 +132,7 @@ const casos = [
     color: "#FF6B35",
   },
   {
-    sector: "Comercio / PyME en crecimiento",
+    sector: "PyME en crecimiento",
     problema:
       "Cada área tiene su propio Excel y nadie ve el panorama completo del negocio.",
     solucion:
@@ -151,150 +142,130 @@ const casos = [
   },
 ];
 
-/* Hover por color — mismo comportamiento que el resto del sitio. */
-function hoverEnter(e: React.MouseEvent<HTMLElement>, color: string) {
-  const el = e.currentTarget;
-  el.style.transform = "translateY(-6px)";
-  el.style.boxShadow = `0 12px 50px ${color}25, 0 0 0 1px ${color}40`;
-  el.style.border = `1px solid ${color}50`;
-}
-function hoverLeave(e: React.MouseEvent<HTMLElement>, color: string) {
-  const el = e.currentTarget;
-  el.style.transform = "translateY(0)";
-  el.style.boxShadow = "none";
-  el.style.border = `1px solid ${color}20`;
-}
-
-function ServicioCard({
-  servicio,
-  index,
-}: {
-  servicio: (typeof servicios)[number];
-  index: number;
-}) {
-  const Icon = servicio.icon;
+function CurveVioletTop() {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: (index % 3) * 0.08 }}
-      onMouseEnter={(e) => hoverEnter(e, servicio.color)}
-      onMouseLeave={(e) => hoverLeave(e, servicio.color)}
-      className="relative flex flex-col overflow-hidden rounded-3xl p-7"
+    <svg
+      className="absolute pointer-events-none"
       style={{
-        background: "rgba(23,28,49,0.5)",
-        border: `1px solid ${servicio.color}20`,
-        transition:
-          "transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease",
+        top: 0,
+        right: 0,
+        width: "500px",
+        height: "350px",
+        opacity: 0.3,
       }}
+      viewBox="0 0 500 350"
+      fill="none"
     >
-      {/* Acento superior */}
-      <div
-        className="absolute left-0 right-0 top-0 h-[2px]"
-        style={{
-          background: `linear-gradient(90deg, transparent, ${servicio.color}70, transparent)`,
-        }}
+      <path
+        d="M 500 0 Q 300 150 0 300"
+        stroke="url(#svt)"
+        strokeWidth="1.5"
+        fill="none"
       />
+      <path
+        d="M 500 20 Q 310 160 5 315"
+        stroke="url(#svt2)"
+        strokeWidth="0.5"
+        fill="none"
+      />
+      <defs>
+        <linearGradient id="svt" x1="1" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#8B5CFF" stopOpacity="0.1" />
+          <stop offset="50%" stopColor="#8B5CFF" stopOpacity="1" />
+          <stop offset="100%" stopColor="#8B5CFF" stopOpacity="0" />
+        </linearGradient>
+        <linearGradient id="svt2" x1="1" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#B388FF" stopOpacity="0" />
+          <stop offset="55%" stopColor="#B388FF" stopOpacity="0.7" />
+          <stop offset="100%" stopColor="#B388FF" stopOpacity="0" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
 
-      {/* Icono */}
-      <div
-        className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl"
-        style={{
-          background: `${servicio.color}12`,
-          border: `1px solid ${servicio.color}25`,
-        }}
-      >
-        <Icon
-          size={22}
-          style={{
-            color: servicio.color,
-            filter: `drop-shadow(0 0 6px ${servicio.color}60)`,
-          }}
-        />
-      </div>
-
-      {/* Título + para qué sirve */}
-      <h3 className="mb-2 text-lg font-semibold leading-tight">
-        {servicio.title}
-      </h3>
-      <p className="mb-6 text-sm leading-relaxed text-[#8E95A9]">
-        {servicio.para}
-      </p>
-
-      {/* Bloque de métrica — número grande con glow + línea de acento animada.
-          Reemplaza a las gráficas de barras falsas: visual, pero sin datos inventados. */}
-      <div className="mb-6">
-        <div className="flex items-baseline gap-2">
-          <span
-            className="text-4xl font-bold leading-none"
-            style={{
-              color: servicio.color,
-              textShadow: `0 0 24px ${servicio.color}40, 0 0 48px ${servicio.color}18`,
-            }}
-          >
-            {servicio.stat.value}
-          </span>
-          <span className="text-xs leading-snug text-[#8E95A9]">
-            {servicio.stat.label}
-          </span>
-        </div>
-        <motion.div
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.9, delay: 0.25, ease: "easeOut" }}
-          className="mt-3 h-[3px] w-full rounded-full"
-          style={{
-            transformOrigin: "left",
-            background: `linear-gradient(90deg, ${servicio.color}, ${servicio.color}10)`,
-          }}
-        />
-      </div>
-
-      {/* Qué incluye */}
-      <div className="mt-auto flex flex-wrap gap-2">
-        {servicio.incluye.map((item) => (
-          <span
-            key={item}
-            className="rounded-full px-2.5 py-1 text-xs"
-            style={{
-              color: servicio.color,
-              background: `${servicio.color}10`,
-              border: `1px solid ${servicio.color}20`,
-            }}
-          >
-            {item}
-          </span>
-        ))}
-      </div>
-    </motion.div>
+function CurveOrangeBottom() {
+  return (
+    <svg
+      className="absolute pointer-events-none"
+      style={{
+        bottom: 0,
+        left: 0,
+        width: "500px",
+        height: "300px",
+        opacity: 0.25,
+      }}
+      viewBox="0 0 500 300"
+      fill="none"
+    >
+      <path
+        d="M 0 300 Q 200 100 500 50"
+        stroke="url(#sob)"
+        strokeWidth="1.5"
+        fill="none"
+      />
+      <defs>
+        <linearGradient id="sob" x1="0" y1="1" x2="1" y2="0">
+          <stop offset="0%" stopColor="#FF6B35" stopOpacity="0" />
+          <stop offset="50%" stopColor="#FF6B35" stopOpacity="1" />
+          <stop offset="100%" stopColor="#FF6B35" stopOpacity="0" />
+        </linearGradient>
+      </defs>
+    </svg>
   );
 }
 
 export default function ServiciosPage() {
   return (
     <>
-      {/* ---------------------------------------------------------- */}
-      {/* HERO */}
-      {/* ---------------------------------------------------------- */}
-      <section className="pt-40 pb-12">
-        <div className="mx-auto max-w-3xl px-6 text-center">
+      {/* ── HERO ── */}
+      <section className="relative pt-40 pb-20 z-10 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img
+            src="/assets/servicios-bg.jpg"
+            alt=""
+            className="w-full h-full object-cover object-center"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(to right, rgba(0,0,0,0.97) 30%, rgba(0,0,0,0.8) 60%, rgba(0,0,0,0.4) 100%)",
+            }}
+          />
+          <div
+            className="absolute bottom-0 left-0 right-0"
+            style={{
+              height: "280px",
+              background:
+                "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 50%, #000000 100%)",
+            }}
+          />
+        </div>
+        <div className="max-w-4xl mx-auto px-6 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
           >
-            <p className="mb-6 text-sm uppercase tracking-[0.2em] text-[#FF6B35] text-glow-orange">
-              Servicios
-            </p>
-            <h1 className="mb-6 text-5xl font-semibold leading-[1.05] tracking-tight lg:text-6xl">
-              Diseñamos el sistema,{" "}
-              <span className="text-[#8B5CFF] text-glow-violet">
+            <div className="flex items-center gap-3 mb-10">
+              <div className="h-px w-8 bg-[#FF6B35]" />
+              <span className="text-[#FF6B35] text-[10px] tracking-[0.35em] uppercase font-light">
+                Servicios
+              </span>
+            </div>
+            <h1
+              className="leading-[0.95] tracking-tight mb-8"
+              style={{ letterSpacing: "-0.03em" }}
+            >
+              <span className="block text-5xl lg:text-7xl font-bold text-white">
+                Diseñamos el sistema,
+              </span>
+              <span className="block text-5xl lg:text-7xl font-extralight text-white/35">
                 no piezas aisladas.
               </span>
             </h1>
-            <p className="mx-auto max-w-2xl text-lg leading-relaxed text-[#8E95A9]">
+            <p className="text-white/50 text-lg font-light leading-relaxed max-w-xl">
               Estas son las seis capas con las que ordenamos y escalamos la
               operación de tu empresa. Empiezas por donde más te duele y todo
               queda conectado bajo un mismo sistema.
@@ -303,81 +274,294 @@ export default function ServiciosPage() {
         </div>
       </section>
 
-      {/* ---------------------------------------------------------- */}
-      {/* GRID DE SERVICIOS — todos visibles, sin precios */}
-      {/* ---------------------------------------------------------- */}
-      <section className="pb-20">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {servicios.map((servicio, i) => (
-              <ServicioCard
-                key={servicio.title}
-                servicio={servicio}
-                index={i}
-              />
-            ))}
+      {/* ── GRID DE SERVICIOS ── */}
+      <section className="pb-24 relative z-10">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {servicios.map((s, i) => {
+              const Icon = s.icon;
+              return (
+                <motion.div
+                  key={s.title}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: (i % 3) * 0.08 }}
+                  className="relative flex flex-col overflow-hidden rounded-2xl p-7 cursor-default"
+                  style={{
+                    background: "rgba(255,255,255,0.02)",
+                    border: `1px solid rgba(255,255,255,0.05)`,
+                    transition: "all 0.35s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    const el = e.currentTarget as HTMLElement;
+                    el.style.background = `${s.color}06`;
+                    el.style.border = `1px solid ${s.color}22`;
+                    el.style.transform = "translateY(-3px)";
+                  }}
+                  onMouseLeave={(e) => {
+                    const el = e.currentTarget as HTMLElement;
+                    el.style.background = "rgba(255,255,255,0.02)";
+                    el.style.border = "1px solid rgba(255,255,255,0.05)";
+                    el.style.transform = "translateY(0)";
+                  }}
+                >
+                  <div
+                    className="absolute top-0 left-0 right-0 h-px"
+                    style={{
+                      background: `linear-gradient(90deg, transparent, ${s.color}40, transparent)`,
+                    }}
+                  />
+
+                  <div
+                    className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl"
+                    style={{
+                      background: `${s.color}10`,
+                      border: `1px solid ${s.color}20`,
+                    }}
+                  >
+                    <Icon size={20} style={{ color: s.color }} />
+                  </div>
+
+                  <h3
+                    className="text-lg font-semibold mb-2 tracking-tight"
+                    style={{ letterSpacing: "-0.02em" }}
+                  >
+                    {s.title}
+                  </h3>
+                  <p className="text-white/45 text-sm font-light leading-relaxed mb-6">
+                    {s.para}
+                  </p>
+
+                  <div className="mb-6">
+                    <div className="flex items-baseline gap-2 mb-3">
+                      <span
+                        className="text-3xl font-bold"
+                        style={{ color: s.color }}
+                      >
+                        {s.stat.value}
+                      </span>
+                      <span className="text-xs text-white/30 font-light leading-snug">
+                        {s.stat.label}
+                      </span>
+                    </div>
+                    <motion.div
+                      initial={{ scaleX: 0 }}
+                      whileInView={{ scaleX: 1 }}
+                      viewport={{ once: true }}
+                      transition={{
+                        duration: 0.9,
+                        delay: 0.2,
+                        ease: "easeOut",
+                      }}
+                      className="h-px w-full"
+                      style={{
+                        transformOrigin: "left",
+                        background: `linear-gradient(90deg, ${s.color}60, transparent)`,
+                      }}
+                    />
+                  </div>
+
+                  <div className="mt-auto flex flex-wrap gap-1.5">
+                    {s.incluye.map((item) => (
+                      <span
+                        key={item}
+                        className="rounded-full px-2.5 py-1 text-xs font-light"
+                        style={{
+                          color: s.color,
+                          background: `${s.color}08`,
+                          border: `1px solid ${s.color}15`,
+                        }}
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* ---------------------------------------------------------- */}
-      {/* NO SON PIEZAS SUELTAS — cómo conectan las capas */}
-      {/* ---------------------------------------------------------- */}
-      <section className="pb-20">
-        <div className="mx-auto max-w-5xl px-6">
+      {/* ── CÓMO ENCAJA TODO ── */}
+      <section className="py-24 relative z-10 overflow-hidden">
+        {/* Halo violeta izquierda */}
+        <div
+          className="absolute pointer-events-none"
+          style={{
+            top: "0%",
+            left: "-5%",
+            width: "500px",
+            height: "500px",
+            background:
+              "radial-gradient(circle, rgba(139,92,255,0.06), transparent 70%)",
+            filter: "blur(80px)",
+            borderRadius: "50%",
+          }}
+        />
+        {/* Halo naranja derecha */}
+        <div
+          className="absolute pointer-events-none"
+          style={{
+            bottom: "0%",
+            right: "-5%",
+            width: "400px",
+            height: "400px",
+            background:
+              "radial-gradient(circle, rgba(255,107,53,0.05), transparent 70%)",
+            filter: "blur(80px)",
+            borderRadius: "50%",
+          }}
+        />
+        {/* Curva violeta arriba izquierda */}
+        <svg
+          className="absolute pointer-events-none"
+          style={{
+            top: 0,
+            left: 0,
+            width: "55%",
+            height: "50%",
+            opacity: 0.28,
+          }}
+          viewBox="0 0 550 300"
+          fill="none"
+        >
+          <path
+            d="M -20 280 Q 180 60 550 30"
+            stroke="url(#scv1)"
+            strokeWidth="1.5"
+            fill="none"
+          />
+          <path
+            d="M -20 300 Q 190 75 550 48"
+            stroke="url(#scv1b)"
+            strokeWidth="0.5"
+            fill="none"
+          />
+          <defs>
+            <linearGradient id="scv1" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0%" stopColor="#8B5CFF" stopOpacity="0" />
+              <stop offset="50%" stopColor="#8B5CFF" stopOpacity="1" />
+              <stop offset="100%" stopColor="#8B5CFF" stopOpacity="0.2" />
+            </linearGradient>
+            <linearGradient id="scv1b" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0%" stopColor="#B388FF" stopOpacity="0" />
+              <stop offset="60%" stopColor="#B388FF" stopOpacity="0.5" />
+              <stop offset="100%" stopColor="#B388FF" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+        </svg>
+        {/* Curva naranja abajo derecha */}
+        <svg
+          className="absolute pointer-events-none"
+          style={{
+            bottom: 0,
+            right: 0,
+            width: "50%",
+            height: "45%",
+            opacity: 0.25,
+          }}
+          viewBox="0 0 500 280"
+          fill="none"
+        >
+          <path
+            d="M 520 280 Q 300 100 0 40"
+            stroke="url(#sco1)"
+            strokeWidth="1.5"
+            fill="none"
+          />
+          <path
+            d="M 520 260 Q 310 88 5 28"
+            stroke="url(#sco1b)"
+            strokeWidth="0.5"
+            fill="none"
+          />
+          <defs>
+            <linearGradient id="sco1" x1="1" y1="1" x2="0" y2="0">
+              <stop offset="0%" stopColor="#FF6B35" stopOpacity="0.1" />
+              <stop offset="50%" stopColor="#FF6B35" stopOpacity="1" />
+              <stop offset="100%" stopColor="#FF6B35" stopOpacity="0" />
+            </linearGradient>
+            <linearGradient id="sco1b" x1="1" y1="1" x2="0" y2="0">
+              <stop offset="0%" stopColor="#FF8F5F" stopOpacity="0" />
+              <stop offset="55%" stopColor="#FF8F5F" stopOpacity="0.6" />
+              <stop offset="100%" stopColor="#FF8F5F" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <div className="max-w-5xl mx-auto px-6 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="rounded-3xl p-8 md:p-12"
-            style={{
-              background: "rgba(23,28,49,0.5)",
-              border: "1px solid rgba(255,255,255,0.07)",
-            }}
+            transition={{ duration: 0.7 }}
           >
-            <div className="mb-10 text-center">
-              <p className="mb-3 text-sm uppercase tracking-[0.2em] text-[#FF6B35] text-glow-orange">
-                Cómo encaja todo
-              </p>
-              <h2 className="text-3xl font-semibold tracking-tight lg:text-4xl">
-                No son servicios sueltos.{" "}
-                <span className="text-[#8B5CFF] text-glow-violet">
+            <div className="mb-16">
+              <div className="flex items-center gap-3 mb-8">
+                <div className="h-px w-8 bg-[#8B5CFF]" />
+                <span className="text-[#8B5CFF] text-[10px] tracking-[0.35em] uppercase font-light">
+                  Cómo encaja todo
+                </span>
+              </div>
+              <h2
+                className="leading-[0.95] tracking-tight"
+                style={{ letterSpacing: "-0.03em" }}
+              >
+                <span className="block text-4xl lg:text-5xl font-bold text-white">
+                  No son servicios sueltos.
+                </span>
+                <span className="block text-4xl lg:text-5xl font-extralight text-white/35">
                   Son un sistema.
                 </span>
               </h2>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
               {flujo.map((paso, i) => (
                 <motion.div
                   key={paso.label}
                   initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.12 }}
-                  className="relative"
+                  transition={{ duration: 0.4, delay: i * 0.1 }}
+                  className="relative p-6 rounded-2xl cursor-default"
+                  style={{
+                    background: "rgba(255,255,255,0.02)",
+                    border: "1px solid rgba(255,255,255,0.05)",
+                    transition: "all 0.3s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    const el = e.currentTarget as HTMLElement;
+                    el.style.background = `${paso.color}06`;
+                    el.style.border = `1px solid ${paso.color}20`;
+                  }}
+                  onMouseLeave={(e) => {
+                    const el = e.currentTarget as HTMLElement;
+                    el.style.background = "rgba(255,255,255,0.02)";
+                    el.style.border = "1px solid rgba(255,255,255,0.05)";
+                  }}
                 >
                   <div
-                    className="flex h-full flex-col rounded-2xl p-5 transition-colors duration-300 hover:border-[#8B5CFF]/40"
+                    className="absolute top-0 left-0 right-0 h-px"
                     style={{
-                      background: "rgba(7,9,15,0.6)",
-                      border: "1px solid rgba(139,92,255,0.15)",
+                      background: `linear-gradient(90deg, transparent, ${paso.color}35, transparent)`,
                     }}
-                  >
-                    <span className="mb-2 text-sm font-semibold text-[#B388FF]">
+                  />
+                  <div className="flex items-center gap-2 mb-3">
+                    <span
+                      className="text-xs font-medium tracking-widest"
+                      style={{ color: paso.color }}
+                    >
+                      0{i + 1}
+                    </span>
+                    <span className="text-sm font-semibold text-white">
                       {paso.label}
                     </span>
-                    <span className="text-sm leading-relaxed text-[#8E95A9]">
-                      {paso.desc}
-                    </span>
                   </div>
-                  {i < flujo.length - 1 && (
-                    <ArrowRight
-                      size={18}
-                      className="absolute -right-3 top-1/2 hidden -translate-y-1/2 text-[#8B5CFF]/40 lg:block"
-                    />
-                  )}
+                  <p className="text-white/40 text-xs font-light leading-relaxed">
+                    {paso.desc}
+                  </p>
                 </motion.div>
               ))}
             </div>
@@ -385,87 +569,103 @@ export default function ServiciosPage() {
         </div>
       </section>
 
-      {/* ---------------------------------------------------------- */}
-      {/* CASOS DE USO — ejemplos editables */}
-      {/* ---------------------------------------------------------- */}
-      <section id="casos" className="pb-24 scroll-mt-28">
-        <div className="mx-auto max-w-6xl px-6">
+      {/* ── CASOS DE USO ── */}
+      <section className="py-24 relative z-10">
+        <div className="max-w-6xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="mb-12 text-center"
+            className="mb-16"
           >
-            <p className="mb-4 text-sm uppercase tracking-[0.2em] text-[#FF6B35] text-glow-orange">
-              Casos de uso
-            </p>
-            <h2 className="text-4xl font-semibold tracking-tight">
-              Si te suena familiar,{" "}
-              <span className="text-[#8B5CFF] text-glow-violet">
+            <div className="flex items-center gap-3 mb-8">
+              <div className="h-px w-8 bg-[#FF6B35]" />
+              <span className="text-[#FF6B35] text-[10px] tracking-[0.35em] uppercase font-light">
+                Casos de uso
+              </span>
+            </div>
+            <h2
+              className="leading-[0.95] tracking-tight"
+              style={{ letterSpacing: "-0.03em" }}
+            >
+              <span className="block text-4xl lg:text-5xl font-bold text-white">
+                Si te suena familiar,
+              </span>
+              <span className="block text-4xl lg:text-5xl font-extralight text-white/35">
                 te podemos ayudar.
               </span>
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-base text-[#8E95A9]">
+            <p className="text-white/40 text-base font-light mt-6 max-w-xl leading-relaxed">
               No necesitas saber qué tecnología pedir. Cuéntanos tu problema y
               nosotros armamos la solución.
             </p>
           </motion.div>
 
-          <div className="grid gap-6 md:grid-cols-3">
-            {casos.map((caso, i) => (
+          <div className="grid gap-4 md:grid-cols-3">
+            {casos.map((c, i) => (
               <motion.div
-                key={caso.sector}
+                key={c.sector}
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                onMouseEnter={(e) => hoverEnter(e, caso.color)}
-                onMouseLeave={(e) => hoverLeave(e, caso.color)}
-                className="relative flex flex-col overflow-hidden rounded-3xl p-7"
+                className="relative flex flex-col overflow-hidden rounded-2xl p-7 cursor-default"
                 style={{
-                  background: "rgba(23,28,49,0.5)",
-                  border: `1px solid ${caso.color}20`,
-                  transition:
-                    "transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease",
+                  background: "rgba(255,255,255,0.02)",
+                  border: `1px solid rgba(255,255,255,0.05)`,
+                  transition: "all 0.35s ease",
+                }}
+                onMouseEnter={(e) => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.background = `${c.color}06`;
+                  el.style.border = `1px solid ${c.color}22`;
+                  el.style.transform = "translateY(-3px)";
+                }}
+                onMouseLeave={(e) => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.background = "rgba(255,255,255,0.02)";
+                  el.style.border = "1px solid rgba(255,255,255,0.05)";
+                  el.style.transform = "translateY(0)";
                 }}
               >
                 <div
-                  className="absolute left-0 right-0 top-0 h-[2px]"
+                  className="absolute top-0 left-0 right-0 h-px"
                   style={{
-                    background: `linear-gradient(90deg, transparent, ${caso.color}60, transparent)`,
+                    background: `linear-gradient(90deg, transparent, ${c.color}40, transparent)`,
                   }}
                 />
+
                 <p
-                  className="mb-4 text-xs font-semibold uppercase tracking-wider"
-                  style={{ color: caso.color }}
+                  className="text-xs font-medium uppercase tracking-widest mb-6"
+                  style={{ color: c.color }}
                 >
-                  {caso.sector}
+                  {c.sector}
                 </p>
 
-                <p className="mb-2 text-xs uppercase tracking-wider text-[#8E95A9]/70">
+                <p className="text-[10px] uppercase tracking-[0.2em] text-white/20 font-light mb-2">
                   El problema
                 </p>
-                <p className="mb-5 text-sm leading-relaxed text-white/80">
-                  {caso.problema}
+                <p className="text-white/60 text-sm font-light leading-relaxed mb-6">
+                  {c.problema}
                 </p>
 
-                <p className="mb-2 text-xs uppercase tracking-wider text-[#8E95A9]/70">
+                <p className="text-[10px] uppercase tracking-[0.2em] text-white/20 font-light mb-2">
                   Lo que hacemos
                 </p>
-                <p className="mb-6 text-sm leading-relaxed text-white/80">
-                  {caso.solucion}
+                <p className="text-white/60 text-sm font-light leading-relaxed mb-6">
+                  {c.solucion}
                 </p>
 
-                <div className="mt-auto flex flex-wrap gap-2">
-                  {caso.usa.map((s) => (
+                <div className="mt-auto flex flex-wrap gap-1.5">
+                  {c.usa.map((s) => (
                     <span
                       key={s}
-                      className="rounded-full px-2.5 py-1 text-xs"
+                      className="rounded-full px-2.5 py-1 text-xs font-light"
                       style={{
-                        color: caso.color,
-                        background: `${caso.color}10`,
-                        border: `1px solid ${caso.color}20`,
+                        color: c.color,
+                        background: `${c.color}08`,
+                        border: `1px solid ${c.color}15`,
                       }}
                     >
                       {s}
@@ -478,58 +678,80 @@ export default function ServiciosPage() {
         </div>
       </section>
 
-      {/* ---------------------------------------------------------- */}
-      {/* CTA — separa claramente "qué hacemos" de "cuánto cuesta" */}
-      {/* ---------------------------------------------------------- */}
-      <section className="pb-32">
-        <div className="mx-auto max-w-7xl px-6">
+      {/* ── CTA ── */}
+      <section className="pb-32 relative z-10 overflow-hidden">
+        <svg
+          className="absolute pointer-events-none inset-0 w-full h-full"
+          viewBox="0 0 1200 400"
+          fill="none"
+          preserveAspectRatio="xMidYMid slice"
+        >
+          <path
+            d="M 0 350 Q 400 100 1200 80"
+            stroke="url(#sctag1)"
+            strokeWidth="1"
+            fill="none"
+            opacity="0.2"
+          />
+          <defs>
+            <linearGradient id="sctag1" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="#8B5CFF" stopOpacity="0" />
+              <stop offset="40%" stopColor="#8B5CFF" stopOpacity="1" />
+              <stop offset="70%" stopColor="#FF6B35" stopOpacity="1" />
+              <stop offset="100%" stopColor="#FF6B35" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <div className="max-w-4xl mx-auto px-6 text-center relative">
           <motion.div
-            initial={{ opacity: 0, y: 40, scale: 0.97 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            whileHover={{ y: -6, scale: 1.01, transition: { duration: 0.3 } }}
-            className="relative overflow-hidden rounded-[32px] p-16 text-center"
-            style={{
-              background: "rgba(23,28,49,0.7)",
-              border: "1px solid rgba(255,255,255,0.1)",
-              boxShadow: "0 0 60px rgba(139,92,255,0.08)",
-            }}
+            transition={{ duration: 0.7 }}
           >
-            <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_top_left,rgba(139,92,255,0.4),transparent_40%)]" />
-            <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_bottom_right,rgba(255,107,53,0.4),transparent_40%)]" />
-            <div className="relative z-10">
-              <p className="mb-6 text-sm uppercase tracking-[0.2em] text-[#FF6B35] text-glow-orange">
+            <div className="flex items-center justify-center gap-3 mb-12">
+              <div className="h-px w-8 bg-white/15" />
+              <span className="text-white/20 text-[10px] tracking-[0.35em] uppercase font-light">
                 Siguiente paso
-              </p>
-              <h2 className="mb-6 text-4xl font-semibold tracking-tight lg:text-5xl">
-                ¿Listo para ordenar{" "}
-                <span className="text-[#8B5CFF] text-glow-violet">
-                  tu operación?
+              </span>
+              <div className="h-px w-8 bg-white/15" />
+            </div>
+            <h2
+              className="leading-[0.95] tracking-tight mb-8"
+              style={{ letterSpacing: "-0.04em" }}
+            >
+              <span className="block text-4xl lg:text-6xl font-bold text-white">
+                ¿Listo para ordenar
+              </span>
+              <span className="block text-4xl lg:text-6xl font-extralight text-white/35">
+                tu operación?
+              </span>
+            </h2>
+            <p className="text-white/35 text-base font-light leading-relaxed mb-12 max-w-md mx-auto">
+              El diagnóstico es gratis. Mira los planes o escríbenos y armamos
+              juntos lo que tu empresa necesita.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link
+                href="/contacto"
+                className="group inline-flex items-center gap-2 px-8 py-5 rounded-2xl bg-white text-black text-sm font-semibold hover:bg-white/90 transition-all duration-300"
+                style={{ letterSpacing: "-0.01em" }}
+              >
+                Solicitar diagnóstico gratis
+                <span className="group-hover:translate-x-1 transition-transform duration-200">
+                  →
                 </span>
-              </h2>
-              <p className="mx-auto mb-10 max-w-xl text-lg text-[#8E95A9]">
-                El diagnóstico es gratis. Mira los planes y precios o escríbenos
-                y armamos juntos lo que tu empresa necesita.
-              </p>
-              <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-                <Link
-                  href="/contacto"
-                  className="inline-flex items-center gap-2 rounded-2xl bg-[#FF6B35] px-8 py-5 font-semibold text-black shadow-[0_0_50px_rgba(255,107,53,0.5)] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_80px_rgba(255,107,53,0.7)]"
-                >
-                  Solicitar diagnóstico gratis →
-                </Link>
-                <Link
-                  href="/planes"
-                  className="inline-flex items-center gap-2 rounded-2xl px-8 py-5 font-semibold transition-all duration-300 hover:scale-105"
-                  style={{
-                    border: "1px solid rgba(139,92,255,0.4)",
-                    color: "#B388FF",
-                  }}
-                >
-                  Ver planes y precios →
-                </Link>
-              </div>
+              </Link>
+              <Link
+                href="/planes"
+                className="inline-flex items-center gap-2 px-8 py-5 rounded-2xl text-sm font-light transition-all duration-300 hover:text-white/80"
+                style={{
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  color: "rgba(255,255,255,0.4)",
+                }}
+              >
+                Ver planes y precios →
+              </Link>
             </div>
           </motion.div>
         </div>

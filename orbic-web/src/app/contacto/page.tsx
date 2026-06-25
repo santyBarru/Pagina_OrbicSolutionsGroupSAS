@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-const EMAIL = "orbic@orbicopsgroup.com";
+const EMAIL = "orbicoperationgroupsas@gmail.com";
 
 export default function ContactoPage() {
   const [copied, setCopied] = useState(false);
@@ -66,40 +66,57 @@ export default function ContactoPage() {
     },
   ];
 
-  const handleEnter = (e: React.MouseEvent<HTMLElement>, color: string) => {
-    const el = e.currentTarget;
-    el.style.transform = "translateY(-6px)";
-    el.style.boxShadow = `0 8px 40px ${color}30, 0 0 0 1px ${color}40`;
-    el.style.border = `1px solid ${color}50`;
-  };
-
-  const handleLeave = (e: React.MouseEvent<HTMLElement>, color: string) => {
-    const el = e.currentTarget;
-    el.style.transform = "translateY(0)";
-    el.style.boxShadow = "none";
-    el.style.border = `1px solid ${color}20`;
-  };
-
   return (
     <>
-      {/* Hero */}
-      <section className="pt-40 pb-20">
-        <div className="max-w-7xl mx-auto px-6 text-center">
+      {/* ── HERO con imagen ── */}
+      <section className="relative min-h-[65vh] flex items-end overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img
+            src="/assets/proceso-bg.jpg"
+            alt=""
+            className="w-full h-full object-cover object-center"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(to right, rgba(0,0,0,0.97) 30%, rgba(0,0,0,0.78) 60%, rgba(0,0,0,0.4) 100%)",
+            }}
+          />
+          <div
+            className="absolute bottom-0 left-0 right-0"
+            style={{
+              height: "400px",
+              background:
+                "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.4) 30%, rgba(0,0,0,0.85) 65%, #000000 100%)",
+            }}
+          />
+        </div>
+
+        <div className="relative z-10 max-w-4xl mx-auto px-6 w-full pt-40 pb-24">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
+            transition={{ duration: 0.8 }}
           >
-            <p className="text-sm tracking-[0.2em] text-[#FF6B35] mb-6 uppercase text-glow-orange">
-              Contacto
-            </p>
-            <h1 className="text-5xl lg:text-6xl font-semibold leading-[1.05] tracking-tight mb-6">
-              Hablemos de{" "}
-              <span className="text-[#8B5CFF] text-glow-violet">
+            <div className="flex items-center gap-3 mb-10">
+              <div className="h-px w-8 bg-[#FF6B35]" />
+              <span className="text-[#FF6B35] text-[10px] tracking-[0.35em] uppercase font-light">
+                Contacto
+              </span>
+            </div>
+            <h1
+              className="leading-[0.95] tracking-tight mb-8"
+              style={{ letterSpacing: "-0.03em" }}
+            >
+              <span className="block text-5xl lg:text-7xl font-bold text-white">
+                Hablemos de
+              </span>
+              <span className="block text-5xl lg:text-7xl font-extralight text-white/35">
                 tu operación.
               </span>
             </h1>
-            <p className="text-[#8E95A9] text-lg max-w-2xl mx-auto leading-relaxed">
+            <p className="text-white/45 text-lg font-light leading-relaxed max-w-lg">
               El diagnóstico es gratis. Sin compromiso. Solo necesitamos
               entender tu operación para mostrarte lo que es posible.
             </p>
@@ -107,37 +124,36 @@ export default function ContactoPage() {
         </div>
       </section>
 
-      {/* Contact methods */}
-      <section className="pb-16">
+      {/* ── MÉTODOS DE CONTACTO ── */}
+      <section className="py-20 relative z-10">
         <div className="max-w-4xl mx-auto px-6">
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-4">
             {contactMethods.map((method, index) => {
-              const cardStyle = {
-                background: "rgba(23,28,49,0.3)",
-                border: `1px solid ${method.color}20`,
-                transition: "all 0.35s ease",
-              };
-
               const inner = (
                 <>
                   <div
-                    className="absolute top-0 left-0 right-0 h-[2px]"
+                    className="absolute top-0 left-0 right-0 h-px"
                     style={{
-                      background: `linear-gradient(90deg, transparent, ${method.color}60, transparent)`,
+                      background: `linear-gradient(90deg, transparent, ${method.color}50, transparent)`,
                     }}
                   />
                   <div
-                    className="w-12 h-12 rounded-xl mb-5 flex items-center justify-center"
+                    className="w-11 h-11 rounded-xl mb-5 flex items-center justify-center"
                     style={{
-                      background: `${method.color}12`,
-                      border: `1px solid ${method.color}25`,
+                      background: `${method.color}10`,
+                      border: `1px solid ${method.color}20`,
                       color: method.color,
                     }}
                   >
                     {method.icon}
                   </div>
-                  <h3 className="text-lg font-semibold mb-2">{method.title}</h3>
-                  <p className="text-[#8E95A9] text-sm leading-relaxed mb-4">
+                  <h3
+                    className="text-lg font-semibold mb-2 tracking-tight"
+                    style={{ letterSpacing: "-0.02em" }}
+                  >
+                    {method.title}
+                  </h3>
+                  <p className="text-white/40 text-sm font-light leading-relaxed mb-4">
                     {method.description}
                   </p>
                   <p
@@ -152,20 +168,36 @@ export default function ContactoPage() {
                 </>
               );
 
+              const cardStyle = {
+                background: "rgba(255,255,255,0.02)",
+                border: `1px solid rgba(255,255,255,0.05)`,
+                transition: "all 0.35s ease",
+              };
+
               return (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 24 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.12 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
                   {method.isEmail ? (
                     <button
                       onClick={handleCopyEmail}
                       className="rounded-2xl p-7 relative overflow-hidden w-full text-left cursor-pointer"
                       style={cardStyle}
-                      onMouseEnter={(e) => handleEnter(e, method.color)}
-                      onMouseLeave={(e) => handleLeave(e, method.color)}
+                      onMouseEnter={(e) => {
+                        const el = e.currentTarget as HTMLElement;
+                        el.style.background = `${method.color}06`;
+                        el.style.border = `1px solid ${method.color}25`;
+                        el.style.transform = "translateY(-3px)";
+                      }}
+                      onMouseLeave={(e) => {
+                        const el = e.currentTarget as HTMLElement;
+                        el.style.background = "rgba(255,255,255,0.02)";
+                        el.style.border = "1px solid rgba(255,255,255,0.05)";
+                        el.style.transform = "translateY(0)";
+                      }}
                     >
                       {inner}
                     </button>
@@ -176,8 +208,18 @@ export default function ContactoPage() {
                       rel="noreferrer"
                       className="rounded-2xl p-7 relative overflow-hidden block cursor-pointer"
                       style={cardStyle}
-                      onMouseEnter={(e) => handleEnter(e, method.color)}
-                      onMouseLeave={(e) => handleLeave(e, method.color)}
+                      onMouseEnter={(e) => {
+                        const el = e.currentTarget as HTMLElement;
+                        el.style.background = `${method.color}06`;
+                        el.style.border = `1px solid ${method.color}25`;
+                        el.style.transform = "translateY(-3px)";
+                      }}
+                      onMouseLeave={(e) => {
+                        const el = e.currentTarget as HTMLElement;
+                        el.style.background = "rgba(255,255,255,0.02)";
+                        el.style.border = "1px solid rgba(255,255,255,0.05)";
+                        el.style.transform = "translateY(0)";
+                      }}
                     >
                       {inner}
                     </a>
@@ -189,55 +231,103 @@ export default function ContactoPage() {
         </div>
       </section>
 
-      {/* Main CTA */}
-      <section className="pb-16">
-        <div className="max-w-2xl mx-auto px-6">
+      {/* ── CTA PRINCIPAL ── */}
+      <section className="py-20 relative z-10 overflow-hidden">
+        {/* Curva violeta */}
+        <svg
+          className="absolute pointer-events-none"
+          style={{
+            top: 0,
+            right: 0,
+            width: "500px",
+            height: "300px",
+            opacity: 0.22,
+          }}
+          viewBox="0 0 500 300"
+          fill="none"
+        >
+          <path
+            d="M 500 0 Q 300 180 0 280"
+            stroke="url(#cctav)"
+            strokeWidth="1.5"
+            fill="none"
+          />
+          <defs>
+            <linearGradient id="cctav" x1="1" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#8B5CFF" stopOpacity="0.1" />
+              <stop offset="50%" stopColor="#8B5CFF" stopOpacity="1" />
+              <stop offset="100%" stopColor="#8B5CFF" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+        </svg>
+        {/* Curva naranja */}
+        <svg
+          className="absolute pointer-events-none"
+          style={{
+            bottom: 0,
+            left: 0,
+            width: "400px",
+            height: "250px",
+            opacity: 0.2,
+          }}
+          viewBox="0 0 400 250"
+          fill="none"
+        >
+          <path
+            d="M 0 250 Q 180 60 400 10"
+            stroke="url(#cctao)"
+            strokeWidth="1.5"
+            fill="none"
+          />
+          <defs>
+            <linearGradient id="cctao" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0%" stopColor="#FF6B35" stopOpacity="0" />
+              <stop offset="50%" stopColor="#FF6B35" stopOpacity="1" />
+              <stop offset="100%" stopColor="#FF6B35" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+        </svg>
+
+        <div className="max-w-2xl mx-auto px-6 relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 40, scale: 0.97 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            whileHover={{ y: -6, scale: 1.01, transition: { duration: 0.3 } }}
-            className="rounded-2xl p-10 relative overflow-hidden text-center cursor-default"
-            style={{
-              background: "rgba(23,28,49,0.3)",
-              border: "1px solid rgba(255,107,53,0.15)",
-              boxShadow: "0 0 60px rgba(255,107,53,0.06)",
-            }}
+            transition={{ duration: 0.7 }}
+            className="text-center"
           >
-            <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_top_left,rgba(139,92,255,0.3),transparent_40%)]" />
-            <div className="absolute inset-0 opacity-15 bg-[radial-gradient(circle_at_bottom_right,rgba(255,107,53,0.3),transparent_40%)]" />
-            <div
-              className="absolute top-0 left-0 right-0 h-[2px]"
-              style={{
-                background:
-                  "linear-gradient(90deg, transparent, rgba(255,107,53,0.5), transparent)",
-              }}
-            />
-            <div className="relative z-10">
-              <p className="text-4xl font-semibold mb-4">
-                ¿Listo para{" "}
-                <span className="text-[#FF6B35] text-glow-orange">empezar</span>
-                ?
-              </p>
-              <p className="text-[#8E95A9] mb-8">
-                Escríbenos por WhatsApp y agenda tu diagnóstico gratuito hoy.
-              </p>
-              <a
-                href="https://wa.me/573053308423?text=Hola%20equipo%20Orbic%2C%20vi%20su%20p%C3%A1gina%20web%20y%20me%20interesa%20un%20diagn%C3%B3stico%20gratuito%20para%20mi%20empresa."
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 px-8 py-5 rounded-2xl bg-[#FF6B35] text-black font-semibold hover:scale-105 transition-all duration-300 shadow-[0_0_50px_rgba(255,107,53,0.5)] hover:shadow-[0_0_80px_rgba(255,107,53,0.7)]"
-              >
-                Abrir WhatsApp →
-              </a>
-            </div>
+            <h2
+              className="leading-[0.95] tracking-tight mb-6"
+              style={{ letterSpacing: "-0.03em" }}
+            >
+              <span className="block text-4xl lg:text-5xl font-bold text-white">
+                ¿Listo para
+              </span>
+              <span className="block text-4xl lg:text-5xl font-extralight text-white/35">
+                empezar?
+              </span>
+            </h2>
+            <p className="text-white/40 text-base font-light mb-10 leading-relaxed">
+              Escríbenos por WhatsApp y agenda tu diagnóstico gratuito hoy.
+            </p>
+            <a
+              href="https://wa.me/573053308423?text=Hola%20equipo%20Orbic%2C%20vi%20su%20p%C3%A1gina%20web%20y%20me%20interesa%20un%20diagn%C3%B3stico%20gratuito%20para%20mi%20empresa."
+              target="_blank"
+              rel="noreferrer"
+              className="group inline-flex items-center gap-2 px-8 py-5 rounded-2xl bg-white text-black text-sm font-semibold hover:bg-white/90 transition-all duration-300"
+              style={{ letterSpacing: "-0.01em" }}
+            >
+              Abrir WhatsApp
+              <span className="group-hover:translate-x-1 transition-transform duration-200">
+                →
+              </span>
+            </a>
           </motion.div>
         </div>
       </section>
 
-      {/* Info */}
-      <section className="pb-32">
+      {/* ── INFO FOOTER ── */}
+      <section className="pb-32 relative z-10">
         <div className="max-w-2xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0 }}
@@ -247,24 +337,34 @@ export default function ContactoPage() {
             className="flex flex-col md:flex-row items-center justify-center gap-8 text-center"
           >
             <div>
-              <p className="text-[#8E95A9] text-xs uppercase tracking-wider mb-1">
+              <p className="text-white/20 text-[10px] uppercase tracking-[0.2em] font-light mb-1">
                 Email
               </p>
-              <p className="text-sm">{EMAIL}</p>
+              <p className="text-white/55 text-sm font-light">{EMAIL}</p>
             </div>
-            <div className="hidden md:block w-[1px] h-8 bg-[rgba(255,255,255,0.08)]" />
+            <div
+              className="hidden md:block w-px h-8"
+              style={{ background: "rgba(255,255,255,0.06)" }}
+            />
             <div>
-              <p className="text-[#8E95A9] text-xs uppercase tracking-wider mb-1">
+              <p className="text-white/20 text-[10px] uppercase tracking-[0.2em] font-light mb-1">
                 Ubicación
               </p>
-              <p className="text-sm">Bogotá D.C., Colombia</p>
+              <p className="text-white/55 text-sm font-light">
+                Bogotá D.C., Colombia
+              </p>
             </div>
-            <div className="hidden md:block w-[1px] h-8 bg-[rgba(255,255,255,0.08)]" />
+            <div
+              className="hidden md:block w-px h-8"
+              style={{ background: "rgba(255,255,255,0.06)" }}
+            />
             <div>
-              <p className="text-[#8E95A9] text-xs uppercase tracking-wider mb-1">
+              <p className="text-white/20 text-[10px] uppercase tracking-[0.2em] font-light mb-1">
                 Horario
               </p>
-              <p className="text-sm">Lun - Vie, 8AM - 6PM</p>
+              <p className="text-white/55 text-sm font-light">
+                Lun - Vie, 8AM - 6PM
+              </p>
             </div>
           </motion.div>
         </div>

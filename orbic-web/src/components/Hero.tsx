@@ -1,95 +1,136 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center pt-32">
-      <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+    <section className="relative min-h-screen flex items-center overflow-hidden">
+      {/* Imagen de fondo */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src="/assets/hero-bg.jpg"
+          alt=""
+          className="w-full h-full object-cover object-right"
+        />
+        {/* Overlay lateral */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to right, #000000 30%, rgba(7,8,9,0.88) 55%, rgba(7,8,9,0.4) 100%)",
+          }}
+        />
+        {/* Difuminado inferior largo y suave */}
+        <div
+          className="absolute bottom-0 left-0 right-0"
+          style={{
+            height: "350px",
+            background:
+              "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 30%, rgba(0,0,0,0.7) 60%, #000000 100%)",
+          }}
+        />
+        {/* Difuminado lateral izquierdo extra para no cortar */}
+        <div
+          className="absolute inset-y-0 left-0"
+          style={{
+            width: "200px",
+            background:
+              "linear-gradient(to right, #000000 0%, transparent 100%)",
+          }}
+        />
+      </div>
+
+      {/* Contenido */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full pt-36 pb-32">
         <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="flex items-center gap-3 mb-10"
+        >
+          <div className="h-px w-8 bg-[#FF6B35]" />
+          <span className="text-[#FF6B35] text-xs tracking-[0.3em] uppercase font-medium">
+            Intelligence that moves business
+          </span>
+        </motion.div>
+
+        <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="z-10"
+          transition={{ duration: 0.9, delay: 0.1 }}
+          className="text-5xl lg:text-[5rem] font-light leading-[0.95] tracking-tight mb-8 max-w-2xl"
+          style={{ letterSpacing: "-0.04em" }}
         >
-          <motion.p
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-sm tracking-[0.2em] text-[#FF6B35] mb-8 uppercase text-glow-orange"
-          >
-            Inteligencia que mueve negocios
-          </motion.p>
+          Tu operación,
+          <br />
+          <span style={{ color: "rgba(255,255,255,0.18)", fontWeight: 200 }}>
+            finalmente
+          </span>
+          <br />
+          <span style={{ fontWeight: 600 }}>bajo control.</span>
+        </motion.h1>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4 }}
-            className="text-5xl lg:text-7xl font-semibold leading-[0.95] tracking-tight mb-8"
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="text-white/35 text-base max-w-sm leading-relaxed mb-12 font-light"
+        >
+          Las PyMEs pierden hasta un 30% de sus ventas por procesos manuales.
+          Orbic lo resuelve con automatización que trabaja sola.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.45 }}
+          className="flex items-center gap-6 mb-24"
+        >
+          <Link
+            href="/contacto"
+            className="group flex items-center gap-2 px-7 py-4 rounded-xl bg-white text-black text-sm font-semibold hover:bg-white/90 transition-all duration-300"
           >
-            Impulsamos el
-            <span className="text-[#FF6B35] text-glow-orange">
-              {" "}
-              crecimiento{" "}
+            Diagnóstico gratuito
+            <span className="group-hover:translate-x-1 transition-transform duration-200">
+              →
             </span>
-            de empresas ambiciosas.
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.6 }}
-            className="text-[#8E95A9] text-lg max-w-xl leading-relaxed mb-10"
+          </Link>
+          <Link
+            href="/servicios"
+            className="text-white/25 text-sm hover:text-white/60 transition-colors duration-300"
           >
-            Orbic conecta equipos, automatiza procesos y escala operaciones con
-            tecnología construida para el futuro de tu negocio.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.8 }}
-            className="flex items-center gap-5"
-          >
-            <Link
-              href="/servicios"
-              className="px-7 py-4 rounded-2xl bg-[#FF6B35] text-black font-medium hover:scale-105 transition-all duration-300 shadow-[0_0_40px_rgba(255,107,53,0.4)] hover:shadow-[0_0_60px_rgba(255,107,53,0.6)]"
-            >
-              Explorar plataforma →
-            </Link>
-
-            <Link
-              href="/proceso"
-              className="text-[#8E95A9] hover:text-white transition-all duration-300"
-            >
-              Cómo funciona
-            </Link>
-          </motion.div>
+            Ver servicios
+          </Link>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.85 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2, delay: 0.3, ease: "easeOut" }}
-          className="relative flex justify-center items-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.65 }}
+          className="flex flex-wrap items-center gap-12 pt-10"
+          style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}
         >
-          <div className="hero-glow" />
-
-          <motion.div
-            animate={{ y: [0, -12, 0] }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <Image
-              src="/assets/orbic-logo.png"
-              alt="Orbic Operations"
-              width={500}
-              height={500}
-              className="relative z-10 drop-shadow-[0_0_80px_rgba(139,92,255,0.35)]"
-              priority
-            />
-          </motion.div>
+          {[
+            { n: "−30%", label: "Leads perdidos" },
+            { n: "2×", label: "Velocidad de cierre" },
+            { n: "24/7", label: "Operación continua" },
+            { n: "< 2 sem", label: "Tiempo de entrega" },
+          ].map((s, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.75 + i * 0.08 }}
+            >
+              <p className="text-xl font-semibold text-white mb-1 tracking-tight">
+                {s.n}
+              </p>
+              <p className="text-[10px] text-white/25 tracking-[0.2em] uppercase font-light">
+                {s.label}
+              </p>
+            </motion.div>
+          ))}
         </motion.div>
       </div>
     </section>

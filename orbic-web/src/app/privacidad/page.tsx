@@ -52,27 +52,66 @@ const sections = [
 export default function PrivacidadPage() {
   return (
     <>
-      <section className="pt-40 pb-20">
-        <div className="max-w-4xl mx-auto px-6 text-center">
+      {/* ── HERO con imagen ── */}
+      <section className="relative min-h-[55vh] flex items-end overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img
+            src="/assets/futuro.jpg"
+            alt=""
+            className="w-full h-full object-cover object-center"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(to right, rgba(0,0,0,0.97) 25%, rgba(0,0,0,0.78) 60%, rgba(0,0,0,0.45) 100%)",
+            }}
+          />
+          <div
+            className="absolute bottom-0 left-0 right-0"
+            style={{
+              height: "400px",
+              background:
+                "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.4) 30%, rgba(0,0,0,0.85) 65%, #000000 100%)",
+            }}
+          />
+          <div
+            className="absolute top-0 left-0 right-0"
+            style={{
+              height: "150px",
+              background: "linear-gradient(to bottom, #000000, transparent)",
+            }}
+          />
+        </div>
+
+        <div className="relative z-10 max-w-4xl mx-auto px-6 w-full pt-40 pb-20">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
+            transition={{ duration: 0.8 }}
           >
-            <p className="text-sm tracking-[0.2em] text-[#FF6B35] mb-6 uppercase text-glow-orange">
-              Legal
-            </p>
-            <h1 className="text-4xl lg:text-5xl font-semibold leading-[1.05] tracking-tight mb-4">
-              Política de{" "}
-              <span className="text-[#8B5CFF] text-glow-violet">
-                Privacidad y Datos
+            <div className="flex items-center gap-3 mb-10">
+              <div className="h-px w-8 bg-[#8B5CFF]" />
+              <span className="text-[#8B5CFF] text-[10px] tracking-[0.35em] uppercase font-light">
+                Legal
+              </span>
+            </div>
+            <h1
+              className="leading-[0.95] tracking-tight mb-8"
+              style={{ letterSpacing: "-0.03em" }}
+            >
+              <span className="block text-5xl lg:text-7xl font-bold text-white">
+                Política de
+              </span>
+              <span className="block text-5xl lg:text-7xl font-extralight text-white/35">
+                Privacidad y Datos.
               </span>
             </h1>
-            <p className="text-[#8E95A9] text-base max-w-xl mx-auto leading-relaxed">
+            <p className="text-white/40 text-base font-light leading-relaxed max-w-lg mb-3">
               Orbic Operations Group S.A.S. · Última actualización: junio de
               2026
             </p>
-            <p className="text-[#8E95A9]/60 text-sm mt-3">
+            <p className="text-white/25 text-sm font-light">
               En cumplimiento de la Ley 1581 de 2012, el Decreto 1377 de 2013 y
               demás normas aplicables en Colombia sobre protección de datos
               personales (Habeas Data).
@@ -81,69 +120,83 @@ export default function PrivacidadPage() {
         </div>
       </section>
 
-      <section className="pb-32">
+      {/* ── CONTENIDO ── */}
+      <section className="pb-32 relative z-10">
         <div className="max-w-4xl mx-auto px-6">
+          {/* Intro */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="rounded-2xl p-8 mb-6"
+            className="rounded-2xl p-8 mb-6 relative overflow-hidden"
             style={{
-              background: "rgba(139,92,255,0.08)",
-              border: "1px solid rgba(139,92,255,0.2)",
+              background: "rgba(139,92,255,0.05)",
+              border: "1px solid rgba(139,92,255,0.15)",
             }}
           >
-            <p className="text-[#8E95A9] text-sm leading-relaxed">
-              Orbic Operations Group S.A.S. (&quot;Orbic&quot;,
-              &quot;nosotros&quot;) es responsable del tratamiento de los datos
-              personales que usted nos proporciona. Esta política describe cómo
-              recopilamos, usamos, almacenamos y protegemos su información.
+            <div
+              className="absolute top-0 left-0 right-0 h-px"
+              style={{
+                background:
+                  "linear-gradient(90deg, transparent, rgba(139,92,255,0.5), transparent)",
+              }}
+            />
+            <p className="text-white/50 text-sm font-light leading-relaxed">
+              Orbic Operations Group S.A.S. [Orbic, nosotros] es responsable del
+              tratamiento de los datos personales que usted nos proporciona.
+              Esta política describe cómo recopilamos, usamos, almacenamos y
+              protegemos su información.
             </p>
           </motion.div>
 
-          <div className="flex flex-col gap-5">
+          {/* Secciones */}
+          <div className="flex flex-col gap-4">
             {sections.map((section, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.04 }}
-                className="rounded-2xl p-8 relative overflow-hidden"
+                transition={{ duration: 0.4, delay: index * 0.03 }}
+                className="rounded-2xl p-7 relative overflow-hidden"
                 style={{
-                  background: "rgba(23,28,49,0.4)",
-                  border: "1px solid rgba(139,92,255,0.10)",
+                  background: "rgba(255,255,255,0.02)",
+                  border: "1px solid rgba(255,255,255,0.05)",
                 }}
               >
                 <div
-                  className="absolute top-0 left-0 right-0 h-[2px]"
+                  className="absolute top-0 left-0 right-0 h-px"
                   style={{
                     background:
-                      "linear-gradient(90deg, transparent, rgba(139,92,255,0.35), transparent)",
+                      "linear-gradient(90deg, transparent, rgba(139,92,255,0.25), transparent)",
                   }}
                 />
-                <h2 className="text-base font-semibold mb-3 text-white">
+                <h2
+                  className="text-sm font-semibold mb-3 text-white tracking-tight"
+                  style={{ letterSpacing: "-0.01em" }}
+                >
                   {section.title}
                 </h2>
-                <p className="text-[#8E95A9] text-sm leading-relaxed whitespace-pre-line">
+                <p className="text-white/40 text-sm font-light leading-relaxed whitespace-pre-line">
                   {section.content}
                 </p>
               </motion.div>
             ))}
           </div>
 
+          {/* Nota legal */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="mt-8 rounded-2xl p-6 text-center"
+            className="mt-6 rounded-2xl p-6 text-center"
             style={{
-              background: "rgba(23,28,49,0.3)",
-              border: "1px solid rgba(255,107,53,0.15)",
+              background: "rgba(255,107,53,0.04)",
+              border: "1px solid rgba(255,107,53,0.1)",
             }}
           >
-            <p className="text-[#8E95A9] text-xs">
+            <p className="text-white/25 text-xs font-light">
               Este documento es una plantilla base. Para mayor seguridad
               jurídica, se recomienda revisión por un abogado antes de su
               publicación definitiva.

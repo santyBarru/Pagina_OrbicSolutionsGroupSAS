@@ -7,7 +7,7 @@ const planes = [
   {
     nombre: "Esencial",
     para: "Presencia digital seria + captación",
-    precio: "desde $2.000.000 COP aprox.",
+    precio: "desde $2.000.000 COP",
     soporte: "Soporte Básico $800.000/mes (opcional)",
     color: "#FF6B35",
     destacado: false,
@@ -22,7 +22,7 @@ const planes = [
   {
     nombre: "Crecimiento",
     para: "Ordenar y escalar la operación",
-    precio: "desde $8.000.000 COP aprox.",
+    precio: "desde $8.000.000 COP",
     soporte: "Soporte Empresarial $1.500.000/mes",
     color: "#8B5CFF",
     destacado: true,
@@ -38,7 +38,7 @@ const planes = [
   {
     nombre: "Corporativo",
     para: "Operaciones complejas / alto volumen",
-    precio: "desde $12.000.000 COP aprox.",
+    precio: "desde $12.000.000 COP",
     soporte: "Soporte Corporativo desde $3.000.000/mes",
     color: "#B388FF",
     destacado: false,
@@ -99,36 +99,138 @@ const comparativa = [
 ];
 
 const portafolio = [
-  { servicio: "Landing corporativa", desde: "$2.000.000 COP" },
-  { servicio: "Sitio web empresarial", desde: "$5.000.000 COP" },
-  { servicio: "Plataforma web a medida", desde: "$8.000.000 COP" },
-  { servicio: "Automatización empresarial", desde: "$4.000.000 COP" },
-  { servicio: "CRM corporativo", desde: "$8.000.000 COP" },
-  { servicio: "CRM + Automatización + IA", desde: "$12.000.000 COP" },
-  { servicio: "Soluciones a medida", desde: "Cotización" },
+  {
+    servicio: "Landing corporativa",
+    desde: "$2.000.000 COP",
+    color: "#FF6B35",
+  },
+  {
+    servicio: "Sitio web empresarial",
+    desde: "$5.000.000 COP",
+    color: "#8B5CFF",
+  },
+  {
+    servicio: "Plataforma web a medida",
+    desde: "$8.000.000 COP",
+    color: "#FF6B35",
+  },
+  {
+    servicio: "Automatización empresarial",
+    desde: "$4.000.000 COP",
+    color: "#8B5CFF",
+  },
+  { servicio: "CRM corporativo", desde: "$8.000.000 COP", color: "#FF6B35" },
+  {
+    servicio: "CRM + Automatización + IA",
+    desde: "$12.000.000 COP",
+    color: "#8B5CFF",
+  },
+  { servicio: "Soluciones a medida", desde: "Cotización", color: "#B388FF" },
 ];
+
+function CurveTopRight() {
+  return (
+    <svg
+      className="absolute pointer-events-none"
+      style={{
+        top: 0,
+        right: 0,
+        width: "500px",
+        height: "350px",
+        opacity: 0.28,
+      }}
+      viewBox="0 0 500 350"
+      fill="none"
+    >
+      <path
+        d="M 500 0 Q 300 180 0 320"
+        stroke="url(#pctr)"
+        strokeWidth="1.5"
+        fill="none"
+      />
+      <path
+        d="M 500 25 Q 315 195 5 335"
+        stroke="url(#pctr2)"
+        strokeWidth="0.5"
+        fill="none"
+      />
+      <defs>
+        <linearGradient id="pctr" x1="1" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#8B5CFF" stopOpacity="0.1" />
+          <stop offset="50%" stopColor="#8B5CFF" stopOpacity="1" />
+          <stop offset="100%" stopColor="#8B5CFF" stopOpacity="0" />
+        </linearGradient>
+        <linearGradient id="pctr2" x1="1" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#B388FF" stopOpacity="0" />
+          <stop offset="55%" stopColor="#B388FF" stopOpacity="0.6" />
+          <stop offset="100%" stopColor="#B388FF" stopOpacity="0" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
+
+function CurveBottomLeft() {
+  return (
+    <svg
+      className="absolute pointer-events-none"
+      style={{
+        bottom: 0,
+        left: 0,
+        width: "450px",
+        height: "280px",
+        opacity: 0.22,
+      }}
+      viewBox="0 0 450 280"
+      fill="none"
+    >
+      <path
+        d="M 0 280 Q 180 80 450 20"
+        stroke="url(#pcbl)"
+        strokeWidth="1.5"
+        fill="none"
+      />
+      <defs>
+        <linearGradient id="pcbl" x1="0" y1="1" x2="1" y2="0">
+          <stop offset="0%" stopColor="#FF6B35" stopOpacity="0" />
+          <stop offset="50%" stopColor="#FF6B35" stopOpacity="1" />
+          <stop offset="100%" stopColor="#FF6B35" stopOpacity="0" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
 
 export default function PlanesPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="pt-40 pb-20">
-        <div className="max-w-7xl mx-auto px-6 text-center">
+      {/* ── HERO ── */}
+      <section className="pt-40 pb-20 relative z-10 overflow-hidden">
+        <CurveTopRight />
+        <div className="max-w-4xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
           >
-            <p className="text-sm tracking-[0.2em] text-[#FF6B35] mb-6 uppercase text-glow-orange">
-              Planes & Precios
-            </p>
-            <h1 className="text-5xl lg:text-6xl font-semibold leading-[1.05] tracking-tight mb-6">
-              Inversión clara,{" "}
-              <span className="text-[#8B5CFF] text-glow-violet">
+            <div className="flex items-center gap-3 mb-10">
+              <div className="h-px w-8 bg-[#FF6B35]" />
+              <span className="text-[#FF6B35] text-[10px] tracking-[0.35em] uppercase font-light">
+                Planes & Precios
+              </span>
+            </div>
+            <h1
+              className="leading-[0.95] tracking-tight mb-8"
+              style={{ letterSpacing: "-0.03em" }}
+            >
+              <span className="block text-5xl lg:text-7xl font-bold text-white">
+                Inversión clara,
+              </span>
+              <span className="block text-5xl lg:text-7xl font-extralight text-white/35">
                 resultado medible.
               </span>
             </h1>
-            <p className="text-[#8E95A9] text-lg max-w-2xl mx-auto leading-relaxed">
+            <p className="text-white/45 text-lg font-light leading-relaxed max-w-xl">
               Elige el plan según la etapa de tu empresa. Los valores son
               aproximados y el precio final se define en la cotización.
             </p>
@@ -136,103 +238,108 @@ export default function PlanesPage() {
         </div>
       </section>
 
-      {/* Cards de planes */}
+      {/* ── PLANES ── */}
       <section className="pb-24 relative z-10">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-3 gap-6">
-            {planes.map((plan, index) => (
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid md:grid-cols-3 gap-4">
+            {planes.map((plan, i) => (
               <motion.div
                 key={plan.nombre}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.12 }}
-                className="relative flex flex-col rounded-3xl p-8 transition-all duration-300 hover:-translate-y-2"
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="relative flex flex-col rounded-2xl p-8 cursor-default"
                 style={{
-                  background: "rgba(23,28,49,0.7)",
+                  background: plan.destacado
+                    ? `${plan.color}08`
+                    : "rgba(255,255,255,0.02)",
                   border: plan.destacado
-                    ? `2px solid ${plan.color}60`
-                    : `1px solid ${plan.color}20`,
-                  boxShadow: plan.destacado
-                    ? `0 0 40px ${plan.color}20`
-                    : "none",
+                    ? `1px solid ${plan.color}30`
+                    : "1px solid rgba(255,255,255,0.05)",
                   transition: "all 0.35s ease",
                 }}
                 onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.boxShadow =
-                    `0 12px 50px ${plan.color}30, 0 0 0 1px ${plan.color}40`;
-                  (e.currentTarget as HTMLElement).style.border =
-                    `${plan.destacado ? "2px" : "1px"} solid ${plan.color}50`;
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.background = `${plan.color}08`;
+                  el.style.border = `1px solid ${plan.color}30`;
+                  el.style.transform = "translateY(-4px)";
                 }}
                 onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.boxShadow =
-                    plan.destacado ? `0 0 40px ${plan.color}20` : "none";
-                  (e.currentTarget as HTMLElement).style.border = plan.destacado
-                    ? `2px solid ${plan.color}60`
-                    : `1px solid ${plan.color}20`;
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.background = plan.destacado
+                    ? `${plan.color}08`
+                    : "rgba(255,255,255,0.02)";
+                  el.style.border = plan.destacado
+                    ? `1px solid ${plan.color}30`
+                    : "1px solid rgba(255,255,255,0.05)";
+                  el.style.transform = "translateY(0)";
                 }}
               >
-                {/* Línea de acento arriba */}
                 <div
-                  className="absolute top-0 left-0 right-0 h-[2px] rounded-t-3xl"
+                  className="absolute top-0 left-0 right-0 h-px rounded-t-2xl"
                   style={{
-                    background: `linear-gradient(90deg, transparent, ${plan.color}80, transparent)`,
+                    background: `linear-gradient(90deg, transparent, ${plan.color}${plan.destacado ? "60" : "30"}, transparent)`,
                   }}
                 />
 
                 {plan.destacado && (
                   <span
-                    className="inline-flex w-fit rounded-full px-3 py-1 text-xs font-medium mb-4"
+                    className="inline-flex w-fit rounded-full px-3 py-1 text-xs font-medium mb-5"
                     style={{
-                      background: `${plan.color}15`,
+                      background: `${plan.color}12`,
                       color: plan.color,
-                      border: `1px solid ${plan.color}30`,
+                      border: `1px solid ${plan.color}25`,
                     }}
                   >
                     Más elegido
                   </span>
                 )}
 
-                <p className="text-xs uppercase tracking-widest text-[#8E95A9] mb-1">
+                <p className="text-[10px] uppercase tracking-[0.25em] text-white/25 font-light mb-1">
                   {plan.nombre}
                 </p>
-                <p className="text-xs text-[#8E95A9] mb-4">{plan.para}</p>
+                <p className="text-xs text-white/35 font-light mb-5">
+                  {plan.para}
+                </p>
 
                 <p
-                  className="text-2xl font-semibold tracking-tight mb-1"
-                  style={{ color: plan.color }}
+                  className="text-2xl font-bold tracking-tight mb-1"
+                  style={{ color: plan.color, letterSpacing: "-0.02em" }}
                 >
                   {plan.precio}
                 </p>
-                <p className="text-xs text-[#8E95A9] mb-6">{plan.soporte}</p>
+                <p className="text-xs text-white/25 font-light mb-7">
+                  {plan.soporte}
+                </p>
 
-                <ul className="flex flex-1 flex-col gap-3 text-sm text-[#8E95A9] mb-8">
+                <ul className="flex flex-1 flex-col gap-3 mb-8">
                   {plan.incluye.map((f) => (
-                    <li key={f} className="flex items-start gap-2">
+                    <li key={f} className="flex items-start gap-3 text-sm">
                       <span
-                        className="mt-0.5 shrink-0 font-bold text-sm"
+                        className="mt-0.5 shrink-0 text-xs"
                         style={{ color: plan.color }}
                       >
                         ✓
                       </span>
-                      {f}
+                      <span className="text-white/55 font-light">{f}</span>
                     </li>
                   ))}
                 </ul>
 
                 <Link
                   href="/contacto"
-                  className="inline-flex items-center justify-center px-6 py-3.5 rounded-2xl text-sm font-semibold transition-all duration-300 hover:scale-[1.03]"
+                  className="inline-flex items-center justify-center px-6 py-3.5 rounded-xl text-sm font-medium transition-all duration-300 hover:scale-[1.02]"
                   style={
                     plan.destacado
                       ? {
                           background: plan.color,
-                          color: "#fff",
-                          boxShadow: `0 0 30px ${plan.color}50`,
+                          color: "#000",
+                          fontWeight: 600,
                         }
                       : {
-                          border: `1px solid ${plan.color}40`,
-                          color: plan.color,
+                          border: `1px solid rgba(255,255,255,0.1)`,
+                          color: "rgba(255,255,255,0.5)",
                         }
                   }
                 >
@@ -244,34 +351,34 @@ export default function PlanesPage() {
         </div>
       </section>
 
-      {/* Guiño a casos de uso — ayuda a quien no sabe qué plan necesita */}
-      <section className="pb-24">
+      {/* ── ¿NO SABES CUÁL? ── */}
+      <section className="pb-20 relative z-10">
         <div className="max-w-5xl mx-auto px-6">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="flex flex-col items-center justify-between gap-5 rounded-2xl px-8 py-7 text-center md:flex-row md:text-left"
+            transition={{ duration: 0.5 }}
+            className="flex flex-col md:flex-row items-center justify-between gap-5 rounded-2xl px-8 py-7"
             style={{
-              background: "rgba(23,28,49,0.5)",
-              border: "1px solid rgba(139,92,255,0.18)",
+              background: "rgba(255,255,255,0.02)",
+              border: "1px solid rgba(139,92,255,0.12)",
             }}
           >
             <div>
-              <p className="text-lg font-semibold">
+              <p className="text-base font-semibold text-white mb-1">
                 ¿No sabes cuál plan necesitas?
               </p>
-              <p className="mt-1 text-sm text-[#8E95A9]">
+              <p className="text-sm text-white/35 font-light">
                 Mira casos de uso reales y descubre cuál se parece a tu empresa.
               </p>
             </div>
             <Link
               href="/servicios#casos"
-              className="inline-flex flex-shrink-0 items-center gap-2 rounded-2xl px-6 py-3.5 text-sm font-semibold transition-all duration-300 hover:scale-[1.03]"
+              className="flex-shrink-0 inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-light transition-all duration-300 hover:text-white/70"
               style={{
-                border: "1px solid rgba(139,92,255,0.4)",
-                color: "#B388FF",
+                border: "1px solid rgba(139,92,255,0.2)",
+                color: "rgba(139,92,255,0.7)",
               }}
             >
               Ver casos de uso →
@@ -280,47 +387,72 @@ export default function PlanesPage() {
         </div>
       </section>
 
-      {/* Tabla comparativa */}
-      <section className="pb-24">
-        <div className="max-w-5xl mx-auto px-6">
+      {/* ── COMPARATIVA ── */}
+      <section className="pb-24 relative z-10 overflow-hidden">
+        <CurveBottomLeft />
+        <div className="max-w-5xl mx-auto px-6 relative">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="text-center mb-12"
+            className="mb-14"
           >
-            <p className="text-sm tracking-[0.2em] text-[#FF6B35] mb-4 uppercase text-glow-orange">
-              Comparativa
-            </p>
-            <h2 className="text-4xl font-semibold tracking-tight">
-              Compara los{" "}
-              <span className="text-[#8B5CFF] text-glow-violet">planes.</span>
+            <div className="flex items-center gap-3 mb-8">
+              <div className="h-px w-8 bg-[#8B5CFF]" />
+              <span className="text-[#8B5CFF] text-[10px] tracking-[0.35em] uppercase font-light">
+                Comparativa
+              </span>
+            </div>
+            <h2
+              className="leading-[0.95] tracking-tight"
+              style={{ letterSpacing: "-0.03em" }}
+            >
+              <span className="block text-4xl lg:text-5xl font-bold text-white">
+                Compara los
+              </span>
+              <span className="block text-4xl lg:text-5xl font-extralight text-white/35">
+                planes.
+              </span>
             </h2>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             className="rounded-2xl overflow-hidden"
-            style={{ border: "1px solid rgba(255,255,255,0.07)" }}
+            style={{ border: "1px solid rgba(255,255,255,0.05)" }}
           >
             <div className="overflow-x-auto">
               <table className="w-full min-w-[580px] text-sm">
                 <thead>
-                  <tr style={{ background: "rgba(23,28,49,0.9)" }}>
-                    <th className="py-4 px-6 text-left font-medium text-[#8E95A9]">
+                  <tr
+                    style={{
+                      background: "rgba(255,255,255,0.03)",
+                      borderBottom: "1px solid rgba(255,255,255,0.05)",
+                    }}
+                  >
+                    <th className="py-4 px-6 text-left text-xs font-light text-white/25 tracking-widest uppercase">
                       Característica
                     </th>
-                    <th className="py-4 px-4 text-left font-medium text-[#FF6B35]">
+                    <th
+                      className="py-4 px-4 text-left text-xs font-medium"
+                      style={{ color: "#FF6B35" }}
+                    >
                       Esencial
                     </th>
-                    <th className="py-4 px-4 text-left font-medium text-[#8B5CFF]">
+                    <th
+                      className="py-4 px-4 text-left text-xs font-medium"
+                      style={{ color: "#8B5CFF" }}
+                    >
                       Crecimiento ✦
                     </th>
-                    <th className="py-4 px-4 text-left font-medium text-[#B388FF]">
+                    <th
+                      className="py-4 px-4 text-left text-xs font-medium"
+                      style={{ color: "#B388FF" }}
+                    >
                       Corporativo
                     </th>
                   </tr>
@@ -330,23 +462,23 @@ export default function PlanesPage() {
                     <tr
                       key={row.caracteristica}
                       style={{
-                        borderTop: "1px solid rgba(255,255,255,0.05)",
+                        borderTop: "1px solid rgba(255,255,255,0.03)",
                         background:
                           i % 2 === 0
-                            ? "rgba(23,28,49,0.5)"
-                            : "rgba(23,28,49,0.3)",
+                            ? "rgba(255,255,255,0.015)"
+                            : "transparent",
                       }}
                     >
-                      <td className="py-4 px-6 text-white/80">
+                      <td className="py-4 px-6 text-white/50 font-light">
                         {row.caracteristica}
                       </td>
-                      <td className="py-4 px-4 text-[#8E95A9]">
+                      <td className="py-4 px-4 text-white/35 font-light">
                         {row.esencial}
                       </td>
-                      <td className="py-4 px-4 text-white font-medium">
+                      <td className="py-4 px-4 text-white/70 font-medium">
                         {row.crecimiento}
                       </td>
-                      <td className="py-4 px-4 text-[#8E95A9]">
+                      <td className="py-4 px-4 text-white/35 font-light">
                         {row.corporativo}
                       </td>
                     </tr>
@@ -358,49 +490,66 @@ export default function PlanesPage() {
         </div>
       </section>
 
-      {/* Portafolio por servicio */}
-      <section className="pb-24">
+      {/* ── PORTAFOLIO À LA CARTE ── */}
+      <section className="pb-24 relative z-10">
         <div className="max-w-5xl mx-auto px-6">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="text-center mb-12"
+            className="mb-14"
           >
-            <p className="text-sm tracking-[0.2em] text-[#FF6B35] mb-4 uppercase text-glow-orange">
-              À la carte
-            </p>
-            <h2 className="text-4xl font-semibold tracking-tight">
-              O contrata por{" "}
-              <span className="text-[#8B5CFF] text-glow-violet">servicio.</span>
+            <div className="flex items-center gap-3 mb-8">
+              <div className="h-px w-8 bg-[#FF6B35]" />
+              <span className="text-[#FF6B35] text-[10px] tracking-[0.35em] uppercase font-light">
+                À la carte
+              </span>
+            </div>
+            <h2
+              className="leading-[0.95] tracking-tight"
+              style={{ letterSpacing: "-0.03em" }}
+            >
+              <span className="block text-4xl lg:text-5xl font-bold text-white">
+                O contrata por
+              </span>
+              <span className="block text-4xl lg:text-5xl font-extralight text-white/35">
+                servicio.
+              </span>
             </h2>
-            <p className="text-[#8E95A9] text-base mt-4 max-w-xl mx-auto">
+            <p className="text-white/35 text-base font-light mt-5 max-w-md leading-relaxed">
               Precios base por servicio. El alcance final se cotiza según tu
               operación.
             </p>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="rounded-2xl overflow-hidden grid sm:grid-cols-2 gap-[1px]"
+            className="rounded-2xl overflow-hidden grid sm:grid-cols-2 gap-px"
             style={{ background: "rgba(255,255,255,0.04)" }}
           >
             {portafolio.map((s, i) => (
               <div
                 key={s.servicio}
-                className="flex items-center justify-between px-6 py-5 transition-colors duration-200 hover:bg-[rgba(139,92,255,0.06)]"
-                style={{ background: "rgba(7,9,15,0.9)" }}
+                className="flex items-center justify-between px-6 py-5 transition-all duration-200 cursor-default"
+                style={{ background: "#000000" }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.background =
+                    `${s.color}06`;
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.background = "#000000";
+                }}
               >
-                <span className="text-sm text-white/80">{s.servicio}</span>
+                <span className="text-sm text-white/55 font-light">
+                  {s.servicio}
+                </span>
                 <span
-                  className="text-sm font-medium"
-                  style={{
-                    color: i % 2 === 0 ? "#FF6B35" : "#8B5CFF",
-                  }}
+                  className="text-sm font-semibold"
+                  style={{ color: s.color, letterSpacing: "-0.01em" }}
                 >
                   {s.desde}
                 </span>
@@ -410,56 +559,69 @@ export default function PlanesPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="pb-32">
-        <div className="max-w-7xl mx-auto px-6">
+      {/* ── CTA ── */}
+      <section className="pb-32 relative z-10 overflow-hidden">
+        <svg
+          className="absolute pointer-events-none inset-0 w-full h-full"
+          viewBox="0 0 1200 400"
+          fill="none"
+          preserveAspectRatio="xMidYMid slice"
+        >
+          <path
+            d="M 0 380 Q 400 150 1200 100"
+            stroke="url(#pctag)"
+            strokeWidth="1"
+            fill="none"
+            opacity="0.2"
+          />
+          <defs>
+            <linearGradient id="pctag" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="#FF6B35" stopOpacity="0" />
+              <stop offset="40%" stopColor="#FF6B35" stopOpacity="1" />
+              <stop offset="70%" stopColor="#8B5CFF" stopOpacity="1" />
+              <stop offset="100%" stopColor="#8B5CFF" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <div className="max-w-4xl mx-auto px-6 text-center relative">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="relative overflow-hidden rounded-[32px] p-16 text-center transition-all duration-300 hover:-translate-y-1"
-            style={{
-              background: "rgba(23,28,49,0.7)",
-              border: "1px solid rgba(255,255,255,0.1)",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.boxShadow =
-                "0 12px 60px rgba(139,92,255,0.25), 0 0 0 1px rgba(139,92,255,0.3)";
-              (e.currentTarget as HTMLElement).style.border =
-                "1px solid rgba(139,92,255,0.3)";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.boxShadow = "none";
-              (e.currentTarget as HTMLElement).style.border =
-                "1px solid rgba(255,255,255,0.1)";
-            }}
           >
-            <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_top_left,rgba(139,92,255,0.4),transparent_40%)]" />
-            <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_bottom_right,rgba(255,107,53,0.4),transparent_40%)]" />
-
-            <div className="relative z-10">
-              <p className="text-sm tracking-[0.2em] text-[#FF6B35] mb-6 uppercase text-glow-orange">
+            <div className="flex items-center justify-center gap-3 mb-12">
+              <div className="h-px w-8 bg-white/15" />
+              <span className="text-white/20 text-[10px] tracking-[0.35em] uppercase font-light">
                 Siguiente paso
-              </p>
-              <h2 className="text-4xl lg:text-5xl font-semibold tracking-tight mb-6">
-                El diagnóstico es gratis.
-                <br />
-                <span className="text-[#8B5CFF] text-glow-violet">
-                  Sin compromiso.
-                </span>
-              </h2>
-              <p className="text-[#8E95A9] text-lg mb-10 max-w-xl mx-auto">
-                Solo necesitamos entender tu operación para mostrarte lo que es
-                posible con Orbic.
-              </p>
-              <Link
-                href="/contacto"
-                className="inline-flex items-center gap-2 px-8 py-5 rounded-2xl bg-[#FF6B35] text-black font-semibold hover:scale-105 transition-all duration-300 shadow-[0_0_50px_rgba(255,107,53,0.5)] hover:shadow-[0_0_80px_rgba(255,107,53,0.7)]"
-              >
-                Solicitar diagnóstico gratis →
-              </Link>
+              </span>
+              <div className="h-px w-8 bg-white/15" />
             </div>
+            <h2
+              className="leading-[0.95] tracking-tight mb-8"
+              style={{ letterSpacing: "-0.04em" }}
+            >
+              <span className="block text-4xl lg:text-6xl font-bold text-white">
+                El diagnóstico es gratis.
+              </span>
+              <span className="block text-4xl lg:text-6xl font-extralight text-white/35">
+                Sin compromiso.
+              </span>
+            </h2>
+            <p className="text-white/30 text-base font-light leading-relaxed mb-12 max-w-md mx-auto">
+              Solo necesitamos entender tu operación para mostrarte lo que es
+              posible con Orbic.
+            </p>
+            <Link
+              href="/contacto"
+              className="group inline-flex items-center gap-2 px-8 py-5 rounded-2xl bg-white text-black text-sm font-semibold hover:bg-white/90 transition-all duration-300"
+              style={{ letterSpacing: "-0.01em" }}
+            >
+              Solicitar diagnóstico gratis
+              <span className="group-hover:translate-x-1 transition-transform duration-200">
+                →
+              </span>
+            </Link>
           </motion.div>
         </div>
       </section>
