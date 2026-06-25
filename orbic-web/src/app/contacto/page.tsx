@@ -17,7 +17,7 @@ export default function ContactoPage() {
   const contactMethods = [
     {
       title: "WhatsApp",
-      description: "Escríbenos directo. Respondemos en menos de 24 horas.",
+      description: "Escríbenos. Respondemos en menos de 24 horas.",
       action: "Abrir WhatsApp →",
       href: "https://wa.me/573053308423?text=Hola%20equipo%20Orbic%2C%20vi%20su%20p%C3%A1gina%20web%20y%20me%20interesa%20un%20diagn%C3%B3stico%20gratuito%20para%20mi%20empresa.",
       color: "#22C55E",
