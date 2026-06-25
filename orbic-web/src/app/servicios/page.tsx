@@ -7,7 +7,7 @@ import { Globe, BarChart3, Workflow, Code, Brain, Link2 } from "lucide-react";
 const servicios = [
   {
     title: "Páginas web comerciales",
-    para: "Tu vitrina digital pensada para convertir visitantes en clientes, no solo para verse bien.",
+    para: "Tu vitrina digital diseñada para convertir, no solo para verse bien.",
     incluye: [
       "Diseño a medida",
       "SEO optimizado",
@@ -23,7 +23,7 @@ const servicios = [
   },
   {
     title: "CRM personalizado",
-    para: "Todos tus clientes y oportunidades en un solo lugar, con seguimiento que no se te escapa.",
+    para: "Todos tus clientes y oportunidades en un solo lugar, con seguimiento que no se escapa.",
     incluye: [
       "Pipeline visual",
       "Alertas automáticas",
@@ -31,7 +31,7 @@ const servicios = [
       "Reportes en tiempo real",
     ],
     stat: {
-      value: "-30%",
+      value: "−30%",
       label: "menos negocios perdidos por falta de seguimiento",
     },
     color: "#B388FF",
@@ -39,23 +39,20 @@ const servicios = [
   },
   {
     title: "Automatización de procesos",
-    para: "Las tareas repetitivas las hace el sistema; tu equipo se dedica a lo que de verdad importa.",
+    para: "Las tareas repetitivas las hace el sistema. Tu equipo se dedica a lo que importa.",
     incluye: [
       "Flujos 24/7 (n8n)",
       "SARLAFT / KYC",
       "Bots de WhatsApp",
       "Sincronización de datos",
     ],
-    stat: {
-      value: "24/7",
-      label: "operación corriendo sin intervención manual",
-    },
+    stat: { value: "24/7", label: "operación sin intervención manual" },
     color: "#FF6B35",
     icon: Workflow,
   },
   {
     title: "Software empresarial",
-    para: "Herramientas internas hechas a tu medida para cuando lo genérico ya se te quedó corto.",
+    para: "Herramientas internas a medida para cuando lo genérico ya no alcanza.",
     incluye: [
       "Dashboards en tiempo real",
       "Roles y permisos",
@@ -71,20 +68,20 @@ const servicios = [
   },
   {
     title: "IA aplicada",
-    para: "Inteligencia artificial puesta a trabajar en tu negocio: como herramienta real, no como moda.",
+    para: "Inteligencia artificial como herramienta real de negocio, no como moda.",
     incluye: [
       "Chatbots inteligentes",
       "Análisis de datos",
       "Asistentes virtuales",
       "Clasificación automática",
     ],
-    stat: { value: "-80%", label: "menos tiempo en tareas repetitivas" },
+    stat: { value: "−80%", label: "menos tiempo en tareas repetitivas" },
     color: "#8B5CFF",
     icon: Brain,
   },
   {
     title: "Integraciones digitales",
-    para: "Conectamos las herramientas que ya usas para que hablen entre sí, sin copiar y pegar.",
+    para: "Conectamos tus herramientas para que hablen entre sí. Sin copiar y pegar.",
     incluye: [
       "APIs personalizadas",
       "Webhooks en tiempo real",
@@ -98,46 +95,58 @@ const servicios = [
 ];
 
 const flujo = [
-  { label: "Web", desc: "Captas al cliente", color: "#8B5CFF" },
   {
+    num: "01",
+    label: "Web",
+    desc: "Captas al cliente con una presencia digital que convierte visitas en oportunidades.",
+    color: "#8B5CFF",
+  },
+  {
+    num: "02",
     label: "CRM",
-    desc: "Lo organizas y le haces seguimiento",
+    desc: "Organizas y le haces seguimiento sin que ninguna oportunidad se pierda.",
     color: "#B388FF",
   },
   {
+    num: "03",
     label: "Automatización",
-    desc: "El sistema responde y avanza solo",
+    desc: "El sistema responde, avanza y ejecuta tareas sin intervención humana.",
     color: "#FF6B35",
   },
-  { label: "IA", desc: "Aprende y mejora la operación", color: "#FF8F5F" },
+  {
+    num: "04",
+    label: "IA",
+    desc: "La operación aprende, mejora y escala con inteligencia aplicada al negocio.",
+    color: "#FF8F5F",
+  },
 ];
 
 const casos = [
   {
-    sector: "Inmobiliaria / agencia",
+    sector: "Sector financiero y cumplimiento",
     problema:
-      "Los leads llegan por varios canales y se enfrían antes de que alguien los contacte.",
+      "Validar cada cliente nuevo toma horas, depende de una sola persona y es difícil de auditar.",
     solucion:
-      "CRM + bot de WhatsApp que responde al instante, califica y agenda automáticamente.",
-    usa: ["CRM", "Automatización"],
+      "Automatización del proceso de validación SARLAFT/KYC con alertas, trazabilidad y documentación completa. El sistema corre solo y genera reportes en tiempo real.",
+    usa: ["Automatización", "Software empresarial"],
     color: "#8B5CFF",
   },
   {
-    sector: "Empresa con cumplimiento",
+    sector: "Inmobiliaria y agencias comerciales",
     problema:
-      "Validar cada cliente nuevo toma horas y depende de una sola persona.",
+      "Los leads llegan por WhatsApp, correo y redes, pero se enfrían antes de que alguien los contacte.",
     solucion:
-      "Automatización del proceso de validación con alertas y trazabilidad completa.",
-    usa: ["Automatización", "Software"],
+      "CRM conectado a todos los canales más bot de WhatsApp que responde, califica y agenda automáticamente. El equipo solo cierra.",
+    usa: ["CRM", "Automatización"],
     color: "#FF6B35",
   },
   {
-    sector: "PyME en crecimiento",
+    sector: "PyMEs en crecimiento",
     problema:
-      "Cada área tiene su propio Excel y nadie ve el panorama completo del negocio.",
+      "Cada área trabaja en su propio Excel y nadie tiene visibilidad del panorama completo del negocio.",
     solucion:
-      "Plataforma con dashboards que centraliza la operación y conecta lo que ya usan.",
-    usa: ["Software", "Integraciones"],
+      "Plataforma con dashboards centralizados que conecta todas las áreas, elimina los silos y da visibilidad en tiempo real a la dirección.",
+    usa: ["Software empresarial", "Integraciones"],
     color: "#B388FF",
   },
 ];
@@ -151,19 +160,19 @@ function CurveVioletTop() {
         right: 0,
         width: "500px",
         height: "350px",
-        opacity: 0.3,
+        opacity: 0.28,
       }}
       viewBox="0 0 500 350"
       fill="none"
     >
       <path
-        d="M 500 0 Q 300 150 0 300"
+        d="M 500 0 Q 300 180 0 320"
         stroke="url(#svt)"
         strokeWidth="1.5"
         fill="none"
       />
       <path
-        d="M 500 20 Q 310 160 5 315"
+        d="M 500 25 Q 315 195 5 335"
         stroke="url(#svt2)"
         strokeWidth="0.5"
         fill="none"
@@ -176,39 +185,8 @@ function CurveVioletTop() {
         </linearGradient>
         <linearGradient id="svt2" x1="1" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#B388FF" stopOpacity="0" />
-          <stop offset="55%" stopColor="#B388FF" stopOpacity="0.7" />
+          <stop offset="55%" stopColor="#B388FF" stopOpacity="0.6" />
           <stop offset="100%" stopColor="#B388FF" stopOpacity="0" />
-        </linearGradient>
-      </defs>
-    </svg>
-  );
-}
-
-function CurveOrangeBottom() {
-  return (
-    <svg
-      className="absolute pointer-events-none"
-      style={{
-        bottom: 0,
-        left: 0,
-        width: "500px",
-        height: "300px",
-        opacity: 0.25,
-      }}
-      viewBox="0 0 500 300"
-      fill="none"
-    >
-      <path
-        d="M 0 300 Q 200 100 500 50"
-        stroke="url(#sob)"
-        strokeWidth="1.5"
-        fill="none"
-      />
-      <defs>
-        <linearGradient id="sob" x1="0" y1="1" x2="1" y2="0">
-          <stop offset="0%" stopColor="#FF6B35" stopOpacity="0" />
-          <stop offset="50%" stopColor="#FF6B35" stopOpacity="1" />
-          <stop offset="100%" stopColor="#FF6B35" stopOpacity="0" />
         </linearGradient>
       </defs>
     </svg>
@@ -265,10 +243,10 @@ export default function ServiciosPage() {
                 no piezas aisladas.
               </span>
             </h1>
-            <p className="text-white/50 text-lg font-light leading-relaxed max-w-xl">
-              Estas son las seis capas con las que ordenamos y escalamos la
-              operación de tu empresa. Empiezas por donde más te duele y todo
-              queda conectado bajo un mismo sistema.
+            <p className="text-white/45 text-lg font-light leading-relaxed max-w-xl">
+              Seis capas de intervención que ordenan y escalan la operación de
+              tu empresa. Empiezas donde más te duele y todo queda conectado
+              bajo un mismo ecosistema.
             </p>
           </motion.div>
         </div>
@@ -290,7 +268,7 @@ export default function ServiciosPage() {
                   className="relative flex flex-col overflow-hidden rounded-2xl p-7 cursor-default"
                   style={{
                     background: "rgba(255,255,255,0.02)",
-                    border: `1px solid rgba(255,255,255,0.05)`,
+                    border: "1px solid rgba(255,255,255,0.05)",
                     transition: "all 0.35s ease",
                   }}
                   onMouseEnter={(e) => {
@@ -312,7 +290,6 @@ export default function ServiciosPage() {
                       background: `linear-gradient(90deg, transparent, ${s.color}40, transparent)`,
                     }}
                   />
-
                   <div
                     className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl"
                     style={{
@@ -322,7 +299,6 @@ export default function ServiciosPage() {
                   >
                     <Icon size={20} style={{ color: s.color }} />
                   </div>
-
                   <h3
                     className="text-lg font-semibold mb-2 tracking-tight"
                     style={{ letterSpacing: "-0.02em" }}
@@ -332,7 +308,6 @@ export default function ServiciosPage() {
                   <p className="text-white/45 text-sm font-light leading-relaxed mb-6">
                     {s.para}
                   </p>
-
                   <div className="mb-6">
                     <div className="flex items-baseline gap-2 mb-3">
                       <span
@@ -361,7 +336,6 @@ export default function ServiciosPage() {
                       }}
                     />
                   </div>
-
                   <div className="mt-auto flex flex-wrap gap-1.5">
                     {s.incluye.map((item) => (
                       <span
@@ -384,9 +358,9 @@ export default function ServiciosPage() {
         </div>
       </section>
 
-      {/* ── CÓMO ENCAJA TODO ── */}
-      <section className="py-24 relative z-10 overflow-hidden">
-        {/* Halo violeta izquierda */}
+      {/* ── CÓMO ENCAJA TODO — estilo storytelling ── */}
+      <section className="py-32 relative z-10 overflow-hidden">
+        {/* Halos ambientales */}
         <div
           className="absolute pointer-events-none"
           style={{
@@ -400,7 +374,6 @@ export default function ServiciosPage() {
             borderRadius: "50%",
           }}
         />
-        {/* Halo naranja derecha */}
         <div
           className="absolute pointer-events-none"
           style={{
@@ -414,7 +387,7 @@ export default function ServiciosPage() {
             borderRadius: "50%",
           }}
         />
-        {/* Curva violeta arriba izquierda */}
+        {/* Curva violeta */}
         <svg
           className="absolute pointer-events-none"
           style={{
@@ -433,26 +406,103 @@ export default function ServiciosPage() {
             strokeWidth="1.5"
             fill="none"
           />
-          <path
-            d="M -20 300 Q 190 75 550 48"
-            stroke="url(#scv1b)"
-            strokeWidth="0.5"
-            fill="none"
-          />
           <defs>
             <linearGradient id="scv1" x1="0" y1="1" x2="1" y2="0">
               <stop offset="0%" stopColor="#8B5CFF" stopOpacity="0" />
               <stop offset="50%" stopColor="#8B5CFF" stopOpacity="1" />
               <stop offset="100%" stopColor="#8B5CFF" stopOpacity="0.2" />
             </linearGradient>
-            <linearGradient id="scv1b" x1="0" y1="1" x2="1" y2="0">
-              <stop offset="0%" stopColor="#B388FF" stopOpacity="0" />
-              <stop offset="60%" stopColor="#B388FF" stopOpacity="0.5" />
-              <stop offset="100%" stopColor="#B388FF" stopOpacity="0" />
-            </linearGradient>
           </defs>
         </svg>
-        {/* Curva naranja abajo derecha */}
+
+        <div className="max-w-5xl mx-auto px-6 relative">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="mb-20"
+          >
+            <div className="flex items-center gap-3 mb-10">
+              <div className="h-px w-8 bg-[#8B5CFF]" />
+              <span className="text-[#8B5CFF] text-[10px] tracking-[0.35em] uppercase font-light">
+                Cómo encaja todo
+              </span>
+            </div>
+            <h2
+              className="leading-[0.95] tracking-tight"
+              style={{ letterSpacing: "-0.03em" }}
+            >
+              <span className="block text-4xl lg:text-5xl font-bold text-white">
+                No son servicios sueltos.
+              </span>
+              <span className="block text-4xl lg:text-5xl font-extralight text-white/35">
+                Son un sistema.
+              </span>
+            </h2>
+            <p className="text-white/40 text-base font-light mt-6 max-w-lg leading-relaxed">
+              Cada capa fue diseñada para comunicarse con las demás. El
+              resultado no es tecnología instalada — es una operación que
+              funciona sola.
+            </p>
+          </motion.div>
+
+          {/* Flujo — estilo timeline horizontal storytelling */}
+          <div className="relative">
+            {/* Línea conectora */}
+            <div
+              className="hidden md:block absolute top-8 left-0 right-0 h-px"
+              style={{
+                background:
+                  "linear-gradient(90deg, transparent, rgba(139,92,255,0.2), rgba(255,107,53,0.2), transparent)",
+              }}
+            />
+
+            <div className="grid md:grid-cols-4 gap-8">
+              {flujo.map((paso, i) => (
+                <motion.div
+                  key={paso.label}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  className="relative"
+                >
+                  {/* Dot en la línea */}
+                  <div
+                    className="hidden md:flex w-4 h-4 rounded-full mb-6 items-center justify-center"
+                    style={{
+                      background: paso.color,
+                      boxShadow: `0 0 12px ${paso.color}60`,
+                    }}
+                  >
+                    <div className="w-1.5 h-1.5 rounded-full bg-black" />
+                  </div>
+                  <p
+                    className="text-xs font-medium mb-2 tracking-widest"
+                    style={{ color: paso.color }}
+                  >
+                    {paso.num}
+                  </p>
+                  <h3
+                    className="text-xl font-semibold mb-3 tracking-tight"
+                    style={{ letterSpacing: "-0.02em" }}
+                  >
+                    {paso.label}
+                  </h3>
+                  <p className="text-white/40 text-sm font-light leading-relaxed">
+                    {paso.desc}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── CASOS DE USO — storytelling real ── */}
+      <section className="py-32 relative z-10 overflow-hidden">
+        {/* Curva naranja */}
         <svg
           className="absolute pointer-events-none"
           style={{
@@ -460,126 +510,35 @@ export default function ServiciosPage() {
             right: 0,
             width: "50%",
             height: "45%",
-            opacity: 0.25,
+            opacity: 0.22,
           }}
           viewBox="0 0 500 280"
           fill="none"
         >
           <path
             d="M 520 280 Q 300 100 0 40"
-            stroke="url(#sco1)"
+            stroke="url(#sco2)"
             strokeWidth="1.5"
             fill="none"
           />
-          <path
-            d="M 520 260 Q 310 88 5 28"
-            stroke="url(#sco1b)"
-            strokeWidth="0.5"
-            fill="none"
-          />
           <defs>
-            <linearGradient id="sco1" x1="1" y1="1" x2="0" y2="0">
+            <linearGradient id="sco2" x1="1" y1="1" x2="0" y2="0">
               <stop offset="0%" stopColor="#FF6B35" stopOpacity="0.1" />
               <stop offset="50%" stopColor="#FF6B35" stopOpacity="1" />
               <stop offset="100%" stopColor="#FF6B35" stopOpacity="0" />
             </linearGradient>
-            <linearGradient id="sco1b" x1="1" y1="1" x2="0" y2="0">
-              <stop offset="0%" stopColor="#FF8F5F" stopOpacity="0" />
-              <stop offset="55%" stopColor="#FF8F5F" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#FF8F5F" stopOpacity="0" />
-            </linearGradient>
           </defs>
         </svg>
-        <div className="max-w-5xl mx-auto px-6 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-          >
-            <div className="mb-16">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="h-px w-8 bg-[#8B5CFF]" />
-                <span className="text-[#8B5CFF] text-[10px] tracking-[0.35em] uppercase font-light">
-                  Cómo encaja todo
-                </span>
-              </div>
-              <h2
-                className="leading-[0.95] tracking-tight"
-                style={{ letterSpacing: "-0.03em" }}
-              >
-                <span className="block text-4xl lg:text-5xl font-bold text-white">
-                  No son servicios sueltos.
-                </span>
-                <span className="block text-4xl lg:text-5xl font-extralight text-white/35">
-                  Son un sistema.
-                </span>
-              </h2>
-            </div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
-              {flujo.map((paso, i) => (
-                <motion.div
-                  key={paso.label}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.1 }}
-                  className="relative p-6 rounded-2xl cursor-default"
-                  style={{
-                    background: "rgba(255,255,255,0.02)",
-                    border: "1px solid rgba(255,255,255,0.05)",
-                    transition: "all 0.3s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    const el = e.currentTarget as HTMLElement;
-                    el.style.background = `${paso.color}06`;
-                    el.style.border = `1px solid ${paso.color}20`;
-                  }}
-                  onMouseLeave={(e) => {
-                    const el = e.currentTarget as HTMLElement;
-                    el.style.background = "rgba(255,255,255,0.02)";
-                    el.style.border = "1px solid rgba(255,255,255,0.05)";
-                  }}
-                >
-                  <div
-                    className="absolute top-0 left-0 right-0 h-px"
-                    style={{
-                      background: `linear-gradient(90deg, transparent, ${paso.color}35, transparent)`,
-                    }}
-                  />
-                  <div className="flex items-center gap-2 mb-3">
-                    <span
-                      className="text-xs font-medium tracking-widest"
-                      style={{ color: paso.color }}
-                    >
-                      0{i + 1}
-                    </span>
-                    <span className="text-sm font-semibold text-white">
-                      {paso.label}
-                    </span>
-                  </div>
-                  <p className="text-white/40 text-xs font-light leading-relaxed">
-                    {paso.desc}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ── CASOS DE USO ── */}
-      <section className="py-24 relative z-10">
-        <div className="max-w-6xl mx-auto px-6">
+        <div className="max-w-6xl mx-auto px-6 relative">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="mb-16"
+            className="mb-20"
           >
-            <div className="flex items-center gap-3 mb-8">
+            <div className="flex items-center gap-3 mb-10">
               <div className="h-px w-8 bg-[#FF6B35]" />
               <span className="text-[#FF6B35] text-[10px] tracking-[0.35em] uppercase font-light">
                 Casos de uso
@@ -593,84 +552,87 @@ export default function ServiciosPage() {
                 Si te suena familiar,
               </span>
               <span className="block text-4xl lg:text-5xl font-extralight text-white/35">
-                te podemos ayudar.
+                podemos ayudarte.
               </span>
             </h2>
-            <p className="text-white/40 text-base font-light mt-6 max-w-xl leading-relaxed">
-              No necesitas saber qué tecnología pedir. Cuéntanos tu problema y
-              nosotros armamos la solución.
+            <p className="text-white/40 text-base font-light mt-6 max-w-lg leading-relaxed">
+              No necesitas saber qué tecnología pedir. Cuéntanos el problema y
+              nosotros diseñamos la solución.
             </p>
           </motion.div>
 
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="flex flex-col gap-4">
             {casos.map((c, i) => (
               <motion.div
                 key={c.sector}
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="relative flex flex-col overflow-hidden rounded-2xl p-7 cursor-default"
+                className="rounded-2xl p-8 relative overflow-hidden cursor-default"
                 style={{
                   background: "rgba(255,255,255,0.02)",
-                  border: `1px solid rgba(255,255,255,0.05)`,
+                  border: "1px solid rgba(255,255,255,0.05)",
                   transition: "all 0.35s ease",
                 }}
                 onMouseEnter={(e) => {
                   const el = e.currentTarget as HTMLElement;
-                  el.style.background = `${c.color}06`;
-                  el.style.border = `1px solid ${c.color}22`;
-                  el.style.transform = "translateY(-3px)";
+                  el.style.background = `${c.color}05`;
+                  el.style.border = `1px solid ${c.color}20`;
                 }}
                 onMouseLeave={(e) => {
                   const el = e.currentTarget as HTMLElement;
                   el.style.background = "rgba(255,255,255,0.02)";
                   el.style.border = "1px solid rgba(255,255,255,0.05)";
-                  el.style.transform = "translateY(0)";
                 }}
               >
                 <div
                   className="absolute top-0 left-0 right-0 h-px"
                   style={{
-                    background: `linear-gradient(90deg, transparent, ${c.color}40, transparent)`,
+                    background: `linear-gradient(90deg, transparent, ${c.color}35, transparent)`,
                   }}
                 />
 
-                <p
-                  className="text-xs font-medium uppercase tracking-widest mb-6"
-                  style={{ color: c.color }}
-                >
-                  {c.sector}
-                </p>
-
-                <p className="text-[10px] uppercase tracking-[0.2em] text-white/20 font-light mb-2">
-                  El problema
-                </p>
-                <p className="text-white/60 text-sm font-light leading-relaxed mb-6">
-                  {c.problema}
-                </p>
-
-                <p className="text-[10px] uppercase tracking-[0.2em] text-white/20 font-light mb-2">
-                  Lo que hacemos
-                </p>
-                <p className="text-white/60 text-sm font-light leading-relaxed mb-6">
-                  {c.solucion}
-                </p>
-
-                <div className="mt-auto flex flex-wrap gap-1.5">
-                  {c.usa.map((s) => (
-                    <span
-                      key={s}
-                      className="rounded-full px-2.5 py-1 text-xs font-light"
-                      style={{
-                        color: c.color,
-                        background: `${c.color}08`,
-                        border: `1px solid ${c.color}15`,
-                      }}
+                <div className="grid md:grid-cols-3 gap-8 items-start">
+                  <div>
+                    <p
+                      className="text-xs font-medium uppercase tracking-widest mb-3"
+                      style={{ color: c.color }}
                     >
-                      {s}
-                    </span>
-                  ))}
+                      {c.sector}
+                    </p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {c.usa.map((s) => (
+                        <span
+                          key={s}
+                          className="rounded-full px-2.5 py-1 text-xs font-light"
+                          style={{
+                            color: c.color,
+                            background: `${c.color}08`,
+                            border: `1px solid ${c.color}15`,
+                          }}
+                        >
+                          {s}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-[10px] uppercase tracking-[0.2em] text-white/20 font-light mb-2">
+                      El problema
+                    </p>
+                    <p className="text-white/55 text-sm font-light leading-relaxed">
+                      {c.problema}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-[10px] uppercase tracking-[0.2em] text-white/20 font-light mb-2">
+                      La solución
+                    </p>
+                    <p className="text-white/55 text-sm font-light leading-relaxed">
+                      {c.solucion}
+                    </p>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -687,7 +649,7 @@ export default function ServiciosPage() {
           preserveAspectRatio="xMidYMid slice"
         >
           <path
-            d="M 0 350 Q 400 100 1200 80"
+            d="M 0 350 Q 400 120 1200 80"
             stroke="url(#sctag1)"
             strokeWidth="1"
             fill="none"
@@ -727,9 +689,9 @@ export default function ServiciosPage() {
                 tu operación?
               </span>
             </h2>
-            <p className="text-white/35 text-base font-light leading-relaxed mb-12 max-w-md mx-auto">
-              El diagnóstico es gratis. Mira los planes o escríbenos y armamos
-              juntos lo que tu empresa necesita.
+            <p className="text-white/30 text-base font-light leading-relaxed mb-12 max-w-md mx-auto">
+              El diagnóstico es gratis. Cuéntanos tu problema y armamos juntos
+              la solución que tu empresa necesita.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
@@ -744,7 +706,7 @@ export default function ServiciosPage() {
               </Link>
               <Link
                 href="/planes"
-                className="inline-flex items-center gap-2 px-8 py-5 rounded-2xl text-sm font-light transition-all duration-300 hover:text-white/80"
+                className="inline-flex items-center gap-2 px-8 py-5 rounded-2xl text-sm font-light transition-all duration-300 hover:text-white/70"
                 style={{
                   border: "1px solid rgba(255,255,255,0.1)",
                   color: "rgba(255,255,255,0.4)",

@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-const EMAIL = "orbicoperationgroupsas@gmail.com";
+const EMAIL = "orbic@orbicopsgroup.com";
 
 export default function ContactoPage() {
   const [copied, setCopied] = useState(false);
