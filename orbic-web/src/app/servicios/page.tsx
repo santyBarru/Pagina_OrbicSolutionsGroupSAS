@@ -254,102 +254,130 @@ export default function ServiciosPage() {
 
       {/* ── GRID DE SERVICIOS ── */}
       <section className="pb-24 relative z-10">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="max-w-5xl mx-auto px-6">
+          {/* GIFs de producto */}
+          <div className="grid md:grid-cols-2 gap-4 mb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="rounded-2xl overflow-hidden relative"
+              style={{ border: "1px solid rgba(255,255,255,0.06)" }}
+            >
+              <img
+                src="/assets/gift.gif"
+                alt="CRM Orbic"
+                className="w-full h-full object-cover"
+              />
+              <div
+                className="absolute bottom-0 left-0 right-0 p-4"
+                style={{
+                  background:
+                    "linear-gradient(to top, rgba(0,0,0,0.8), transparent)",
+                }}
+              >
+                <p className="text-xs text-white/40 font-light tracking-widest uppercase">
+                  CRM en vivo
+                </p>
+              </div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="rounded-2xl overflow-hidden relative"
+              style={{ border: "1px solid rgba(255,255,255,0.06)" }}
+            >
+              <img
+                src="/assets/gift2.gif"
+                alt="WhatsApp Bot Orbic"
+                className="w-full h-full object-cover"
+              />
+              <div
+                className="absolute bottom-0 left-0 right-0 p-4"
+                style={{
+                  background:
+                    "linear-gradient(to top, rgba(0,0,0,0.8), transparent)",
+                }}
+              >
+                <p className="text-xs text-white/40 font-light tracking-widest uppercase">
+                  WhatsApp Bot en vivo
+                </p>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Lista de servicios */}
+          <div className="flex flex-col gap-0">
             {servicios.map((s, i) => {
               const Icon = s.icon;
               return (
                 <motion.div
                   key={s.title}
-                  initial={{ opacity: 0, y: 24 }}
+                  initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: (i % 3) * 0.08 }}
-                  className="relative flex flex-col overflow-hidden rounded-2xl p-7 cursor-default"
-                  style={{
-                    background: "rgba(255,255,255,0.02)",
-                    border: "1px solid rgba(255,255,255,0.05)",
-                    transition: "all 0.35s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    const el = e.currentTarget as HTMLElement;
-                    el.style.background = `${s.color}06`;
-                    el.style.border = `1px solid ${s.color}22`;
-                    el.style.transform = "translateY(-3px)";
-                  }}
-                  onMouseLeave={(e) => {
-                    const el = e.currentTarget as HTMLElement;
-                    el.style.background = "rgba(255,255,255,0.02)";
-                    el.style.border = "1px solid rgba(255,255,255,0.05)";
-                    el.style.transform = "translateY(0)";
-                  }}
+                  transition={{ duration: 0.4, delay: i * 0.05 }}
+                  className="grid md:grid-cols-[40px_1fr_auto] gap-6 items-start py-9 cursor-default group"
+                  style={{ borderBottom: "1px solid rgba(255,255,255,0.04)" }}
                 >
-                  <div
-                    className="absolute top-0 left-0 right-0 h-px"
-                    style={{
-                      background: `linear-gradient(90deg, transparent, ${s.color}40, transparent)`,
-                    }}
-                  />
-                  <div
-                    className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl"
-                    style={{
-                      background: `${s.color}10`,
-                      border: `1px solid ${s.color}20`,
-                    }}
-                  >
-                    <Icon size={20} style={{ color: s.color }} />
-                  </div>
-                  <h3
-                    className="text-lg font-semibold mb-2 tracking-tight"
-                    style={{ letterSpacing: "-0.02em" }}
-                  >
-                    {s.title}
-                  </h3>
-                  <p className="text-white/45 text-sm font-light leading-relaxed mb-6">
-                    {s.para}
-                  </p>
-                  <div className="mb-6">
-                    <div className="flex items-baseline gap-2 mb-3">
-                      <span
-                        className="text-3xl font-bold"
-                        style={{ color: s.color }}
-                      >
-                        {s.stat.value}
-                      </span>
-                      <span className="text-xs text-white/30 font-light leading-snug">
-                        {s.stat.label}
-                      </span>
+                  {/* Número + icono */}
+                  <div className="flex flex-col items-center gap-3 pt-1">
+                    <span className="text-[10px] font-light text-white/15 tracking-widest">
+                      0{i + 1}
+                    </span>
+                    <div
+                      className="w-8 h-8 rounded-lg flex items-center justify-center"
+                      style={{ background: "transparent", border: "none" }}
+                    >
+                      <Icon
+                        size={15}
+                        style={{ color: "rgba(255,255,255,0.2)" }}
+                      />
                     </div>
-                    <motion.div
-                      initial={{ scaleX: 0 }}
-                      whileInView={{ scaleX: 1 }}
-                      viewport={{ once: true }}
-                      transition={{
-                        duration: 0.9,
-                        delay: 0.2,
-                        ease: "easeOut",
-                      }}
-                      className="h-px w-full"
-                      style={{
-                        transformOrigin: "left",
-                        background: `linear-gradient(90deg, ${s.color}60, transparent)`,
-                      }}
-                    />
                   </div>
-                  <div className="mt-auto flex flex-wrap gap-1.5">
-                    {s.incluye.map((item) => (
-                      <span
-                        key={item}
-                        className="rounded-full px-2.5 py-1 text-xs font-light"
-                        style={{
-                          color: s.color,
-                          background: `${s.color}08`,
-                          border: `1px solid ${s.color}15`,
-                        }}
-                      >
-                        {item}
-                      </span>
-                    ))}
+
+                  {/* Texto */}
+                  <div>
+                    <h3
+                      className="text-xl font-semibold mb-2 text-white tracking-tight group-hover:text-white/80 transition-colors"
+                      style={{ letterSpacing: "-0.02em" }}
+                    >
+                      {s.title}
+                    </h3>
+                    <p className="text-white/38 text-sm font-light leading-relaxed mb-4 max-w-md">
+                      {s.para}
+                    </p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {s.incluye.map((item) => (
+                        <span
+                          key={item}
+                          className="rounded-full px-2.5 py-1 text-xs font-light"
+                          style={{
+                            color: "rgba(255,255,255,0.25)",
+                            background: "transparent",
+                            border: "1px solid rgba(255,255,255,0.07)",
+                          }}
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Stat */}
+                  <div className="text-right hidden md:block pt-1">
+                    <p
+                      className="text-2xl font-semibold tracking-tight text-white/70"
+                      style={{ letterSpacing: "-0.03em" }}
+                    >
+                      {s.stat.value}
+                    </p>
+                    <p className="text-[11px] text-white/20 font-light mt-1 max-w-[100px] ml-auto leading-snug">
+                      {s.stat.label}
+                    </p>
                   </div>
                 </motion.div>
               );
@@ -473,7 +501,7 @@ export default function ServiciosPage() {
                     className="hidden md:flex w-4 h-4 rounded-full mb-6 items-center justify-center"
                     style={{
                       background: paso.color,
-                      boxShadow: `0 0 12px ${paso.color}60`,
+                      boxShadow: `0 0 10px ${paso.color}50`,
                     }}
                   >
                     <div className="w-1.5 h-1.5 rounded-full bg-black" />
@@ -589,7 +617,7 @@ export default function ServiciosPage() {
                 <div
                   className="absolute top-0 left-0 right-0 h-px"
                   style={{
-                    background: `linear-gradient(90deg, transparent, ${c.color}35, transparent)`,
+                    background: `linear-gradient(90deg, transparent, ${c.color}30, transparent)`,
                   }}
                 />
 
@@ -609,7 +637,7 @@ export default function ServiciosPage() {
                           style={{
                             color: c.color,
                             background: `${c.color}08`,
-                            border: `1px solid ${c.color}15`,
+                            border: `1px solid ${c.color}20`,
                           }}
                         >
                           {s}

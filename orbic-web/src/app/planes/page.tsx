@@ -523,39 +523,34 @@ export default function PlanesPage() {
             </p>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="rounded-2xl overflow-hidden grid sm:grid-cols-2 gap-px"
-            style={{ background: "rgba(255,255,255,0.04)" }}
-          >
+          <div className="flex flex-col gap-0">
             {portafolio.map((s, i) => (
-              <div
+              <motion.div
                 key={s.servicio}
-                className="flex items-center justify-between px-6 py-5 transition-all duration-200 cursor-default"
-                style={{ background: "#000000" }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.background =
-                    `${s.color}06`;
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.background = "#000000";
-                }}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.05 }}
+                className="flex items-center justify-between py-6 cursor-default group"
+                style={{ borderBottom: "1px solid rgba(255,255,255,0.04)" }}
               >
-                <span className="text-sm text-white/55 font-light">
-                  {s.servicio}
-                </span>
+                <div className="flex items-center gap-5">
+                  <span className="text-xs text-white/15 font-light tracking-widest w-6">
+                    0{i + 1}
+                  </span>
+                  <span className="text-base text-white/55 font-light group-hover:text-white/80 transition-colors duration-300">
+                    {s.servicio}
+                  </span>
+                </div>
                 <span
-                  className="text-sm font-semibold"
-                  style={{ color: s.color, letterSpacing: "-0.01em" }}
+                  className="text-base font-semibold text-white/70 group-hover:text-white transition-colors duration-300"
+                  style={{ letterSpacing: "-0.02em" }}
                 >
                   {s.desde}
                 </span>
-              </div>
+              </motion.div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 

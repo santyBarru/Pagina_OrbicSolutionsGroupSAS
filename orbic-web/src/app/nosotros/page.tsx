@@ -460,7 +460,7 @@ export default function NosotrosPage() {
                 }}
               >
                 <div
-                  className={`absolute top-0 left-0 right-0 ${i === 1 ? "h-[2px]" : "h-px"}`}
+                  className="absolute top-0 left-0 right-0 h-px"
                   style={{
                     background: `linear-gradient(90deg, transparent, ${value.color}40, transparent)`,
                   }}
