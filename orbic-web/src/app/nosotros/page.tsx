@@ -2,7 +2,63 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import Script from "next/script";
 import { useState, useEffect } from "react";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://orbicopsgroup.com/#santiago",
+      name: "Santiago Barrera Rueda",
+      jobTitle: "CEO & Founder",
+      image: "https://orbicopsgroup.com/assets/santiago.jpg",
+      url: "https://orbicopsgroup.com",
+      worksFor: { "@id": "https://orbicopsgroup.com/#orbic" },
+      sameAs: [
+        "https://www.linkedin.com/in/santiago-barrera-rueda-209baa393/",
+        "https://www.linkedin.com/company/orbic-operations-group/",
+      ],
+    },
+    {
+      "@type": "Person",
+      "@id": "https://orbicopsgroup.com/#juanca",
+      name: "Juan Camilo Hernández Díaz",
+      jobTitle: "Co-Founder & Investor",
+      image: "https://orbicopsgroup.com/assets/juan%20camilo.jpg",
+      url: "https://orbicopsgroup.com/nosotros",
+      worksFor: { "@id": "https://orbicopsgroup.com/#orbic" },
+    },
+    {
+      "@type": "Person",
+      "@id": "https://orbicopsgroup.com/#jpablo",
+      name: "Juan Pablo Luna",
+      jobTitle: "CTO & Infrastructure Lead",
+      image: "https://orbicopsgroup.com/assets/juan%20pablo.jpg",
+      url: "https://orbicopsgroup.com/nosotros",
+      worksFor: { "@id": "https://orbicopsgroup.com/#orbic" },
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://orbicopsgroup.com/#orbic",
+      name: "Orbic Operations Group SAS",
+      url: "https://orbicopsgroup.com",
+      logo: "https://orbicopsgroup.com/assets/orbic-logo.png",
+      email: "orbic@orbicopsgroup.com",
+      description:
+        "Automatización de procesos de negocio, desarrollo de CRM, aplicaciones web y herramientas con IA para PyMEs en Colombia.",
+      foundingDate: "2026-06",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Bogotá",
+        addressCountry: "CO",
+      },
+      founder: { "@id": "https://orbicopsgroup.com/#santiago" },
+      sameAs: ["https://www.linkedin.com/company/orbic-operations-group/"],
+    },
+  ],
+};
 
 const frases = [
   {
@@ -59,9 +115,9 @@ function FraseCarrusel() {
             className="text-2xl font-light leading-snug mb-4"
             style={{ letterSpacing: "-0.02em" }}
           >
-            <span style={{ color: frase.color }}></span>
+            <span style={{ color: frase.color }}>{'"'}</span>
             {frase.texto}
-            <span style={{ color: frase.color }}></span>
+            <span style={{ color: frase.color }}>{'"'}</span>
           </p>
           <p className="text-white/30 text-xs tracking-widest uppercase font-light">
             — {frase.autor}
@@ -143,6 +199,12 @@ const values = [
 export default function NosotrosPage() {
   return (
     <>
+      <Script
+        id="schema-orbic"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
+
       {/* ── HERO con imagen ── */}
       <section className="relative min-h-[75vh] flex items-end overflow-hidden">
         <div className="absolute inset-0 z-0">
@@ -460,7 +522,7 @@ export default function NosotrosPage() {
                 }}
               >
                 <div
-                  className="absolute top-0 left-0 right-0 h-px"
+                  className={`absolute top-0 left-0 right-0 h-px`}
                   style={{
                     background: `linear-gradient(90deg, transparent, ${value.color}40, transparent)`,
                   }}
