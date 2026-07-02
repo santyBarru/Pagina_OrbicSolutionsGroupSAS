@@ -98,6 +98,48 @@ const comparativa = [
   },
 ];
 
+const marketing = [
+  {
+    nombre: "Start",
+    precio: "$360.000",
+    color: "#FF6B35",
+    destacado: false,
+    filas: [
+      { label: "Publicaciones / mes", valor: "4" },
+      { label: "Reels / mes", valor: "3" },
+      { label: "Manejo de redes", valor: "Sí" },
+      { label: "Diseño y copies", valor: "Sí" },
+      { label: "Reporte mensual", valor: "Básico" },
+    ],
+  },
+  {
+    nombre: "Growth",
+    precio: "$540.000",
+    color: "#8B5CFF",
+    destacado: true,
+    filas: [
+      { label: "Publicaciones / mes", valor: "6" },
+      { label: "Reels / mes", valor: "5" },
+      { label: "Manejo de redes", valor: "Sí" },
+      { label: "Diseño y copies", valor: "Sí" },
+      { label: "Reporte mensual", valor: "Completo" },
+    ],
+  },
+  {
+    nombre: "Pro",
+    precio: "$740.000",
+    color: "#B388FF",
+    destacado: false,
+    filas: [
+      { label: "Publicaciones / mes", valor: "8" },
+      { label: "Reels / mes", valor: "7" },
+      { label: "Manejo de redes", valor: "Sí" },
+      { label: "Diseño y copies", valor: "Sí" },
+      { label: "Reporte mensual", valor: "Completo + estrategia" },
+    ],
+  },
+];
+
 const portafolio = [
   {
     servicio: "Landing corporativa",
@@ -485,6 +527,207 @@ export default function PlanesPage() {
                   ))}
                 </tbody>
               </table>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── MARKETING Y REDES (FASE 1) ── */}
+      <section className="pb-24 relative z-10 overflow-hidden">
+        {/* Halo ambiental violeta */}
+        <div
+          className="absolute pointer-events-none"
+          style={{
+            top: "5%",
+            left: "-8%",
+            width: "500px",
+            height: "500px",
+            background:
+              "radial-gradient(circle, rgba(139,92,255,0.06), transparent 70%)",
+            filter: "blur(80px)",
+            borderRadius: "50%",
+          }}
+        />
+
+        <div className="max-w-6xl mx-auto px-6 relative">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="mb-14"
+          >
+            <div className="flex items-center gap-3 mb-8">
+              <div className="h-px w-8 bg-[#FF6B35]" />
+              <span className="text-[#FF6B35] text-[10px] tracking-[0.35em] uppercase font-light">
+                Marketing y Redes
+              </span>
+            </div>
+            <h2
+              className="leading-[0.95] tracking-tight mb-6"
+              style={{ letterSpacing: "-0.03em" }}
+            >
+              <span className="block text-4xl lg:text-5xl font-bold text-white">
+                Construimos tu marca,
+              </span>
+              <span className="block text-4xl lg:text-5xl font-extralight text-white/35">
+                luego potenciamos resultados.
+              </span>
+            </h2>
+            <p className="text-white/45 max-w-2xl leading-relaxed font-light">
+              La publicidad funciona mejor cuando existe una marca sólida
+              detrás. Primero fortalecemos tu presencia digital con contenido y
+              branding. Tú solo grabas el material siguiendo nuestras
+              recomendaciones; nosotros nos encargamos de la edición, diseño,
+              organización y publicación.
+            </p>
+          </motion.div>
+
+          {/* Grid 3 planes de marketing */}
+          <div className="grid md:grid-cols-3 gap-4">
+            {marketing.map((plan, i) => (
+              <motion.div
+                key={plan.nombre}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="relative flex flex-col rounded-2xl p-8 cursor-default"
+                style={{
+                  background: plan.destacado
+                    ? `${plan.color}08`
+                    : "rgba(255,255,255,0.02)",
+                  border: plan.destacado
+                    ? `1px solid ${plan.color}30`
+                    : "1px solid rgba(255,255,255,0.05)",
+                  transition: "all 0.35s ease",
+                }}
+                onMouseEnter={(e) => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.background = `${plan.color}08`;
+                  el.style.border = `1px solid ${plan.color}30`;
+                  el.style.transform = "translateY(-4px)";
+                }}
+                onMouseLeave={(e) => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.background = plan.destacado
+                    ? `${plan.color}08`
+                    : "rgba(255,255,255,0.02)";
+                  el.style.border = plan.destacado
+                    ? `1px solid ${plan.color}30`
+                    : "1px solid rgba(255,255,255,0.05)";
+                  el.style.transform = "translateY(0)";
+                }}
+              >
+                <div
+                  className="absolute top-0 left-0 right-0 h-px rounded-t-2xl"
+                  style={{
+                    background: `linear-gradient(90deg, transparent, ${plan.color}${plan.destacado ? "60" : "30"}, transparent)`,
+                  }}
+                />
+
+                {plan.destacado && (
+                  <span
+                    className="inline-flex w-fit rounded-full px-3 py-1 text-xs font-medium mb-5"
+                    style={{
+                      background: `${plan.color}12`,
+                      color: plan.color,
+                      border: `1px solid ${plan.color}25`,
+                    }}
+                  >
+                    Recomendado
+                  </span>
+                )}
+
+                <p className="text-[10px] uppercase tracking-[0.25em] text-white/25 font-light mb-1">
+                  Orbic
+                </p>
+                <p className="text-lg font-bold text-white mb-5">
+                  {plan.nombre}
+                </p>
+
+                <p
+                  className="text-3xl font-bold tracking-tight mb-1"
+                  style={{ color: plan.color, letterSpacing: "-0.02em" }}
+                >
+                  {plan.precio}
+                </p>
+                <p className="text-xs text-white/25 font-light mb-7">
+                  COP / mes
+                </p>
+
+                <ul className="flex flex-1 flex-col gap-3">
+                  {plan.filas.map((fila) => (
+                    <li
+                      key={fila.label}
+                      className="flex items-center justify-between text-sm"
+                    >
+                      <span className="text-white/50 font-light">
+                        {fila.label}
+                      </span>
+                      <span className="text-white font-semibold text-right">
+                        {fila.valor}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Nota compromiso mínimo */}
+          <p className="text-white/25 text-xs font-light mt-8 text-center max-w-2xl mx-auto">
+            Precios mensuales. Los resultados en redes se consolidan a partir
+            del tercer mes, por lo que recomendamos un compromiso mínimo de 3
+            meses.
+          </p>
+
+          {/* Mención breve Fase 2 · Meta Ads */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="rounded-2xl p-8 md:p-10 mt-12 relative overflow-hidden"
+            style={{
+              background: "#FF6B3506",
+              border: "1px solid #FF6B3518",
+            }}
+          >
+            <div
+              className="absolute top-0 left-0 right-0 h-px"
+              style={{
+                background:
+                  "linear-gradient(90deg, transparent, #FF6B3535, transparent)",
+              }}
+            />
+            <div className="md:flex md:items-center md:justify-between gap-8">
+              <div className="max-w-2xl">
+                <span className="text-[#FF6B35] text-[10px] tracking-[0.35em] uppercase font-light">
+                  Fase 2 · Opcional
+                </span>
+                <h3 className="text-2xl font-bold text-white mt-3 mb-3">
+                  Publicidad digital con Meta Ads
+                </h3>
+                <p className="text-white/45 font-light leading-relaxed">
+                  Cuando tu marca ya tiene contenido de calidad e imagen
+                  profesional, aceleramos el crecimiento con campañas en
+                  Facebook e Instagram. Configuramos y administramos todo el
+                  ecosistema publicitario de Meta: estrategia, segmentación,
+                  remarketing y optimización constante.
+                </p>
+              </div>
+              <div className="mt-6 md:mt-0 md:text-right shrink-0">
+                <span className="text-white/25 text-xs font-light block">
+                  Gestión de campañas desde
+                </span>
+                <span className="text-3xl font-bold text-white">$300.000</span>
+                <span className="text-white/25 text-sm font-light"> / mes</span>
+                <span className="text-white/25 text-[11px] font-light block mt-2 max-w-[220px] md:ml-auto">
+                  No incluye el presupuesto publicitario, que se paga
+                  directamente a Meta.
+                </span>
+              </div>
             </div>
           </motion.div>
         </div>
