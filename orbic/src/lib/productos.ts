@@ -1,6 +1,0 @@
-export type Producto = { id: string; nombre: string; precio: string; destacado?: boolean; descripcion: string; incluye: string[]; demoId: string };
-export const PRODUCTOS: Producto[] = [
-  { id: "compliance", nombre: "Suite Compliance", precio: "$8.000.000 COP/mes", destacado: true, descripcion: "Cumplimiento SARLAFT y KYC automatizado para bancos y cooperativas.", incluye: ["SARLAFT Monitor", "KYC + AML screening", "Reportes SFC automáticos", "Alertas en tiempo real", "Dashboard de auditoría", "Soporte 24/7"], demoId: "sarlaft" },
-  { id: "whatsapp", nombre: "WhatsApp Commerce Bot", precio: "desde $150.000 COP/mes", descripcion: "Atención y ventas automáticas por WhatsApp para comercios y PYMEs.", incluye: ["Bot conversacional 24/7", "Catálogo de productos", "Pagos Nequi / Bancolombia", "Hasta 1.000 msgs/día", "Panel de reportes", "Soporte incluido"], demoId: "whatsapp" },
-  { id: "realestate", nombre: "Real Estate Lead Bot", precio: "desde $99 USD/mes", descripcion: "Lead capture y scoring automático para agentes inmobiliarios (US).", incluye: ["Lead capture automático", "Integración CRM", "Follow-up con IA", "Lead scoring", "Pipeline dashboard", "Soporte por email"], demoId: "realestate" },
-];
