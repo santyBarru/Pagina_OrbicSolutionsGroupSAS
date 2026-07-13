@@ -20,7 +20,6 @@ export default function Navbar() {
   const navLinks = [
     { label: "Inicio", href: "/" },
     { label: "Servicios", href: "/servicios" },
-    { label: "E-commerce", href: "/nfc" },
     { label: "Planes", href: "/planes" },
     { label: "Proceso", href: "/proceso" },
     { label: "Nosotros", href: "/nosotros" },
@@ -30,8 +29,8 @@ export default function Navbar() {
   return (
     <header className="fixed top-0 left-0 w-full z-50">
       <div
-        className={`max-w-7xl mx-auto px-6 py-4 flex items-center justify-between transition-all duration-300 ${
-          scrolled ? "py-2.5" : ""
+        className={`max-w-7xl mx-auto px-6 py-6 flex items-center justify-between transition-all duration-300 ${
+          scrolled ? "py-4" : ""
         }`}
       >
         <Link href="/" className="flex items-center gap-3">
@@ -45,7 +44,7 @@ export default function Navbar() {
           <span className="tracking-[0.25em] text-sm font-medium">ORBIC</span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-7 text-[13px] text-[#8E95A9]">
+        <nav className="hidden md:flex items-center gap-10 text-sm text-[#8E95A9]">
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -62,13 +61,13 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-3">
           <a
             href="https://demo.orbicopsgroup.com"
-            className="px-4 py-2 rounded-lg border border-[rgba(139,92,255,0.5)] text-[13px] text-[#B388FF] hover:bg-[rgba(139,92,255,0.08)] transition-all duration-300"
+            className="px-5 py-3 rounded-xl border border-[rgba(139,92,255,0.5)] text-sm text-[#B388FF] hover:bg-[rgba(139,92,255,0.08)] transition-all duration-300"
           >
             Probar Demo ✦
           </a>
           <Link
             href="/contacto"
-            className="px-4 py-2 rounded-lg border border-[rgba(255,107,53,0.5)] text-[13px] hover:bg-[rgba(255,107,53,0.08)] transition-all duration-300"
+            className="px-5 py-3 rounded-xl border border-[rgba(255,107,53,0.5)] text-sm hover:bg-[rgba(255,107,53,0.08)] transition-all duration-300"
           >
             Solicitar propuesta →
           </Link>
