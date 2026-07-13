@@ -333,7 +333,7 @@ export default function NFCPage() {
         href="https://fonts.gstatic.com"
         crossOrigin="anonymous"
       />
-      <link rel="stylesheet" href={FONTS_URL} />
+      <link rel="stylesheet" href={FONTS_URL} precedence="default" />
       {/* ══ FONDO DEL HEADER ══ */}
       <div
         className="absolute top-0 left-0 right-0 h-[640px] pointer-events-none"
