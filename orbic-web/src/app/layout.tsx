@@ -5,6 +5,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CookieBanner from "@/components/CookieBanner";
+import NFCAnnouncement from "@/components/NFCAnnouncement";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -75,6 +76,7 @@ export default function RootLayout({
         <main className="relative z-[2]">{children}</main>
         <Footer />
         <CookieBanner />
+        <NFCAnnouncement />
       </body>
     </html>
   );
