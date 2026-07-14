@@ -155,25 +155,33 @@ export default function NFCPage() {
   const [cantidad, setCantidad] = useState(1);
   const fileRef = useRef<HTMLInputElement>(null);
 
-  // Adapta el logo: si trae fondo uniforme (ej. cuadro blanco), lo elimina con borde suavizado
+  // Quita el fondo del logo automáticamente (flood fill desde los bordes):
+  // elimina solo el fondo conectado a los bordes, respetando colores internos del logo
   const adaptarLogo = (dataURL: string): Promise<string> =>
     new Promise((resolve) => {
       const img = new Image();
       img.onload = () => {
+        // limitar tamaño para rendimiento (suficiente para impresión del stand)
+        const MAX = 1600;
+        const esc = Math.min(1, MAX / Math.max(img.width, img.height));
+        const w = Math.max(1, Math.round(img.width * esc));
+        const h = Math.max(1, Math.round(img.height * esc));
         const c = document.createElement("canvas");
-        c.width = img.width;
-        c.height = img.height;
+        c.width = w;
+        c.height = h;
         const x = c.getContext("2d");
         if (!x) return resolve(dataURL);
-        x.drawImage(img, 0, 0);
+        x.drawImage(img, 0, 0, w, h);
         try {
-          const d = x.getImageData(0, 0, c.width, c.height);
+          const d = x.getImageData(0, 0, w, h);
           const px = d.data;
+
+          // color de fondo = promedio de las 4 esquinas
           const idx = [
             0,
-            (c.width - 1) * 4,
-            (c.height - 1) * c.width * 4,
-            ((c.height - 1) * c.width + c.width - 1) * 4,
+            (w - 1) * 4,
+            (h - 1) * w * 4,
+            ((h - 1) * w + w - 1) * 4,
           ];
           let r = 0,
             g = 0,
@@ -189,6 +197,8 @@ export default function NFCPage() {
           g /= 4;
           b /= 4;
           a /= 4;
+
+          // si ya es transparente (PNG con alpha) o las esquinas no coinciden entre sí, no tocar
           const esquinasUniformes =
             a > 200 &&
             idx.every(
@@ -198,18 +208,44 @@ export default function NFCPage() {
                   Math.abs(px[i + 2] - b) <
                 60,
             );
-          if (esquinasUniformes) {
-            const tol = 90;
-            for (let i = 0; i < px.length; i += 4) {
-              const diff =
-                Math.abs(px[i] - r) +
-                Math.abs(px[i + 1] - g) +
-                Math.abs(px[i + 2] - b);
-              if (diff < tol)
-                px[i + 3] = Math.min(px[i + 3], Math.round((diff / tol) * 120));
-            }
-            x.putImageData(d, 0, 0);
+          if (!esquinasUniformes) return resolve(dataURL);
+
+          const TOL = 100;
+          const difFondo = (i: number) =>
+            Math.abs(px[i] - r) +
+            Math.abs(px[i + 1] - g) +
+            Math.abs(px[i + 2] - b);
+
+          // flood fill desde todos los píxeles del borde
+          const visitado = new Uint8Array(w * h);
+          const pila: number[] = [];
+          for (let cx2 = 0; cx2 < w; cx2++) {
+            pila.push(cx2);
+            pila.push(cx2 + (h - 1) * w);
           }
+          for (let cy2 = 0; cy2 < h; cy2++) {
+            pila.push(cy2 * w);
+            pila.push(cy2 * w + (w - 1));
+          }
+
+          while (pila.length) {
+            const pos = pila.pop() as number;
+            if (visitado[pos]) continue;
+            visitado[pos] = 1;
+            const i = pos * 4;
+            const diff = difFondo(i);
+            if (diff >= TOL) continue; // llegamos al logo: frenar
+            // borrar con borde suavizado
+            px[i + 3] = Math.min(px[i + 3], Math.round((diff / TOL) * 110));
+            const cx2 = pos % w,
+              cy2 = (pos / w) | 0;
+            if (cx2 > 0) pila.push(pos - 1);
+            if (cx2 < w - 1) pila.push(pos + 1);
+            if (cy2 > 0) pila.push(pos - w);
+            if (cy2 < h - 1) pila.push(pos + w);
+          }
+
+          x.putImageData(d, 0, 0);
           resolve(c.toDataURL("image/png"));
         } catch {
           resolve(dataURL);
@@ -333,7 +369,7 @@ export default function NFCPage() {
         href="https://fonts.gstatic.com"
         crossOrigin="anonymous"
       />
-      <link rel="stylesheet" href={FONTS_URL} precedence="default" />
+      <link rel="stylesheet" href={FONTS_URL} />
       {/* ══ FONDO DEL HEADER ══ */}
       <div
         className="absolute top-0 left-0 right-0 h-[640px] pointer-events-none"

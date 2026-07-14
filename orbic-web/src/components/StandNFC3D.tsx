@@ -75,19 +75,6 @@ export function drawDesign(
     const lw = logoImg.width * k,
       lh = logoImg.height * k;
     ctx.drawImage(logoImg, cx - lw / 2, logoCY - lh / 2, lw, lh);
-    ctx.save();
-    ctx.globalCompositeOperation = "soft-light";
-    const v = ctx.createLinearGradient(
-      cx - lw / 2,
-      logoCY - lh / 2,
-      cx + lw / 2,
-      logoCY + lh / 2,
-    );
-    v.addColorStop(0, dark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.08)");
-    v.addColorStop(1, "rgba(0,0,0,0.08)");
-    ctx.fillStyle = v;
-    ctx.fillRect(cx - lw / 2, logoCY - lh / 2, lw, lh);
-    ctx.restore();
   } else {
     ctx.strokeStyle = faint;
     ctx.lineWidth = 3 * s;
