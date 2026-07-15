@@ -17,7 +17,7 @@ export type DesignOpts = {
   franja: string[];
 };
 
-type Props = DesignOpts & { logo: string | null };
+type Props = DesignOpts & { logo: string | null; qr: string | null };
 
 // ── Diseño del stand: título → empresa → logo → símbolo NFC → estrellas ──
 // Se usa como textura del 3D y para el PNG de descarga (W base 512, escala proporcional)
@@ -37,6 +37,7 @@ export function drawDesign(
     franja,
   }: DesignOpts,
   logoImg: HTMLImageElement | null,
+  qrImg: HTMLImageElement | null = null,
 ) {
   void franja;
   void negocio;
@@ -119,55 +120,69 @@ export function drawDesign(
     qx = cx - qs / 2,
     qy = 462 * s;
   const cell = qs / 11;
-  const fg = tx;
-  ctx.fillStyle = fg;
-  let seed = 7;
-  for (let i = 0; i < 121; i++) {
-    seed = (seed * 137 + 41) % 211;
-    const gx = i % 11,
-      gy = Math.floor(i / 11);
-    const inFinder =
-      (gx < 4 && gy < 4) || (gx > 6 && gy < 4) || (gx < 4 && gy > 6);
-    if (!inFinder && seed % 3 !== 0) {
+  const fg = dark ? "#ffffff" : "#0b0d13";
+  if (qrImg) {
+    // QR propio del cliente sobre panel blanco (zona de silencio para escaneo real)
+    const pad = 10 * s;
+    ctx.save();
+    ctx.beginPath();
+    ctx.roundRect(qx - pad, qy - pad, qs + pad * 2, qs + pad * 2, 14 * s);
+    ctx.fillStyle = "#ffffff";
+    ctx.fill();
+    ctx.clip();
+    ctx.drawImage(qrImg, qx, qy, qs, qs);
+    ctx.restore();
+  } else {
+    ctx.fillStyle = fg;
+    let seed = 7;
+    for (let i = 0; i < 121; i++) {
+      seed = (seed * 137 + 41) % 211;
+      const gx = i % 11,
+        gy = Math.floor(i / 11);
+      const inFinder =
+        (gx < 4 && gy < 4) || (gx > 6 && gy < 4) || (gx < 4 && gy > 6);
+      if (!inFinder && seed % 3 !== 0) {
+        ctx.beginPath();
+        ctx.roundRect(
+          qx + gx * cell + 1 * s,
+          qy + gy * cell + 1 * s,
+          cell - 2.5 * s,
+          cell - 2.5 * s,
+          3 * s,
+        );
+        ctx.fill();
+      }
+    }
+    (
+      [
+        [0, 0],
+        [qs - cell * 3.2, 0],
+        [0, qs - cell * 3.2],
+      ] as const
+    ).forEach(([fx, fy]) => {
+      ctx.strokeStyle = fg;
+      ctx.lineWidth = 6 * s;
       ctx.beginPath();
       ctx.roundRect(
-        qx + gx * cell + 1 * s,
-        qy + gy * cell + 1 * s,
-        cell - 2.5 * s,
-        cell - 2.5 * s,
+        qx + fx + 2 * s,
+        qy + fy + 2 * s,
+        cell * 3 - 4 * s,
+        cell * 3 - 4 * s,
+        7 * s,
+      );
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.roundRect(
+        qx + fx + cell * 0.95,
+        qy + fy + cell * 0.95,
+        cell * 1.1,
+        cell * 1.1,
         3 * s,
       );
       ctx.fill();
-    }
+    });
   }
-  (
-    [
-      [0, 0],
-      [qs - cell * 3.2, 0],
-      [0, qs - cell * 3.2],
-    ] as const
-  ).forEach(([fx, fy]) => {
-    ctx.strokeStyle = fg;
-    ctx.lineWidth = 6 * s;
-    ctx.beginPath();
-    ctx.roundRect(
-      qx + fx + 2 * s,
-      qy + fy + 2 * s,
-      cell * 3 - 4 * s,
-      cell * 3 - 4 * s,
-      7 * s,
-    );
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.roundRect(
-      qx + fx + cell * 0.95,
-      qy + fy + cell * 0.95,
-      cell * 1.1,
-      cell * 1.1,
-      3 * s,
-    );
-    ctx.fill();
-  });
+
   // esquinas redondeadas — blancas o negras según la placa
   const m = 18 * s,
     R = 26 * s,
@@ -327,9 +342,12 @@ function Stand(props: Props) {
     let cancel = false;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
-    const paint = (img: HTMLImageElement | null) => {
+    const paint = (
+      img: HTMLImageElement | null,
+      qimg: HTMLImageElement | null,
+    ) => {
       if (cancel) return;
-      drawDesign(ctx, canvas.width, canvas.height, props, img);
+      drawDesign(ctx, canvas.width, canvas.height, props, img, qimg);
       texture.needsUpdate = true;
     };
     const ready = async () => {
@@ -339,13 +357,19 @@ function Stand(props: Props) {
         await document.fonts.load(`italic 800 40px "${props.fontFamily}"`);
         await document.fonts.load(`700 40px "${props.fontBottom}"`);
       } catch {}
-      if (props.logo) {
-        const img = new Image();
-        img.onload = () => paint(img);
-        img.src = props.logo;
-      } else {
-        paint(null);
-      }
+      const cargar = (src: string | null) =>
+        new Promise<HTMLImageElement | null>((res) => {
+          if (!src) return res(null);
+          const im = new Image();
+          im.onload = () => res(im);
+          im.onerror = () => res(null);
+          im.src = src;
+        });
+      const [li, qi] = await Promise.all([
+        cargar(props.logo),
+        cargar(props.qr),
+      ]);
+      paint(li, qi);
     };
     ready();
     return () => {
@@ -353,6 +377,7 @@ function Stand(props: Props) {
     };
   }, [
     props.logo,
+    props.qr,
     props.texto,
     props.colorId,
     props.fontFamily,

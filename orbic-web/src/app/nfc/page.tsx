@@ -143,6 +143,7 @@ function CurvesBg() {
 
 export default function NFCPage() {
   const [logo, setLogo] = useState<string | null>(null);
+  const [qr, setQr] = useState<string | null>(null);
   const [texto, setTexto] = useState("¡Califícanos!");
   const [color, setColor] = useState(COLORES[0]);
   const [fuente, setFuente] = useState(FUENTES[0]);
@@ -154,6 +155,7 @@ export default function NFCPage() {
   const [calibre, setCalibre] = useState(CALIBRES[0]);
   const [cantidad, setCantidad] = useState(1);
   const fileRef = useRef<HTMLInputElement>(null);
+  const qrRef = useRef<HTMLInputElement>(null);
 
   // Quita el fondo del logo automáticamente (flood fill desde los bordes):
   // elimina solo el fondo conectado a los bordes, respetando colores internos del logo
@@ -255,6 +257,14 @@ export default function NFCPage() {
       img.src = dataURL;
     });
 
+  const onQr = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const f = e.target.files?.[0];
+    if (!f) return;
+    const r = new FileReader();
+    r.onload = () => setQr(r.result as string);
+    r.readAsDataURL(f);
+  };
+
   const onLogo = (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0];
     if (!f) return;
@@ -265,7 +275,7 @@ export default function NFCPage() {
 
   const total = producto.precio * cantidad;
   const mensaje = encodeURIComponent(
-    `Hola Orbic 👋 Quiero cotizar:\n\n▪️ Producto: ${producto.nombre}\n▪️ Medidas: ${MEDIDAS}\n▪️ Calibre: ${calibre.nombre}\n▪️ Color: ${color.nombre}\n▪️ Tipografía título: ${fuente.nombre}${negrita ? " (negrita)" : ""}${cursiva ? " (cursiva)" : ""} ${sizeTitulo}px\n▪️ Cantidad: ${cantidad}\n▪️ Texto: "${texto}"\n▪️ Total estimado: ${fmt(total)}\n\nTe adjunto la imagen de mi diseño (se descargó al cotizar) 📎`,
+    `Hola Orbic 👋 Quiero cotizar:\n\n▪️ Producto: ${producto.nombre}\n▪️ Medidas: ${MEDIDAS}\n▪️ Calibre: ${calibre.nombre}\n▪️ Color: ${color.nombre}\n▪️ Tipografía título: ${fuente.nombre}${negrita ? " (negrita)" : ""}${cursiva ? " (cursiva)" : ""} ${sizeTitulo}px\n▪️ Cantidad: ${cantidad}\n▪️ Texto: "${texto}"\n▪️ QR: ${qr ? "propio (adjunto la imagen)" : "por definir — Orbic lo genera"}\n▪️ Total estimado: ${fmt(total)}\n\nTe adjunto la imagen de mi diseño (se descargó al cotizar) 📎`,
   );
 
   const descargarDiseno = async () => {
@@ -299,29 +309,19 @@ export default function NFCPage() {
       sizeTitulo,
       franja,
     };
-    const pintar = (img: HTMLImageElement | null) => {
-      ctx.save();
-      ctx.translate(0, 70);
-      drawDesign(ctx, W, DH, opts, img);
-      ctx.restore();
-    };
-
-    if (logo) {
-      await new Promise<void>((res) => {
-        const img = new Image();
-        img.onload = () => {
-          pintar(img);
-          res();
-        };
-        img.onerror = () => {
-          pintar(null);
-          res();
-        };
-        img.src = logo;
+    const cargar = (src: string | null) =>
+      new Promise<HTMLImageElement | null>((res) => {
+        if (!src) return res(null);
+        const im = new Image();
+        im.onload = () => res(im);
+        im.onerror = () => res(null);
+        im.src = src;
       });
-    } else {
-      pintar(null);
-    }
+    const [li, qi] = await Promise.all([cargar(logo), cargar(qr)]);
+    ctx.save();
+    ctx.translate(0, 70);
+    drawDesign(ctx, W, DH, opts, li, qi);
+    ctx.restore();
 
     ctx.fillStyle = "rgba(255,255,255,0.85)";
     ctx.font = "300 24px Inter, sans-serif";
@@ -499,6 +499,7 @@ export default function NFCPage() {
               >
                 <StandNFC3D
                   logo={logo}
+                  qr={qr}
                   negocio=""
                   texto={texto}
                   colorId={color.id as "negro" | "blanco"}
@@ -539,6 +540,23 @@ export default function NFCPage() {
                     onChange={onLogo}
                     className="hidden"
                     aria-label="Subir logo"
+                  />
+                  <button
+                    onClick={() => qrRef.current?.click()}
+                    className="rounded-lg px-4 py-3 text-sm font-light text-white/70 hover:text-white transition-colors"
+                    style={{ border: "1px dashed rgba(255,255,255,0.25)" }}
+                  >
+                    {qr
+                      ? "✓ QR cargado — cambiar"
+                      : "Sube tu QR (Nequi, Google, el que quieras)"}
+                  </button>
+                  <input
+                    ref={qrRef}
+                    type="file"
+                    accept="image/*"
+                    onChange={onQr}
+                    className="hidden"
+                    aria-label="Subir QR"
                   />
                   <input
                     value={texto}
