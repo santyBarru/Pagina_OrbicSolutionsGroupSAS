@@ -18,32 +18,44 @@ const StandNFC3D = dynamic(() => import("@/components/StandNFC3D"), {
 // ═══ CONFIG ═══
 const WHATSAPP = "573053336210"; // WhatsApp directo de ventas
 const MEDIDAS = "10 × 17 cm · base trasera 3–4 cm";
+// precio = precio original (tachado) · promo = precio con descuento (hasta 31 ago)
+// formato = qué diseño 3D usa cada producto: "tarjeta" (plana) o "stand" (con base)
 const PRODUCTOS = [
+  {
+    id: "chip",
+    nombre: "Chip NFC",
+    precio: 49900,
+    promo: 29900,
+    desc: "Adhesivo inteligente con tu página configurada",
+    formato: "tarjeta" as const,
+  },
   {
     id: "tarjeta",
     nombre: "Tarjeta NFC",
-    precio: 79000,
-    desc: "PVC con chip configurado y tu marca",
+    precio: 69900,
+    promo: 49900,
+    desc: "Tarjeta PVC con tu logo y tu marca",
+    formato: "tarjeta" as const,
   },
   {
     id: "stand",
     nombre: "Stand de mesa",
-    precio: 149000,
-    desc: "Acrílico impresión UV + chip integrado",
+    precio: 89900,
+    promo: 69900,
+    desc: "Acrílico impresión láser + chip integrado",
+    formato: "stand" as const,
   },
   {
     id: "premium",
     nombre: "Stand Premium",
-    precio: 249000,
-    desc: "Acrílico grueso, doble cara, base sólida",
-  },
-  {
-    id: "kit",
-    nombre: "Kit x3 puntos",
-    precio: 399000,
-    desc: "Caja, mesas y entrada",
+    precio: 119900,
+    promo: 99900,
+    desc: "Acrílico grueso, base sólida, acabado premium",
+    formato: "stand" as const,
   },
 ];
+// Vigencia del descuento de lanzamiento
+const PROMO_HASTA = "31 de agosto";
 const FUENTES = [
   { id: "roboto", nombre: "Roboto · Google", family: "Roboto" },
   { id: "inter", nombre: "Inter", family: "Inter" },
@@ -151,7 +163,8 @@ export default function NFCPage() {
   const [cursiva, setCursiva] = useState(false);
   const [sizeTitulo, setSizeTitulo] = useState(40);
   const franja: string[] = []; // diseño neutro — sin colores de marca
-  const [producto, setProducto] = useState(PRODUCTOS[1]);
+  const [formato, setFormato] = useState<"stand" | "tarjeta">("stand");
+  const [producto, setProducto] = useState(PRODUCTOS[2]);
   const [calibre, setCalibre] = useState(CALIBRES[0]);
   const [cantidad, setCantidad] = useState(1);
   const fileRef = useRef<HTMLInputElement>(null);
@@ -273,9 +286,9 @@ export default function NFCPage() {
     r.readAsDataURL(f);
   };
 
-  const total = producto.precio * cantidad;
+  const total = producto.promo * cantidad;
   const mensaje = encodeURIComponent(
-    `Hola Orbic 👋 Quiero cotizar:\n\n▪️ Producto: ${producto.nombre}\n▪️ Medidas: ${MEDIDAS}\n▪️ Calibre: ${calibre.nombre}\n▪️ Color: ${color.nombre}\n▪️ Tipografía título: ${fuente.nombre}${negrita ? " (negrita)" : ""}${cursiva ? " (cursiva)" : ""} ${sizeTitulo}px\n▪️ Cantidad: ${cantidad}\n▪️ Texto: "${texto}"\n▪️ QR: ${qr ? "propio (adjunto la imagen)" : "por definir — Orbic lo genera"}\n▪️ Total estimado: ${fmt(total)}\n\nTe adjunto la imagen de mi diseño (se descargó al cotizar) 📎`,
+    `Hola Orbic 👋 Quiero cotizar:\n\n▪️ Producto: ${producto.nombre}\n▪️ Formato del diseño: ${formato === "tarjeta" ? "Tarjeta" : "Stand"}\n▪️ Medidas: ${MEDIDAS}\n▪️ Calibre: ${calibre.nombre}\n▪️ Color: ${color.nombre}\n▪️ Tipografía título: ${fuente.nombre}${negrita ? " (negrita)" : ""}${cursiva ? " (cursiva)" : ""} ${sizeTitulo}px\n▪️ Cantidad: ${cantidad}\n▪️ Texto: "${texto}"\n▪️ QR: ${qr ? "propio (adjunto la imagen)" : "por definir — Orbic lo genera"}\n▪️ Precio lanzamiento: ${fmt(total)} (antes ${fmt(producto.precio * cantidad)})\n\nTe adjunto la imagen de mi diseño (se descargó al cotizar) 📎`,
   );
 
   const descargarDiseno = async () => {
@@ -308,6 +321,7 @@ export default function NFCPage() {
       cursiva,
       sizeTitulo,
       franja,
+      formato,
     };
     const cargar = (src: string | null) =>
       new Promise<HTMLImageElement | null>((res) => {
@@ -519,6 +533,7 @@ export default function NFCPage() {
       cursiva,
       sizeTitulo,
       franja,
+      formato,
     };
     drawDesign(ctx, W, H, opts, li, qi);
     const a = document.createElement("a");
@@ -693,6 +708,7 @@ export default function NFCPage() {
                   cursiva={cursiva}
                   sizeTitulo={sizeTitulo}
                   franja={franja}
+                  formato={formato}
                 />
               </div>
               <p className="text-[11px] mt-3 text-center text-white/25 font-light">
@@ -708,6 +724,34 @@ export default function NFCPage() {
                   01 · Personalización
                 </div>
                 <div className="flex flex-col gap-2.5">
+                  {/* Selector de formato del diseño */}
+                  <div
+                    className="grid grid-cols-2 gap-2"
+                    role="radiogroup"
+                    aria-label="Formato"
+                  >
+                    {(
+                      [
+                        ["stand", "Stand", "Con base y QR"],
+                        ["tarjeta", "Tarjeta", "Plana, solo marca"],
+                      ] as const
+                    ).map(([id, nom, sub]) => (
+                      <button
+                        key={id}
+                        onClick={() => setFormato(id)}
+                        aria-pressed={formato === id}
+                        className="rounded-lg px-3 py-2.5 text-left transition-colors"
+                        style={chip(formato === id)}
+                      >
+                        <span className="block text-sm font-medium text-white">
+                          {nom}
+                        </span>
+                        <span className="block text-[10px] text-white/35 font-light mt-0.5">
+                          {sub}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
                   <button
                     onClick={() => fileRef.current?.click()}
                     className="rounded-lg px-4 py-3 text-sm font-light text-white/70 hover:text-white transition-colors"
@@ -725,23 +769,27 @@ export default function NFCPage() {
                     className="hidden"
                     aria-label="Subir logo"
                   />
-                  <button
-                    onClick={() => qrRef.current?.click()}
-                    className="rounded-lg px-4 py-3 text-sm font-light text-white/70 hover:text-white transition-colors"
-                    style={{ border: "1px dashed rgba(255,255,255,0.25)" }}
-                  >
-                    {qr
-                      ? "✓ QR cargado — cambiar"
-                      : "Sube tu QR (Nequi, Google, el que quieras)"}
-                  </button>
-                  <input
-                    ref={qrRef}
-                    type="file"
-                    accept="image/*"
-                    onChange={onQr}
-                    className="hidden"
-                    aria-label="Subir QR"
-                  />
+                  {formato === "stand" && (
+                    <>
+                      <button
+                        onClick={() => qrRef.current?.click()}
+                        className="rounded-lg px-4 py-3 text-sm font-light text-white/70 hover:text-white transition-colors"
+                        style={{ border: "1px dashed rgba(255,255,255,0.25)" }}
+                      >
+                        {qr
+                          ? "✓ QR cargado — cambiar"
+                          : "Sube tu QR (Nequi, Google, el que quieras)"}
+                      </button>
+                      <input
+                        ref={qrRef}
+                        type="file"
+                        accept="image/*"
+                        onChange={onQr}
+                        className="hidden"
+                        aria-label="Subir QR"
+                      />
+                    </>
+                  )}
                   <input
                     value={texto}
                     onChange={(e) => setTexto(e.target.value)}
@@ -870,15 +918,25 @@ export default function NFCPage() {
               </div>
 
               <div>
-                <div className="text-white/30 text-[10px] tracking-[0.3em] uppercase font-light mb-4">
-                  02 · Producto
+                <div className="flex items-center justify-between mb-4">
+                  <div className="text-white/30 text-[10px] tracking-[0.3em] uppercase font-light">
+                    02 · Producto
+                  </div>
+                  <span
+                    className="text-[9px] tracking-[0.15em] uppercase font-semibold px-2.5 py-1 rounded-full text-white"
+                    style={{
+                      background: "linear-gradient(120deg,#8B5CFF,#FF6B35)",
+                    }}
+                  >
+                    Lanzamiento · hasta {PROMO_HASTA}
+                  </span>
                 </div>
                 <div className="grid grid-cols-2 gap-2">
                   {PRODUCTOS.map((p) => (
                     <button
                       key={p.id}
                       onClick={() => setProducto(p)}
-                      className="text-left rounded-lg px-4 py-3.5 transition-colors"
+                      className="text-left rounded-lg px-4 py-3.5 transition-colors relative"
                       style={chip(producto.id === p.id)}
                     >
                       <div className="text-sm font-medium text-white">
@@ -887,8 +945,16 @@ export default function NFCPage() {
                       <div className="text-[11px] leading-snug text-white/30 mt-1 font-light">
                         {p.desc}
                       </div>
-                      <div className="text-sm text-white/70 mt-2">
-                        {fmt(p.precio)}
+                      <div className="flex items-baseline gap-2 mt-2">
+                        <span className="text-[12px] text-white/30 line-through font-light">
+                          {fmt(p.precio)}
+                        </span>
+                        <span
+                          className="text-sm font-semibold"
+                          style={{ color: "#8B5CFF" }}
+                        >
+                          {fmt(p.promo)}
+                        </span>
                       </div>
                     </button>
                   ))}
@@ -965,6 +1031,111 @@ export default function NFCPage() {
                 </p>
               </div>
             </div>
+          </div>
+
+          {/* ═══════════ CATÁLOGO ═══════════ */}
+          <div className="mt-24">
+            <div className="text-center mb-3">
+              <span
+                className="inline-block text-[10px] tracking-[0.28em] uppercase font-semibold px-3 py-1.5 rounded-full text-white"
+                style={{
+                  background: "linear-gradient(120deg,#8B5CFF,#FF6B35)",
+                }}
+              >
+                Precios de lanzamiento · hasta {PROMO_HASTA}
+              </span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-semibold text-center text-white tracking-tight">
+              Catálogo NFC
+            </h2>
+            <p className="text-center text-white/40 font-light mt-3 max-w-lg mx-auto">
+              Cada pieza incluye tu página personalizada, configuración del chip
+              y garantía.
+            </p>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-12">
+              {PRODUCTOS.map((p) => (
+                <div
+                  key={p.id}
+                  className="rounded-2xl overflow-hidden flex flex-col"
+                  style={{
+                    background: "rgba(255,255,255,0.025)",
+                    border: "1px solid rgba(255,255,255,0.08)",
+                  }}
+                >
+                  {/* Imagen del producto — reemplazar por foto real en /public/nfc/{id}.png */}
+                  <div
+                    className="relative flex items-center justify-center"
+                    style={{
+                      aspectRatio: "4 / 3",
+                      background:
+                        "radial-gradient(ellipse at 50% 30%, rgba(139,92,255,0.12), transparent 60%), rgba(255,255,255,0.02)",
+                    }}
+                  >
+                    <span className="text-white/20 text-[11px] font-light tracking-wide">
+                      {p.formato === "tarjeta" ? "◳" : "▤"} imagen
+                    </span>
+                    <span
+                      className="absolute top-3 right-3 text-[9px] font-semibold px-2 py-1 rounded-full text-white"
+                      style={{
+                        background: "linear-gradient(120deg,#8B5CFF,#FF6B35)",
+                      }}
+                    >
+                      −{Math.round((1 - p.promo / p.precio) * 100)}%
+                    </span>
+                  </div>
+
+                  <div className="p-4 flex flex-col flex-1">
+                    <div className="text-white font-medium">{p.nombre}</div>
+                    <div className="text-[12px] text-white/35 font-light mt-1 leading-snug flex-1">
+                      {p.desc}
+                    </div>
+                    <div className="flex items-baseline gap-2 mt-3">
+                      <span className="text-[13px] text-white/30 line-through font-light">
+                        {fmt(p.precio)}
+                      </span>
+                      <span
+                        className="text-lg font-semibold"
+                        style={{ color: "#8B5CFF" }}
+                      >
+                        {fmt(p.promo)}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Pieza personalizada */}
+            <div
+              className="rounded-2xl mt-4 p-6 flex flex-col sm:flex-row items-center justify-between gap-4"
+              style={{
+                background:
+                  "linear-gradient(100deg, rgba(139,92,255,0.12), rgba(255,107,53,0.07))",
+                border: "1px solid rgba(139,92,255,0.35)",
+              }}
+            >
+              <div>
+                <div className="text-white font-medium">
+                  Pieza única o personalizada
+                </div>
+                <div className="text-[13px] text-white/45 font-light mt-1">
+                  Formatos especiales, volúmenes altos, materiales alternativos
+                  o integraciones a medida.
+                </div>
+              </div>
+              <div
+                className="text-lg font-semibold whitespace-nowrap"
+                style={{ color: "#8B5CFF" }}
+              >
+                A cotizar
+              </div>
+            </div>
+
+            <p className="text-center text-white/25 text-[12px] font-light mt-6">
+              Precios en pesos colombianos, IVA incluido. Descuento de
+              lanzamiento vigente hasta el {PROMO_HASTA}.
+            </p>
           </div>
         </div>
       </section>

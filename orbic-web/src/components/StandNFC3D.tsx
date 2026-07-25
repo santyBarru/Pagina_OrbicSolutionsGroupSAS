@@ -15,6 +15,7 @@ export type DesignOpts = {
   cursiva: boolean;
   sizeTitulo: number; // tamaño del título (px base sobre 512)
   franja: string[];
+  formato?: "stand" | "tarjeta"; // stand = caballete con QR; tarjeta = plana sin QR
 };
 
 type Props = DesignOpts & { logo: string | null; qr: string | null };
@@ -35,6 +36,7 @@ export function drawDesign(
     cursiva,
     sizeTitulo,
     franja,
+    formato,
   }: DesignOpts,
   logoImg: HTMLImageElement | null,
   qrImg: HTMLImageElement | null = null,
@@ -48,6 +50,7 @@ export function drawDesign(
   const sub = dark ? "rgba(255,255,255,0.55)" : "rgba(17,17,20,0.6)";
   const faint = dark ? "rgba(255,255,255,0.16)" : "rgba(17,17,20,0.16)";
   const cx = W / 2;
+  const esTarjeta = (formato ?? "stand") === "tarjeta";
 
   ctx.clearRect(0, 0, W, H);
   ctx.fillStyle = plate;
@@ -67,10 +70,10 @@ export function drawDesign(
   ctx.fillStyle = tx;
   ctx.fillText(titulo, cx, 88 * s);
 
-  // 2. LOGO — grande, protagonista central
-  const logoCY = 242 * s,
-    maxW = 345 * s,
-    maxH = 225 * s;
+  // 2. LOGO — grande, protagonista central (en tarjeta va aún más grande y centrado)
+  const logoCY = (esTarjeta ? 320 : 242) * s;
+  const maxW = (esTarjeta ? 380 : 345) * s,
+    maxH = (esTarjeta ? 300 : 225) * s;
   if (logoImg) {
     const k = Math.min(maxW / logoImg.width, maxH / logoImg.height);
     const lw = logoImg.width * k,
@@ -108,113 +111,115 @@ export function drawDesign(
     ctx.strokeStyle = "#F5B72E";
     ctx.stroke();
   };
-  const starY = 396 * s,
+  const starY = (esTarjeta ? 560 : 396) * s,
     starR = 22 * s,
     gap = 60 * s;
   for (let i = 0; i < 5; i++) {
     drawStar(cx + (i - 2) * gap, starY, starR, starR * 0.46);
   }
 
-  // 4. QR — más pequeño, redondeado
-  const qs = 188 * s,
-    qx = cx - qs / 2,
-    qy = 462 * s;
-  const cell = qs / 11;
-  const fg = dark ? "#ffffff" : "#0b0d13";
-  if (qrImg) {
-    // QR propio del cliente sobre panel blanco (zona de silencio para escaneo real)
-    const pad = 10 * s;
-    ctx.save();
-    ctx.beginPath();
-    ctx.roundRect(qx - pad, qy - pad, qs + pad * 2, qs + pad * 2, 14 * s);
-    ctx.fillStyle = "#ffffff";
-    ctx.fill();
-    ctx.clip();
-    ctx.drawImage(qrImg, qx, qy, qs, qs);
-    ctx.restore();
-  } else {
-    ctx.fillStyle = fg;
-    let seed = 7;
-    for (let i = 0; i < 121; i++) {
-      seed = (seed * 137 + 41) % 211;
-      const gx = i % 11,
-        gy = Math.floor(i / 11);
-      const inFinder =
-        (gx < 4 && gy < 4) || (gx > 6 && gy < 4) || (gx < 4 && gy > 6);
-      if (!inFinder && seed % 3 !== 0) {
+  // 4. QR — más pequeño, redondeado (SOLO en stand; la tarjeta no lleva QR)
+  if (!esTarjeta) {
+    const qs = 188 * s,
+      qx = cx - qs / 2,
+      qy = 462 * s;
+    const cell = qs / 11;
+    const fg = dark ? "#ffffff" : "#0b0d13";
+    if (qrImg) {
+      // QR propio del cliente sobre panel blanco (zona de silencio para escaneo real)
+      const pad = 10 * s;
+      ctx.save();
+      ctx.beginPath();
+      ctx.roundRect(qx - pad, qy - pad, qs + pad * 2, qs + pad * 2, 14 * s);
+      ctx.fillStyle = "#ffffff";
+      ctx.fill();
+      ctx.clip();
+      ctx.drawImage(qrImg, qx, qy, qs, qs);
+      ctx.restore();
+    } else {
+      ctx.fillStyle = fg;
+      let seed = 7;
+      for (let i = 0; i < 121; i++) {
+        seed = (seed * 137 + 41) % 211;
+        const gx = i % 11,
+          gy = Math.floor(i / 11);
+        const inFinder =
+          (gx < 4 && gy < 4) || (gx > 6 && gy < 4) || (gx < 4 && gy > 6);
+        if (!inFinder && seed % 3 !== 0) {
+          ctx.beginPath();
+          ctx.roundRect(
+            qx + gx * cell + 1 * s,
+            qy + gy * cell + 1 * s,
+            cell - 2.5 * s,
+            cell - 2.5 * s,
+            3 * s,
+          );
+          ctx.fill();
+        }
+      }
+      (
+        [
+          [0, 0],
+          [qs - cell * 3.2, 0],
+          [0, qs - cell * 3.2],
+        ] as const
+      ).forEach(([fx, fy]) => {
+        ctx.strokeStyle = fg;
+        ctx.lineWidth = 6 * s;
         ctx.beginPath();
         ctx.roundRect(
-          qx + gx * cell + 1 * s,
-          qy + gy * cell + 1 * s,
-          cell - 2.5 * s,
-          cell - 2.5 * s,
+          qx + fx + 2 * s,
+          qy + fy + 2 * s,
+          cell * 3 - 4 * s,
+          cell * 3 - 4 * s,
+          7 * s,
+        );
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.roundRect(
+          qx + fx + cell * 0.95,
+          qy + fy + cell * 0.95,
+          cell * 1.1,
+          cell * 1.1,
           3 * s,
         );
         ctx.fill();
-      }
+      });
     }
-    (
-      [
-        [0, 0],
-        [qs - cell * 3.2, 0],
-        [0, qs - cell * 3.2],
-      ] as const
-    ).forEach(([fx, fy]) => {
-      ctx.strokeStyle = fg;
-      ctx.lineWidth = 6 * s;
-      ctx.beginPath();
-      ctx.roundRect(
-        qx + fx + 2 * s,
-        qy + fy + 2 * s,
-        cell * 3 - 4 * s,
-        cell * 3 - 4 * s,
-        7 * s,
-      );
-      ctx.stroke();
-      ctx.beginPath();
-      ctx.roundRect(
-        qx + fx + cell * 0.95,
-        qy + fy + cell * 0.95,
-        cell * 1.1,
-        cell * 1.1,
-        3 * s,
-      );
-      ctx.fill();
-    });
-  }
 
-  // esquinas redondeadas — blancas o negras según la placa
-  const m = 18 * s,
-    R = 26 * s,
-    arm = 16 * s;
-  ctx.lineWidth = 5.5 * s;
-  ctx.lineCap = "round";
-  const corner = (
-    x: number,
-    y: number,
-    sx: number,
-    sy: number,
-    col: string,
-  ) => {
-    ctx.strokeStyle = col;
-    ctx.beginPath();
-    ctx.moveTo(x + sx * (R + arm), y);
-    ctx.lineTo(x + sx * R, y);
-    ctx.quadraticCurveTo(x, y, x, y + sy * R);
-    ctx.lineTo(x, y + sy * (R + arm));
-    ctx.stroke();
-  };
-  const bx0 = qx - m,
-    bx1 = qx + qs + m,
-    by0 = qy - m,
-    by1 = qy + qs + m;
-  corner(bx0, by0, 1, 1, fg);
-  corner(bx1, by0, -1, 1, fg);
-  corner(bx0, by1, 1, -1, fg);
-  corner(bx1, by1, -1, -1, fg);
+    // esquinas redondeadas — blancas o negras según la placa
+    const m = 18 * s,
+      R = 26 * s,
+      arm = 16 * s;
+    ctx.lineWidth = 5.5 * s;
+    ctx.lineCap = "round";
+    const corner = (
+      x: number,
+      y: number,
+      sx: number,
+      sy: number,
+      col: string,
+    ) => {
+      ctx.strokeStyle = col;
+      ctx.beginPath();
+      ctx.moveTo(x + sx * (R + arm), y);
+      ctx.lineTo(x + sx * R, y);
+      ctx.quadraticCurveTo(x, y, x, y + sy * R);
+      ctx.lineTo(x, y + sy * (R + arm));
+      ctx.stroke();
+    };
+    const bx0 = qx - m,
+      bx1 = qx + qs + m,
+      by0 = qy - m,
+      by1 = qy + qs + m;
+    corner(bx0, by0, 1, 1, fg);
+    corner(bx1, by0, -1, 1, fg);
+    corner(bx0, by1, 1, -1, fg);
+    corner(bx1, by1, -1, -1, fg);
+  } // fin del bloque QR (solo stand)
 
   // 5. Fila inferior — layout dinámico (nunca se encima) con iconos simplificados
-  const py2 = H - 96 * s;
+  const py2 = (esTarjeta ? H - 130 : H - 96) * s;
   ctx.lineCap = "round";
   ctx.lineJoin = "round";
 
@@ -386,6 +391,7 @@ function Stand(props: Props) {
     props.cursiva,
     props.sizeTitulo,
     props.franja,
+    props.formato,
     canvas,
     texture,
     props,
@@ -498,6 +504,31 @@ function Stand(props: Props) {
       transparent: true,
     });
   }, []);
+
+  const esTarjeta = (props.formato ?? "stand") === "tarjeta";
+
+  if (esTarjeta) {
+    // TARJETA: placa plana tipo tarjeta de crédito (vertical), sin base ni caballete.
+    // Proporción 2.0 x 3.15 y flotando centrada, con leve giro para lucir el grosor.
+    return (
+      <group ref={groupRef} rotation={[0, 0.1, 0]} position={[0, 1.55, 0]}>
+        <mesh
+          castShadow
+          material={[sideMat, sideMat, sideMat, sideMat, frontMat, backMat]}
+        >
+          <boxGeometry args={[2.0, 3.15, 0.05]} />
+        </mesh>
+        {/* Sticker NFC pegado atrás */}
+        <mesh
+          position={[0, 0, -0.03]}
+          rotation={[0, Math.PI, 0]}
+          material={stickerMat}
+        >
+          <circleGeometry args={[0.3, 48]} />
+        </mesh>
+      </group>
+    );
+  }
 
   return (
     <group ref={groupRef}>
